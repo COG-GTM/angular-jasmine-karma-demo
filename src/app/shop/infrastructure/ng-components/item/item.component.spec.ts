@@ -1,12 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ItemComponent } from './item.component';
 
-// Creamos la Suite de tests para este componente.
-// los tests se ejecutan con el comando $ ng test
 describe('ItemComponent: testing basic component creation', () => {
-   // variable con el propio componente a testear
    let component: ItemComponent;
-   // es el componente a testear pero añadiendo más información para que sea más fácil de testear.
    let fixture: ComponentFixture<ItemComponent>;
 
    /*
@@ -22,7 +19,8 @@ describe('ItemComponent: testing basic component creation', () => {
       que desea probar. Separa el componente a testear de su propio módulo de aplicación 
       y lo conecta a un módulo de prueba Angular de construcción dinámica adaptado específicamente para estas pruebas. */
       await TestBed.configureTestingModule({
-         declarations: [ItemComponent]
+         declarations: [ItemComponent],
+         schemas: [CUSTOM_ELEMENTS_SCHEMA] // Add schema to ignore unknown elements
       })
          .compileComponents();
    });
@@ -37,6 +35,10 @@ describe('ItemComponent: testing basic component creation', () => {
       ya que fixture proporciona más metodos y parámetros a parte del propio componente. */
       component = fixture.componentInstance;
 
+      component.name = 'Test Item';
+      component.description = 'Test Description';
+      component.price = '10.00';
+
       /*
       - Al invocar detectChanges() le decimos a TestBed que realice el enlace de datos.
       - Es imprescindible para los tests, da error si no está.
@@ -44,11 +46,18 @@ describe('ItemComponent: testing basic component creation', () => {
         It gives the tester an opportunity to inspect and change the state of the component before Angular 
         initiates data binding and calls lifecycle hooks. */
       fixture.detectChanges();
-
    });
 
-   // Test para comprobar que el componente se crea correctamente
-   it('should create', () => {
+   test('should create', () => {
       expect(component).toBeTruthy();
+   });
+
+   test('should call like method when button is clicked', () => {
+      const likeSpy = jest.spyOn(component, 'like');
+      
+      const button = fixture.nativeElement.querySelector('button');
+      button.click();
+      
+      expect(likeSpy).toHaveBeenCalled();
    });
 });
