@@ -1,54 +1,62 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ItemComponent } from './item.component';
 
-// Creamos la Suite de tests para este componente.
-// los tests se ejecutan con el comando $ ng test
 describe('ItemComponent: testing basic component creation', () => {
-   // variable con el propio componente a testear
    let component: ItemComponent;
-   // es el componente a testear pero añadiendo más información para que sea más fácil de testear.
    let fixture: ComponentFixture<ItemComponent>;
 
    /*
-   - asíncrona para asegurarnos de que se termina de ejecutar antes de pasar un test
-   - configureTestingModule: configura e inyecta dependecias al componente que queremos testear.
-   - Si usáramos en el componente un servicio, habría que incluirlo también, creando una sección llamada providers.
+   - Using beforeEach to ensure setup completes before each test
+   - configureTestingModule: configures and injects dependencies for the component under test
+   - If the component used a service, we would include it in the providers section
    */
    beforeEach(async () => {
       /* TESTBED
-      - es la API principal para escribir pruebas unitarias para aplicaciones y bibliotecas de Angular. 
-      - Creo que dobla el componente, cómo el mount de jest => Crea un módulo de prueba angular (una clase @NgModule) 
-      que se configura con el método configureTestingModule para producir el entorno del módulo para la clase
-      que desea probar. Separa el componente a testear de su propio módulo de aplicación 
-      y lo conecta a un módulo de prueba Angular de construcción dinámica adaptado específicamente para estas pruebas. */
+      - Main API for writing unit tests for Angular applications and libraries
+      - Creates an Angular test module (a @NgModule class) configured with configureTestingModule
+      - Separates the component from its own application module and connects it to a 
+        dynamically-built Angular test module specifically tailored for these tests */
       await TestBed.configureTestingModule({
-         declarations: [ItemComponent]
+         declarations: [ItemComponent],
+         schemas: [CUSTOM_ELEMENTS_SCHEMA] // Add schema to ignore unknown elements
       })
          .compileComponents();
    });
 
    /*
-    Crea una instancia fixture del componente usando TestBed, 
-    el cual se encargará de inyectar las dependencias definidas anteriormente mediante configureTestingModule. 
+    Creates a component fixture instance using TestBed,
+    which will handle injecting the dependencies defined earlier via configureTestingModule
     */
    beforeEach(() => {
       fixture = TestBed.createComponent(ItemComponent);
-      /* Para referenciar el componente en sí del fixture usa componentInstance;
-      ya que fixture proporciona más metodos y parámetros a parte del propio componente. */
+      /* To reference the component itself from the fixture, use componentInstance;
+      since fixture provides more methods and parameters besides the component itself */
       component = fixture.componentInstance;
 
-      /*
-      - Al invocar detectChanges() le decimos a TestBed que realice el enlace de datos.
-      - Es imprescindible para los tests, da error si no está.
-      - Documentación oficial: Delayed change detection is intentional and useful. 
-        It gives the tester an opportunity to inspect and change the state of the component before Angular 
-        initiates data binding and calls lifecycle hooks. */
-      fixture.detectChanges();
+      component.name = 'Test Item';
+      component.description = 'Test Description';
+      component.price = '10.00';
 
+      /*
+      - Calling detectChanges() tells TestBed to perform data binding
+      - Essential for tests, will error if not present
+      - Official documentation: Delayed change detection is intentional and useful.
+        It gives the tester an opportunity to inspect and change the state of the component before Angular
+        initiates data binding and calls lifecycle hooks */
+      fixture.detectChanges();
    });
 
-   // Test para comprobar que el componente se crea correctamente
-   it('should create', () => {
+   test('should create', () => {
       expect(component).toBeTruthy();
+   });
+
+   test('should call like method when button is clicked', () => {
+      const likeSpy = jest.spyOn(component, 'like');
+      
+      const button = fixture.nativeElement.querySelector('button');
+      button.click();
+      
+      expect(likeSpy).toHaveBeenCalled();
    });
 });
