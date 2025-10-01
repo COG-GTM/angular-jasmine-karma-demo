@@ -13,7 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { AddItemComponent } from './shop/infrastructure/ng-components/add-item/add-item.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { UsersComponent } from './users/infrastructure/ng-components/users/users.component';
+import { UsersComponent } from './user/infrastructure/ng-components/users/users.component';
 import { ItemDetailComponent } from './shop/infrastructure/ng-components/item-detail/item-detail.component';
 
 @NgModule({
