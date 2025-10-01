@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Item } from 'src/app/shop/domain/item.model';
+import { Item } from '../../../domain/item.model';
 import { ItemDetailComponent } from './item-detail.component';
 
 describe('ItemDetailComponent: testing @Input from parent', () => {
@@ -9,7 +9,7 @@ describe('ItemDetailComponent: testing @Input from parent', () => {
 
    beforeEach(async () => {
       await TestBed.configureTestingModule({
-         declarations: [ItemDetailComponent]
+         imports: [ItemDetailComponent]
       })
          .compileComponents();
    });
