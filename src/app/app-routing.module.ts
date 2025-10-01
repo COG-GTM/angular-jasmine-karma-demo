@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ItemsComponent } from 'src/app/shop/infrastructure/ng-components/items/items.component'
-import { UsersComponent } from 'src/app/users/infrastructure/ng-components/users/users.component'
+import { ItemsComponent } from './shop/infrastructure/ng-components/items/items.component'
+import { UsersComponent } from './user/infrastructure/ng-components/users/users.component'
 
 const routes: Routes = [
     { path: 'shop', component: ItemsComponent },
