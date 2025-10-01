@@ -9,11 +9,13 @@ import { ItemsComponent } from './shop/infrastructure/ng-components/items/items.
 import { ItemComponent } from './shop/infrastructure/ng-components/item/item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatCardModule } from '@angular/material/card';
+import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { AddItemComponent } from './shop/infrastructure/ng-components/add-item/add-item.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { UsersComponent } from './users/infrastructure/ng-components/users/users.component';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
+import { UsersComponent } from './user/infrastructure/ng-components/users/users.component';
 import { ItemDetailComponent } from './shop/infrastructure/ng-components/item-detail/item-detail.component';
 
 @NgModule({
@@ -31,6 +33,8 @@ import { ItemDetailComponent } from './shop/infrastructure/ng-components/item-de
     BrowserAnimationsModule,
     MatCardModule,
     MatIconModule,
+    MatButtonModule,
+    MatInputModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,

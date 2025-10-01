@@ -10,8 +10,7 @@ describe('AddItemComponent: testing form validation', () => {
 
    beforeEach(async () => {
       await TestBed.configureTestingModule({
-         declarations: [AddItemComponent],
-         imports: [FormsModule, ReactiveFormsModule]
+         imports: [AddItemComponent, FormsModule, ReactiveFormsModule]
       })
          .compileComponents();
    });

@@ -1,6 +1,18 @@
 # AngularJasmineKarmaDemo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3 and has been upgraded to Angular CLI version 17.3.11.
+
+## Requirements
+
+- Node.js 18.13 or higher (currently using v22.20.0)
+- npm 10.x or higher
+
+## Architecture
+
+This project now uses Angular 17's standalone components architecture with:
+- Standalone components (no NgModules required for components)
+- Modern `bootstrapApplication` bootstrap method
+- Function-based providers (`provideRouter`, `provideHttpClient`, etc.)
 
 <br />
 

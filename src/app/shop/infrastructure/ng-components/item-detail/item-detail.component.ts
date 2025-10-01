@@ -3,6 +3,8 @@ import { Item } from '../../../domain/item.model';
 
 @Component({
    selector: 'app-item-detail',
+   standalone: true,
+   imports: [],
    templateUrl: './item-detail.component.html',
    styleUrls: ['./item-detail.component.scss']
 })

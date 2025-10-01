@@ -22,7 +22,7 @@ describe('ItemComponent: testing basic component creation', () => {
       que desea probar. Separa el componente a testear de su propio módulo de aplicación 
       y lo conecta a un módulo de prueba Angular de construcción dinámica adaptado específicamente para estas pruebas. */
       await TestBed.configureTestingModule({
-         declarations: [ItemComponent]
+         imports: [ItemComponent]
       })
          .compileComponents();
    });
