@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
@@ -10,9 +10,10 @@ describe('UsersComponent: testing calling a service from a component.', () => {
 
    beforeEach(async () => {
       await TestBed.configureTestingModule({
-         declarations: [UsersComponent],
-         imports: [HttpClientModule]
-      })
+    declarations: [UsersComponent],
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
          .compileComponents();
    });
 
