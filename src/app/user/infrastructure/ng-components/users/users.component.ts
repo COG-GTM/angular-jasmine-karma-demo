@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersServices } from 'src/app/users/application/UsersServices';
+import { CommonModule } from '@angular/common';
+import { UsersServices } from 'src/app/user/application/UsersServices';
 
 @Component({
     selector: 'app-users',
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class UsersComponent implements OnInit {
 

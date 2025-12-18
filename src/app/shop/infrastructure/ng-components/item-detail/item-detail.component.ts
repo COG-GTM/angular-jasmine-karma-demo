@@ -5,7 +5,8 @@ import { Item } from '../../../domain/item.model';
     selector: 'app-item-detail',
     templateUrl: './item-detail.component.html',
     styleUrls: ['./item-detail.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: []
 })
 export class ItemDetailComponent implements OnInit {
 
