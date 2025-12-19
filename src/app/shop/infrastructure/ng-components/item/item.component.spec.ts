@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ItemComponent } from './item.component';
 
 // Creamos la Suite de tests para este componente.
@@ -50,5 +51,89 @@ describe('ItemComponent: testing basic component creation', () => {
    // Test para comprobar que el componente se crea correctamente
    it('should create', () => {
       expect(component).toBeTruthy();
+   });
+});
+
+describe('ItemComponent: testing @Input properties', () => {
+   let component: ItemComponent;
+   let fixture: ComponentFixture<ItemComponent>;
+
+   beforeEach(async () => {
+      await TestBed.configureTestingModule({
+         declarations: [ItemComponent]
+      })
+         .compileComponents();
+   });
+
+   beforeEach(() => {
+      fixture = TestBed.createComponent(ItemComponent);
+      component = fixture.componentInstance;
+   });
+
+   it('should accept name input', () => {
+      component.name = 'Test Product';
+      fixture.detectChanges();
+      expect(component.name).toBe('Test Product');
+   });
+
+   it('should accept description input', () => {
+      component.description = 'This is a test description';
+      fixture.detectChanges();
+      expect(component.description).toBe('This is a test description');
+   });
+
+   it('should accept price input', () => {
+      component.price = '99.99';
+      fixture.detectChanges();
+      expect(component.price).toBe('99.99');
+   });
+
+   it('should display all input values correctly', () => {
+      component.name = 'Test Product';
+      component.description = 'Test Description';
+      component.price = '49.99';
+      fixture.detectChanges();
+
+      expect(component.name).toBe('Test Product');
+      expect(component.description).toBe('Test Description');
+      expect(component.price).toBe('49.99');
+   });
+});
+
+describe('ItemComponent: testing like() method', () => {
+   let component: ItemComponent;
+   let fixture: ComponentFixture<ItemComponent>;
+
+   beforeEach(async () => {
+      await TestBed.configureTestingModule({
+         declarations: [ItemComponent]
+      })
+         .compileComponents();
+   });
+
+   beforeEach(() => {
+      fixture = TestBed.createComponent(ItemComponent);
+      component = fixture.componentInstance;
+      component.name = 'Test Product';
+      fixture.detectChanges();
+   });
+
+   it('should call like() method when invoked', () => {
+      spyOn(component, 'like').and.callThrough();
+      component.like();
+      expect(component.like).toHaveBeenCalled();
+   });
+
+   it('should log to console when like() is called', () => {
+      spyOn(console, 'info');
+      component.like();
+      expect(console.info).toHaveBeenCalledWith('like Test Product');
+   });
+
+   it('should call like() when like button is clicked', () => {
+      spyOn(component, 'like');
+      const likeButton = fixture.debugElement.query(By.css('button'));
+      likeButton.triggerEventHandler('click', null);
+      expect(component.like).toHaveBeenCalled();
    });
 });
