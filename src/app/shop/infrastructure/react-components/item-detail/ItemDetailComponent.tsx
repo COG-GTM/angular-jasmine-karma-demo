@@ -5,5 +5,5 @@ interface ItemDetailComponentProps {
 }
 
 export const ItemDetailComponent = ({ item }: ItemDetailComponentProps) => {
-  return null;
+  return <p>item-detail works!</p>;
 };
