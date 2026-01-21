@@ -48,6 +48,7 @@ export const ItemComponent = (props: ItemComponentProps) => {
         <button
           style={buttonStyles}
           aria-label="like"
+          onClick={like}
         >
           &#x2764;
         </button>
