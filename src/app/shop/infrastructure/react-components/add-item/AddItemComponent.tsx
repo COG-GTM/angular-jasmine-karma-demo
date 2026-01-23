@@ -26,5 +26,48 @@ export const AddItemComponent = () => {
     console.info('saveItem');
   };
 
-  return null;
+  return (
+    <div>
+      <p>add-item works!</p>
+      <form>
+        <div className="form-field">
+          <label htmlFor="name">name</label>
+          <input
+            id="name"
+            type="text"
+            placeholder="name"
+            value={form.name}
+            onChange={handleChange('name')}
+          />
+        </div>
+        <div className="form-field">
+          <label htmlFor="description">description</label>
+          <input
+            id="description"
+            type="text"
+            placeholder="description"
+            value={form.description}
+            onChange={handleChange('description')}
+          />
+        </div>
+        <div className="form-field">
+          <label htmlFor="price">price</label>
+          <input
+            id="price"
+            type="text"
+            placeholder="price"
+            value={form.price}
+            onChange={handleChange('price')}
+          />
+        </div>
+        <button
+          type="button"
+          disabled={!isFormValid}
+          onClick={saveItem}
+        >
+          Save
+        </button>
+      </form>
+    </div>
+  );
 };
