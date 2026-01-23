@@ -1,3 +1,5 @@
+import './ItemComponent.css';
+
 interface ItemComponentProps {
   name: string;
   description: string;
@@ -9,5 +11,22 @@ export const ItemComponent = ({ name, description, price }: ItemComponentProps) 
     console.info('like ' + name);
   };
 
-  return null;
+  return (
+    <div className="card">
+      <div className="card-header">
+        <h3 className="card-title">{name}</h3>
+      </div>
+      <div className="card-content">
+        <p>{price} €</p>
+        <p>{description}</p>
+        <button
+          className="icon-button"
+          aria-label="like"
+          onClick={like}
+        >
+          <span className="icon">❤</span>
+        </button>
+      </div>
+    </div>
+  );
 };
