@@ -13,8 +13,12 @@ interface FormErrors {
 }
 
 export interface AddItemComponentProps {
+  /** Callback when form is submitted with valid data */
   onSaveItem?: (item: FormState) => void;
 }
+
+// TODO: Angular Material styling not ported - using plain HTML inputs
+// TODO: mat-icon for save button not included - would need @mui/icons-material or similar
 
 export const AddItemComponent: React.FC<AddItemComponentProps> = ({ onSaveItem }) => {
   const [form, setForm] = useState<FormState>({
