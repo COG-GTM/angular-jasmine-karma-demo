@@ -52,10 +52,13 @@ export const AddItem: React.FC = () => {
     []
   );
 
+  // TODO: saveItem() is a placeholder — wire to a real backend/service when available
   const saveItem = useCallback((): void => {
     console.info('saveItem');
   }, []);
 
+  // TODO: Angular Material styling replaced with plain HTML — consider adding MUI if needed
+  // TODO: Wire into React Router if routing is required
   return (
     <div>
       <p>add-item works!</p>
