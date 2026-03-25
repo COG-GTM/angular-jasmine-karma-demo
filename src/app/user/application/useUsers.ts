@@ -40,9 +40,16 @@ export const useUsers = (): UseUsersReturn => {
 
   const getUsers = useCallback(async () => {
     console.info('getUsers');
-    const response = await fetch('https://jsonplaceholder.typicode.com/users');
-    const data: User[] = await response.json();
-    setUsers(data);
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/users');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch users: ${response.status}`);
+      }
+      const data: User[] = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
   }, []);
 
   return { users, getUsers };
