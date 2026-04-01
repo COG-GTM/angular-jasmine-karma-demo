@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
  * Interface representing the form state for AddItemComponent.
  * Mirrors the Angular reactive form fields: name, description, price.
  */
-interface AddItemFormState {
+export interface AddItemFormState {
   name: string;
   description: string;
   price: string;
