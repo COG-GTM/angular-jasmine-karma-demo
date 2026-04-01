@@ -112,5 +112,62 @@ export const AddItemComponent: React.FC<AddItemComponentProps> = ({ onSaveItem }
     }
   };
 
-  return null;
+  return (
+    <div>
+      <p>add-item works!</p>
+      {/* TODO: Replace HTML form elements with Material UI equivalents (Angular used mat-form-field, mat-label, matInput, mat-raised-button, mat-icon) */}
+      <form>
+        <div className="mat-form-field">
+          <label htmlFor="add-item-name">name</label>
+          <input
+            id="add-item-name"
+            type="text"
+            placeholder="name"
+            value={form.name}
+            onChange={handleChange('name')}
+            onBlur={handleBlur('name')}
+          />
+          {touched.name && form.name.trim() === '' && (
+            <span className="validation-error">Name is required</span>
+          )}
+        </div>
+        <div className="mat-form-field">
+          <label htmlFor="add-item-description">description</label>
+          <input
+            id="add-item-description"
+            type="text"
+            placeholder="description"
+            value={form.description}
+            onChange={handleChange('description')}
+            onBlur={handleBlur('description')}
+          />
+          {touched.description && form.description.trim() === '' && (
+            <span className="validation-error">Description is required</span>
+          )}
+        </div>
+        <div className="mat-form-field">
+          <label htmlFor="add-item-price">price</label>
+          <input
+            id="add-item-price"
+            type="text"
+            placeholder="price"
+            value={form.price}
+            onChange={handleChange('price')}
+            onBlur={handleBlur('price')}
+          />
+          {touched.price && form.price.trim() === '' && (
+            <span className="validation-error">Price is required</span>
+          )}
+        </div>
+        <button
+          disabled={!isFormValid()}
+          type="button"
+          onClick={saveItem}
+        >
+          {/* TODO: Replace with Material UI icon equivalent (Angular used mat-icon with "save") */}
+          Save
+        </button>
+      </form>
+    </div>
+  );
 };
