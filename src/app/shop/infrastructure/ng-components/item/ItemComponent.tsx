@@ -1,5 +1,9 @@
 import React from 'react';
 import { Item } from '../../../domain/item.model';
+// TODO: The original Angular component used Angular Material (mat-card, mat-icon).
+// When integrating into a React app, consider using a Material UI library
+// (e.g., @mui/material) or custom styled components to match the original design.
+import './item.component.scss';
 
 interface ItemComponentProps {
   name: Item['name'];
