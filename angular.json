@@ -103,11 +103,16 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "include": [
+              "src/**/*.spec.ts"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "angular-jasmine-karma-demo"
+  "cli": {
+    "analytics": false
+  }
 }
