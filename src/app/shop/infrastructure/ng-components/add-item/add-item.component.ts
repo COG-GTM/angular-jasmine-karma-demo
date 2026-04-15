@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
    selector: 'app-add-item',
+   standalone: false,
    templateUrl: './add-item.component.html',
    styleUrls: ['./add-item.component.scss']
 })

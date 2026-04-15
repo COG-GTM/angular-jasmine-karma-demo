@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersServices } from 'src/app/users/application/UsersServices';
+import { UsersServices } from 'src/app/user/application/UsersServices';
 
 @Component({
    selector: 'app-users',
+   standalone: false,
    templateUrl: './users.component.html',
    styleUrls: ['./users.component.scss']
 })
