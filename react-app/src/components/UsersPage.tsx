@@ -6,7 +6,7 @@ function UsersPage() {
 
   const getUsers = () => {
     fetch('https://jsonplaceholder.typicode.com/users')
-      .then((response) => response.json())
+      .then((response) => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
       .then((data: User[]) => setUsers(data))
       .catch((error) => console.error('Error fetching users:', error));
   };

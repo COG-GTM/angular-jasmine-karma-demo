@@ -13,7 +13,7 @@ function ItemCard({ name, description, price }: ItemCardProps) {
         <div className="mat-card-title">{name}</div>
       </div>
       <div className="mat-card-content">
-        <p>{price} \u20ac</p>
+        <p>{price} {"\u20ac"}</p>
         <p>{description}</p>
         <button
           className="mat-icon-button"
@@ -21,7 +21,7 @@ function ItemCard({ name, description, price }: ItemCardProps) {
           onClick={handleLike}
           style={{ color: '#f44336', background: 'none', border: 'none', cursor: 'pointer', fontSize: '24px' }}
         >
-          \u2764
+          {"\u2764"}
         </button>
       </div>
     </div>
