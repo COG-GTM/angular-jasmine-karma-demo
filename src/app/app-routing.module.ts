@@ -6,7 +6,7 @@ import { UsersComponent } from 'src/app/users/infrastructure/ng-components/users
 const routes: Routes = [
     { path: 'shop', component: ItemsComponent },
     { path: 'users', component: UsersComponent },
-    { path: '',   redirectTo: '/users', pathMatch: 'full' },
+    { path: '',   redirectTo: '/shop', pathMatch: 'full' },
 ];
 
 @NgModule({

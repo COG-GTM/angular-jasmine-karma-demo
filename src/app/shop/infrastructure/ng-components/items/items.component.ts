@@ -23,7 +23,10 @@ export class ItemsComponent implements OnInit {
     this.items = [
       { name: 'foo', description: 'bar', price: '123' },
       { name: 'mario', description: 'bross', price: '456' },
-      { name: 'luigi', description: 'bross', price: '789' }
+      { name: 'luigi', description: 'bross', price: '789' },
+      { name: 'peach', description: 'princess', price: '999' },
+      { name: 'toad', description: 'mushroom', price: '111' },
+      { name: 'yoshi', description: 'dinosaur', price: '555' }
     ];
   }
 
