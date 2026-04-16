@@ -1,4 +1,24 @@
 <p>items shop</p>
-<app-item [name]="'foo'" [description]="'bar'" [price]="'123'"></app-item>
-<app-item [name]="'mario'" [description]="'bross'" [price]="'456'"></app-item>
-<app-item [name]="'luigi'" [description]="'bross'" [price]="'789'"></app-item>
+
+<div class="search-container">
+  <input 
+    type="text" 
+    placeholder="Search items..." 
+    [value]="searchQuery"
+    (input)="onSearchChange($event.target.value)"
+    class="search-input"
+  >
+</div>
+
+<div class="items-container">
+  <app-item 
+    *ngFor="let item of filteredItems"
+    [name]="item.name" 
+    [description]="item.description" 
+    [price]="item.price">
+  </app-item>
+</div>
+
+<div *ngIf="filteredItems.length === 0" class="no-results">
+  <p>No items found matching your search.</p>
+</div>
