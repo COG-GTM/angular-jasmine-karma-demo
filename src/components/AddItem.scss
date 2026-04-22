@@ -1,0 +1,27 @@
+.add-item {
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 320px;
+  }
+
+  .mat-form-field {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: 0.75rem;
+      color: rgba(0, 0, 0, 0.6);
+      margin-bottom: 0.25rem;
+    }
+
+    input {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid rgba(0, 0, 0, 0.38);
+      border-radius: 4px;
+      font: inherit;
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+}

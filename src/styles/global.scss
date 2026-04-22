@@ -1,0 +1,99 @@
+/* Global styles ported from Angular src/styles.scss */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+#root {
+  min-height: 100%;
+}
+
+/* Material-Design-inspired utility styles (replaces @angular/material
+ * usage from the original Angular app without introducing a UI library). */
+
+.mat-card {
+  display: block;
+  padding: 16px;
+  border-radius: 4px;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.mat-card-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.mat-card-content {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.mat-raised-button,
+.mat-icon-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mat-raised-button {
+  padding: 0 16px;
+  min-width: 64px;
+  height: 36px;
+  border-radius: 4px;
+  background: #e0e0e0;
+  box-shadow:
+    0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.mat-raised-button[disabled] {
+  background: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.38);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.mat-icon-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  justify-content: center;
+  padding: 0;
+}
+
+.mat-warn {
+  color: #f44336;
+}
+
+.mat-raised-button.mat-warn:not([disabled]) {
+  background: #f44336;
+  color: #fff;
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-size: 24px;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
