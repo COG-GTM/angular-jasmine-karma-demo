@@ -1,4 +1,8 @@
 import { Item as ItemModel } from '../../../domain/item.model';
+// TODO: The sibling `Item` React component is being migrated in a separate PR
+// (Angular `ItemComponent` → React). A minimal placeholder lives alongside
+// this file so `Items.tsx` compiles; swap to the real implementation when
+// that PR lands.
 import { Item } from '../item/Item';
 import './Items.scss';
 
