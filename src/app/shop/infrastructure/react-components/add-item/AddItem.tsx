@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './AddItem.module.scss';
 
 export interface AddItemFormValues {
   name: string;
@@ -38,5 +39,53 @@ export const AddItem = (props: AddItemProps): JSX.Element => {
     props.onSave?.(form);
   };
 
-  return null as unknown as JSX.Element;
+  // Template translation of `add-item.component.html`.
+  // TODO: replace plain inputs/buttons with a React Material (or other
+  // design-system) equivalent when the host app picks one.
+  return (
+    <form className={styles.form}>
+      <p>add-item works!</p>
+
+      <div className={styles.field}>
+        <label htmlFor="add-item-name">name</label>
+        <input
+          id="add-item-name"
+          type="text"
+          placeholder="name"
+          value={form.name}
+          onChange={handleChange('name')}
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label htmlFor="add-item-description">description</label>
+        <input
+          id="add-item-description"
+          type="text"
+          placeholder="description"
+          value={form.description}
+          onChange={handleChange('description')}
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label htmlFor="add-item-price">price</label>
+        <input
+          id="add-item-price"
+          type="text"
+          placeholder="price"
+          value={form.price}
+          onChange={handleChange('price')}
+        />
+      </div>
+
+      <button
+        type="button"
+        disabled={!isFormValid}
+        onClick={saveItem}
+      >
+        Save
+      </button>
+    </form>
+  );
 };
