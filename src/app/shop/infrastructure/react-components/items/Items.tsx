@@ -1,17 +1,25 @@
-import { Item } from '../../../domain/item.model';
+import { Item as ItemModel } from '../../../domain/item.model';
+import { Item } from '../item/Item';
+import './Items.scss';
 
 export interface ItemsProps {
-  items?: Item[];
+  items?: ItemModel[];
 }
 
-const DEFAULT_ITEMS: Item[] = [
+const DEFAULT_ITEMS: ItemModel[] = [
   { name: 'foo', description: 'bar', price: '123' },
   { name: 'mario', description: 'bross', price: '456' },
   { name: 'luigi', description: 'bross', price: '789' },
 ];
 
 export const Items = (props: ItemsProps): JSX.Element => {
-  const items: Item[] = props.items ?? DEFAULT_ITEMS;
-  void items;
-  return <></>;
+  const items: ItemModel[] = props.items ?? DEFAULT_ITEMS;
+  return (
+    <>
+      <p>items shop</p>
+      {items.map((item: ItemModel, index: number) => (
+        <Item key={`${item.name}-${index}`} item={item} />
+      ))}
+    </>
+  );
 };
