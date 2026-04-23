@@ -1,3 +1,4 @@
+import React from 'react';
 import { Item } from '../../../domain/item.model.react';
 
 interface ItemDetailProps {
