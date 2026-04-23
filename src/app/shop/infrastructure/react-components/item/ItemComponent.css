@@ -1,0 +1,33 @@
+.card {
+    border: 0.1rem solid lightgrey;
+    box-shadow: 0.3rem 0.3rem lightgrey;
+    margin-top: 1rem;
+    width: 90%;
+}
+
+.card-header {
+    padding: 1rem 1rem 0;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.card-content {
+    padding: 1rem;
+}
+
+.like-button {
+    background: none;
+    border: none;
+    color: #f44336;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0.25rem;
+}
+
+.like-button:hover {
+    opacity: 0.8;
+}
