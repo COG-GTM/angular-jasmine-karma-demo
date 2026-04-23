@@ -9,7 +9,7 @@ const mockUsers = [
 ];
 
 describe('UsersComponent: testing calling a hook from a component.', () => {
-  beforeEach(() => {
+  afterEach(() => {
     jest.restoreAllMocks();
   });
 
@@ -19,7 +19,7 @@ describe('UsersComponent: testing calling a hook from a component.', () => {
   });
 
   it('getUsers() should return a list of users', async () => {
-    jest.spyOn(global, 'fetch').mockResolvedValue({
+    global.fetch = jest.fn().mockResolvedValue({
       json: () => Promise.resolve(mockUsers),
     } as Response);
 
