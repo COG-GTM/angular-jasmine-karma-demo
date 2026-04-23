@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "es2020",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "lib": ["es2018", "dom"],
+    "types": ["jest", "@testing-library/jest-dom"]
+  },
+  "include": ["src/app/shop/infrastructure/react-components/**/*"]
+}
