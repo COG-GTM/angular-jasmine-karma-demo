@@ -1,4 +1,23 @@
 <p>items shop</p>
-<app-item [name]="'foo'" [description]="'bar'" [price]="'123'"></app-item>
-<app-item [name]="'mario'" [description]="'bross'" [price]="'456'"></app-item>
-<app-item [name]="'luigi'" [description]="'bross'" [price]="'789'"></app-item>
+
+<div class="filter-container">
+  <input 
+    type="text" 
+    [(ngModel)]="filterText" 
+    placeholder="Filter items..." 
+    class="filter-input"
+  />
+</div>
+
+<div class="items-list">
+  <app-item 
+    *ngFor="let item of filteredItems"
+    [name]="item.name" 
+    [description]="item.description" 
+    [price]="item.price">
+  </app-item>
+</div>
+
+<div *ngIf="filteredItems.length === 0" class="no-results">
+  No items found matching "{{filterText}}"
+</div>
