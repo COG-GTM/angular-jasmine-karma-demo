@@ -6,10 +6,19 @@
 
 .search-section {
    margin-bottom: 30px;
+   display: flex;
+   gap: 20px;
+   flex-wrap: wrap;
    
    .search-input {
-      width: 100%;
+      flex: 1;
+      min-width: 250px;
       max-width: 500px;
+   }
+   
+   .sort-select {
+      min-width: 200px;
+      max-width: 250px;
    }
 }
 

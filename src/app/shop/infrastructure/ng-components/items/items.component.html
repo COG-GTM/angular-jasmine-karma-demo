@@ -5,6 +5,16 @@
          <input matInput [value]="searchQuery" (input)="onSearchChange($event.target.value)" placeholder="Search by name or description">
          <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
+      
+      <mat-form-field appearance="fill" class="sort-select">
+         <mat-label>Sort by</mat-label>
+         <mat-select [value]="selectedSort" (selectionChange)="onSortChange($event.value)">
+            <mat-option *ngFor="let option of sortOptions" [value]="option.value">
+               {{ option.label }}
+            </mat-option>
+         </mat-select>
+         <mat-icon matSuffix>sort</mat-icon>
+      </mat-form-field>
    </div>
 
    <div class="items-grid">

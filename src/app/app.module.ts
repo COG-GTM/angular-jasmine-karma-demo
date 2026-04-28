@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AddItemComponent } from './shop/infrastructure/ng-components/add-item/add-item.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { UsersComponent } from './users/infrastructure/ng-components/users/users.component';
 import { ItemDetailComponent } from './shop/infrastructure/ng-components/item-detail/item-detail.component';
 
@@ -36,6 +37,7 @@ import { ItemDetailComponent } from './shop/infrastructure/ng-components/item-de
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatSelectModule,
     HttpClientModule,
   ],
   providers: [],
