@@ -1,0 +1,36 @@
+.items-container {
+   padding: 20px;
+   max-width: 1200px;
+   margin: 0 auto;
+}
+
+.search-section {
+   margin-bottom: 30px;
+   display: flex;
+   gap: 20px;
+   flex-wrap: wrap;
+   
+   .search-input {
+      flex: 1;
+      min-width: 250px;
+      max-width: 500px;
+   }
+   
+   .sort-select {
+      min-width: 200px;
+      max-width: 250px;
+   }
+}
+
+.items-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+   gap: 20px;
+}
+
+.no-results {
+   text-align: center;
+   padding: 40px;
+   color: #666;
+   font-style: italic;
+}

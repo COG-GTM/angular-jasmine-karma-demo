@@ -1,4 +1,32 @@
-<p>items shop</p>
-<app-item [name]="'foo'" [description]="'bar'" [price]="'123'"></app-item>
-<app-item [name]="'mario'" [description]="'bross'" [price]="'456'"></app-item>
-<app-item [name]="'luigi'" [description]="'bross'" [price]="'789'"></app-item>
+<div class="items-container">
+   <div class="search-section">
+      <mat-form-field appearance="fill" class="search-input">
+         <mat-label>Search items</mat-label>
+         <input matInput [value]="searchQuery" (input)="onSearchChange($event.target.value)" placeholder="Search by name or description">
+         <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill" class="sort-select">
+         <mat-label>Sort by</mat-label>
+         <mat-select [value]="selectedSort" (selectionChange)="onSortChange($event.value)">
+            <mat-option *ngFor="let option of sortOptions" [value]="option.value">
+               {{ option.label }}
+            </mat-option>
+         </mat-select>
+         <mat-icon matSuffix>sort</mat-icon>
+      </mat-form-field>
+   </div>
+
+   <div class="items-grid">
+      <app-item 
+         *ngFor="let item of filteredItems"
+         [name]="item.name"
+         [description]="item.description"
+         [price]="item.price">
+      </app-item>
+   </div>
+
+   <div *ngIf="filteredItems.length === 0" class="no-results">
+      <p>No items found matching "{{ searchQuery }}"</p>
+   </div>
+</div>
