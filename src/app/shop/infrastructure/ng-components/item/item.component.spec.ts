@@ -1,54 +1,151 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
 import { ItemComponent } from './item.component';
 
-// Creamos la Suite de tests para este componente.
-// los tests se ejecutan con el comando $ ng test
-describe('ItemComponent: testing basic component creation', () => {
-   // variable con el propio componente a testear
+// Suite de tests para ItemComponent
+describe('ItemComponent: testing @Input properties, like() method, and template rendering', () => {
    let component: ItemComponent;
-   // es el componente a testear pero añadiendo más información para que sea más fácil de testear.
    let fixture: ComponentFixture<ItemComponent>;
 
-   /*
-   - asíncrona para asegurarnos de que se termina de ejecutar antes de pasar un test
-   - configureTestingModule: configura e inyecta dependecias al componente que queremos testear.
-   - Si usáramos en el componente un servicio, habría que incluirlo también, creando una sección llamada providers.
-   */
    beforeEach(async () => {
-      /* TESTBED
-      - es la API principal para escribir pruebas unitarias para aplicaciones y bibliotecas de Angular. 
-      - Creo que dobla el componente, cómo el mount de jest => Crea un módulo de prueba angular (una clase @NgModule) 
-      que se configura con el método configureTestingModule para producir el entorno del módulo para la clase
-      que desea probar. Separa el componente a testear de su propio módulo de aplicación 
-      y lo conecta a un módulo de prueba Angular de construcción dinámica adaptado específicamente para estas pruebas. */
       await TestBed.configureTestingModule({
-         declarations: [ItemComponent]
-      })
-         .compileComponents();
+         declarations: [ItemComponent],
+         // Material modules required by the template:
+         //   mat-card, mat-card-header, mat-card-title, mat-card-subtitle, mat-card-content → MatCardModule
+         //   mat-icon → MatIconModule
+         //   mat-icon-button (mat button directive) → MatButtonModule
+         // NoopAnimationsModule prevents real animation timers from slowing tests
+         imports: [
+            NoopAnimationsModule,
+            MatCardModule,
+            MatIconModule,
+            MatButtonModule,
+         ],
+      }).compileComponents();
    });
 
-   /*
-    Crea una instancia fixture del componente usando TestBed, 
-    el cual se encargará de inyectar las dependencias definidas anteriormente mediante configureTestingModule. 
-    */
    beforeEach(() => {
       fixture = TestBed.createComponent(ItemComponent);
-      /* Para referenciar el componente en sí del fixture usa componentInstance;
-      ya que fixture proporciona más metodos y parámetros a parte del propio componente. */
       component = fixture.componentInstance;
 
-      /*
-      - Al invocar detectChanges() le decimos a TestBed que realice el enlace de datos.
-      - Es imprescindible para los tests, da error si no está.
-      - Documentación oficial: Delayed change detection is intentional and useful. 
-        It gives the tester an opportunity to inspect and change the state of the component before Angular 
-        initiates data binding and calls lifecycle hooks. */
-      fixture.detectChanges();
+      // Set baseline @Input values before the first detectChanges() call so that
+      // data binding is applied to a fully-initialised component in every test.
+      component.name        = 'Laptop Pro';
+      component.description = 'High performance laptop';
+      component.price       = '999';
+      component.category    = 'Electronics';
 
+      fixture.detectChanges();
    });
 
-   // Test para comprobar que el componente se crea correctamente
-   it('should create', () => {
+   // ─── 1. Creation ──────────────────────────────────────────────────────────
+
+   it('should create the component', () => {
       expect(component).toBeTruthy();
+   });
+
+   // ─── 2. @Input: name ──────────────────────────────────────────────────────
+
+   it('should receive the name @Input and render it in the template', () => {
+      // component-class assertion
+      expect(component.name).toBe('Laptop Pro');
+
+      // DOM assertion – mat-card-title contains the name
+      const titleEl: HTMLElement = fixture.debugElement
+         .query(By.css('mat-card-title'))
+         .nativeElement;
+      expect(titleEl.textContent).toContain('Laptop Pro');
+   });
+
+   // ─── 3. @Input: description ───────────────────────────────────────────────
+
+   it('should receive the description @Input and render it in the template', () => {
+      expect(component.description).toBe('High performance laptop');
+
+      const descEl: HTMLElement = fixture.debugElement
+         .query(By.css('p.description'))
+         .nativeElement;
+      expect(descEl.textContent).toContain('High performance laptop');
+   });
+
+   // ─── 4. @Input: price ─────────────────────────────────────────────────────
+
+   it('should receive the price @Input and render it with the € symbol', () => {
+      expect(component.price).toBe('999');
+
+      // Template renders "{{ price }} €"
+      const priceEl: HTMLElement = fixture.debugElement
+         .query(By.css('p.price'))
+         .nativeElement;
+      expect(priceEl.textContent).toContain('999');
+      expect(priceEl.textContent).toContain('€');
+   });
+
+   // ─── 5. @Input: category (conditional rendering via *ngIf) ────────────────
+
+   it('should receive the category @Input and render the subtitle when category is set', () => {
+      // category is truthy → subtitle should be present
+      const subtitleEl = fixture.debugElement.query(By.css('mat-card-subtitle'));
+      expect(subtitleEl).not.toBeNull();
+      expect(subtitleEl.nativeElement.textContent).toContain('Electronics');
+   });
+
+   it('should NOT render the subtitle when category is falsy (empty string)', () => {
+      component.category = '';
+      fixture.detectChanges();
+
+      // *ngIf="category" is false → element must be absent from the DOM
+      const subtitleEl = fixture.debugElement.query(By.css('mat-card-subtitle'));
+      expect(subtitleEl).toBeNull();
+   });
+
+   // ─── 6. like() method ─────────────────────────────────────────────────────
+
+   it('should call console.info with the item name when like() is invoked directly', () => {
+      spyOn(console, 'info');
+
+      component.like();
+
+      expect(console.info).toHaveBeenCalledOnceWith('like Laptop Pro');
+   });
+
+   it('should call like() when the like button is clicked in the template', () => {
+      spyOn(component, 'like');
+
+      // The template wires (click)="like()" to the mat-icon-button
+      const likeButton: HTMLElement = fixture.debugElement
+         .query(By.css('button[aria-label="like"]'))
+         .nativeElement;
+      likeButton.click();
+
+      expect(component.like).toHaveBeenCalledTimes(1);
+   });
+
+   // ─── 7. Edge cases ────────────────────────────────────────────────────────
+
+   it('should handle undefined @Input values without throwing', () => {
+      component.name        = undefined;
+      component.description = undefined;
+      component.price       = undefined;
+      component.category    = undefined;
+
+      // detectChanges() must not throw even with all inputs undefined
+      expect(() => fixture.detectChanges()).not.toThrow();
+   });
+
+   it('should log "like undefined" when like() is called with name as undefined', () => {
+      component.name = undefined;
+      fixture.detectChanges();
+
+      spyOn(console, 'info');
+      component.like();
+
+      // String concatenation: 'like ' + undefined → 'like undefined'
+      expect(console.info).toHaveBeenCalledOnceWith('like undefined');
    });
 });

@@ -1,0 +1,245 @@
+.shop-header {
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+  
+  h2 {
+    margin: 0 0 5px 0;
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .item-count {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+  }
+}
+
+.controls-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.search-input {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 250px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+}
+
+.category-select {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 180px;
+  box-sizing: border-box;
+  background: white;
+  cursor: pointer;
+  
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+}
+
+.sort-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+  .sort-label {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+  }
+}
+
+.sort-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.sort-btn {
+  padding: 8px 12px;
+  font-size: 13px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  
+  &:hover {
+    background: #f8f9fa;
+    border-color: #007bff;
+  }
+  
+  &.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+  
+  .sort-indicator {
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+
+.clear-section {
+  .clear-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    background: white;
+    color: #dc3545;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &:hover:not(:disabled) {
+      background: #dc3545;
+      color: white;
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.active-filters {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background: #e3f2fd;
+  border-radius: 6px;
+  border-left: 4px solid #2196f3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  
+  .filter-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1976d2;
+  }
+  
+  .filter-tag {
+    background: #2196f3;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    
+    .remove-filter {
+      cursor: pointer;
+      font-weight: bold;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+      
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.no-results {
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 2px dashed #dee2e6;
+  
+  h3 {
+    margin: 0 0 10px 0;
+    color: #495057;
+  }
+  
+  p {
+    margin: 0 0 20px 0;
+    font-size: 14px;
+  }
+  
+  .clear-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &:hover {
+      background: #0056b3;
+      border-color: #0056b3;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .controls-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-input,
+  .category-select {
+    width: 100%;
+  }
+  
+  .sort-section {
+    justify-content: center;
+  }
+  
+  .sort-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .clear-section {
+    text-align: center;
+  }
+}
