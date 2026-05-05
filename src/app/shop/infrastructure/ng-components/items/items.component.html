@@ -1,4 +1,111 @@
-<p>items shop</p>
-<app-item [name]="'foo'" [description]="'bar'" [price]="'123'"></app-item>
-<app-item [name]="'mario'" [description]="'bross'" [price]="'456'"></app-item>
-<app-item [name]="'luigi'" [description]="'bross'" [price]="'789'"></app-item>
+<div class="shop-header">
+  <h2>Shop Items</h2>
+  <p class="item-count">Showing {{ filteredAndSortedItems.length }} of {{ items.length }} items</p>
+</div>
+
+<div class="controls-container">
+  <!-- Search Filter -->
+  <div class="filter-section">
+    <input 
+      type="text" 
+      [(ngModel)]="filterText" 
+      placeholder="Search items..." 
+      class="search-input"
+    />
+  </div>
+
+  <!-- Category Filter -->
+  <div class="filter-section">
+    <select 
+      [(ngModel)]="selectedCategory" 
+      (change)="onCategoryChange()"
+      class="category-select"
+    >
+      <option value="">All Categories</option>
+      <option *ngFor="let category of categories" [value]="category">
+        {{ category }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Sort Controls -->
+  <div class="sort-section">
+    <div class="sort-buttons">
+      <button 
+        class="sort-btn"
+        [class.active]="sortField === 'name'"
+        (click)="onSortChange('name')"
+        title="Sort by name"
+      >
+        Name
+        <span *ngIf="sortField === 'name'" class="sort-indicator">
+          {{ sortOrder === 'asc' ? '↑' : '↓' }}
+        </span>
+      </button>
+      
+      <button 
+        class="sort-btn"
+        [class.active]="sortField === 'price'"
+        (click)="onSortChange('price')"
+        title="Sort by price"
+      >
+        Price
+        <span *ngIf="sortField === 'price'" class="sort-indicator">
+          {{ sortOrder === 'asc' ? '↑' : '↓' }}
+        </span>
+      </button>
+      
+      <button 
+        class="sort-btn"
+        [class.active]="sortField === 'category'"
+        (click)="onSortChange('category')"
+        title="Sort by category"
+      >
+        Category
+        <span *ngIf="sortField === 'category'" class="sort-indicator">
+          {{ sortOrder === 'asc' ? '↑' : '↓' }}
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Clear Filters -->
+  <div class="clear-section">
+    <button 
+      class="clear-btn"
+      (click)="clearFilters()"
+      [disabled]="!filterText && !selectedCategory && sortField === 'name' && sortOrder === 'asc'"
+    >
+      Clear All
+    </button>
+  </div>
+</div>
+
+<!-- Active Filters Display -->
+<div *ngIf="filterText || selectedCategory" class="active-filters">
+  <span class="filter-label">Active filters:</span>
+  <span *ngIf="filterText" class="filter-tag">
+    Search: "{{ filterText }}"
+    <span class="remove-filter" (click)="filterText = ''">×</span>
+  </span>
+  <span *ngIf="selectedCategory" class="filter-tag">
+    Category: {{ selectedCategory }}
+    <span class="remove-filter" (click)="selectedCategory = ''">×</span>
+  </span>
+</div>
+
+<div class="items-list">
+  <app-item 
+    *ngFor="let item of filteredAndSortedItems"
+    [name]="item.name" 
+    [description]="item.description" 
+    [price]="item.price"
+    [category]="item.category">
+  </app-item>
+</div>
+
+<div *ngIf="filteredAndSortedItems.length === 0" class="no-results">
+  <h3>No items found</h3>
+  <p>Try adjusting your search or filters</p>
+  <button class="clear-btn" (click)="clearFilters()">Clear all filters</button>
+</div>
