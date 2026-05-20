@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
+import { By } from '@angular/platform-browser';
 
 import { UsersComponent } from './users.component';
 
@@ -43,5 +44,56 @@ describe('UsersComponent: testing calling a service from a component.', () => {
 
        //3º assert: we expect to receibe an object with an array of users
       expect(component.users).toEqual({users});
-   })
+   });
+
+   it('getUsers() should handle empty user list', () => {
+      const users = [];
+      spyOn(component.usersServices, 'getUsers').and.returnValue(of({users: users}));
+      
+      component.getUsers();
+      expect(component.users).toEqual({users});
+   });
+
+   it('getUsers() should log to console when called', () => {
+      spyOn(console, 'info');
+      const users = ['foo', 'bar'];
+      spyOn(component.usersServices, 'getUsers').and.returnValue(of({users: users}));
+      
+      component.getUsers();
+      expect(console.info).toHaveBeenCalledWith('getUsers');
+   });
+
+   it('should render users works text', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      expect(compiled.textContent).toContain('users works!');
+   });
+
+   it('should have a Get Users button', () => {
+      const button = fixture.debugElement.query(By.css('button')).nativeElement;
+      expect(button).toBeTruthy();
+      expect(button.textContent).toContain('Get Users');
+   });
+
+   it('should call getUsers when button is clicked', () => {
+      spyOn(component, 'getUsers');
+      const button = fixture.debugElement.query(By.css('button')).nativeElement;
+      button.click();
+      expect(component.getUsers).toHaveBeenCalledTimes(1);
+   });
+
+   it('should initialize with empty users array', () => {
+      expect(component.users).toEqual([]);
+   });
+
+   it('should render user list when users are loaded', () => {
+      const users = [{name: 'User1'}, {name: 'User2'}];
+      spyOn(component.usersServices, 'getUsers').and.returnValue(of({users: users}));
+      
+      component.getUsers();
+      fixture.detectChanges();
+      
+      const compiled = fixture.nativeElement as HTMLElement;
+      expect(compiled.textContent).toContain('User1');
+      expect(compiled.textContent).toContain('User2');
+   });
 });

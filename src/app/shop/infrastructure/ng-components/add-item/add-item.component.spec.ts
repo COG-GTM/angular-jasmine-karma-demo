@@ -26,28 +26,71 @@ describe('AddItemComponent: testing form validation', () => {
       expect(component).toBeTruthy();
    });
 
-   it('form should be invalid', () => {
+   it('form should be invalid when empty', () => {
       component.form.controls['name'].setValue('');
       component.form.controls['description'].setValue('');
       component.form.controls['price'].setValue('');
       expect(component.form.valid).toBeFalsy();
    });
-   it('form should be valid', () => {
+
+   it('form should be valid when all fields are filled', () => {
       component.form.controls['name'].setValue('foo');
       component.form.controls['description'].setValue('bar');
       component.form.controls['price'].setValue('33');
       expect(component.form.valid).toBeTruthy();
    });
-   it('button save should call the saveItem method???', () => {
+
+   it('form should be invalid when only name is filled', () => {
+      component.form.controls['name'].setValue('foo');
+      component.form.controls['description'].setValue('');
+      component.form.controls['price'].setValue('');
+      expect(component.form.valid).toBeFalsy();
+   });
+
+   it('form should be invalid when only description is filled', () => {
+      component.form.controls['name'].setValue('');
+      component.form.controls['description'].setValue('bar');
+      component.form.controls['price'].setValue('');
+      expect(component.form.valid).toBeFalsy();
+   });
+
+   it('form should be invalid when only price is filled', () => {
+      component.form.controls['name'].setValue('');
+      component.form.controls['description'].setValue('');
+      component.form.controls['price'].setValue('33');
+      expect(component.form.valid).toBeFalsy();
+   });
+
+   it('name field should be required', () => {
+      const nameControl = component.form.controls['name'];
+      expect(nameControl.valid).toBeFalsy();
+      nameControl.setValue('');
+      expect(nameControl.hasError('required')).toBeTruthy();
+   });
+
+   it('description field should be required', () => {
+      const descriptionControl = component.form.controls['description'];
+      expect(descriptionControl.valid).toBeFalsy();
+      descriptionControl.setValue('');
+      expect(descriptionControl.hasError('required')).toBeTruthy();
+   });
+
+   it('price field should be required', () => {
+      const priceControl = component.form.controls['price'];
+      expect(priceControl.valid).toBeFalsy();
+      priceControl.setValue('');
+      expect(priceControl.hasError('required')).toBeTruthy();
+   });
+
+   it('button save should not call saveItem when form is invalid', () => {
       // Jasmine feature that allows dynamically intercepting the calls to a function
       spyOn(component, 'saveItem');
       let saveItemButton = fixture.debugElement.query(By.css('button')).nativeElement;
       saveItemButton.click();
       expect(component.saveItem).toHaveBeenCalledTimes(0); // remember: button is disabled if form is invalid
-      //expect(saveItemButton.enabled).toBeFalsy(); // this also could work as a valid expect
-      //expect(saveItemButton.disabled).toBeTruthy(); // this also could work as a valid expect
    });
-   it('button save should be enabled', () => {
+
+   it('button save should call saveItem when form is valid', () => {
       let saveItemButton = fixture.debugElement.query(By.css('button')).nativeElement;
       spyOn(component, 'saveItem');
       
@@ -59,5 +102,25 @@ describe('AddItemComponent: testing form validation', () => {
       saveItemButton.click();
       expect(component.saveItem).toHaveBeenCalledTimes(1);
    });
-   
+
+   it('saveItem method should log to console', () => {
+      spyOn(console, 'info');
+      component.saveItem();
+      expect(console.info).toHaveBeenCalledWith('saveItem');
+   });
+
+   it('button should be disabled when form is invalid', () => {
+      const saveButton = fixture.debugElement.query(By.css('button')).nativeElement;
+      expect(saveButton.disabled).toBeTruthy();
+   });
+
+   it('button should be enabled when form is valid', () => {
+      component.form.controls['name'].setValue('foo');
+      component.form.controls['description'].setValue('bar');
+      component.form.controls['price'].setValue('33');
+      fixture.detectChanges();
+      
+      const saveButton = fixture.debugElement.query(By.css('button')).nativeElement;
+      expect(saveButton.disabled).toBeFalsy();
+   });
 });

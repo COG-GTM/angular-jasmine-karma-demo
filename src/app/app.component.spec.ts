@@ -26,10 +26,29 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('angular-jasmine-karma-demo');
   });
 
-  /*it('should render title', () => {
+  // Test for rendering the title in the template
+  it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-jasmine-karma-demo app is running!');
-  });*/
+    expect(compiled.querySelector('span')?.textContent).toContain('angular-jasmine-karma-demo app is running!');
+  });
+
+  // Test for verifying router-outlet is present
+  it('should have router-outlet', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
+  });
+
+  // Test for verifying the title can be changed
+  it('should allow title to be changed', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.title = 'new-title';
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('span')?.textContent).toContain('new-title app is running!');
+  });
 });

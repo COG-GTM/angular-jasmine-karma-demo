@@ -1,4 +1,30 @@
-<p>items shop</p>
-<app-item [name]="'foo'" [description]="'bar'" [price]="'123'"></app-item>
-<app-item [name]="'mario'" [description]="'bross'" [price]="'456'"></app-item>
-<app-item [name]="'luigi'" [description]="'bross'" [price]="'789'"></app-item>
+<div class="items-container">
+  <h2>Shop Items</h2>
+
+  <div class="sort-controls">
+    <span>Sort by:</span>
+    <button (click)="sortItems('name')" 
+            [class.active]="sortBy === 'name'"
+            class="sort-btn">
+      Name {{ sortBy === 'name' ? (sortOrder === 'asc' ? '↑' : '↓') : '' }}
+    </button>
+    <button (click)="sortItems('description')" 
+            [class.active]="sortBy === 'description'"
+            class="sort-btn">
+      Description {{ sortBy === 'description' ? (sortOrder === 'asc' ? '↑' : '↓') : '' }}
+    </button>
+    <button (click)="sortItems('price')" 
+            [class.active]="sortBy === 'price'"
+            class="sort-btn">
+      Price {{ sortBy === 'price' ? (sortOrder === 'asc' ? '↑' : '↓') : '' }}
+    </button>
+  </div>
+
+  <div class="items-grid">
+    <app-item *ngFor="let item of items"
+               [name]="item.name"
+               [description]="item.description"
+               [price]="item.price">
+    </app-item>
+  </div>
+</div>
