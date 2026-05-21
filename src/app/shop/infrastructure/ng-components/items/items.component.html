@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <div class="items-container">
   <h2>Shop Items</h2>
 
@@ -27,4 +28,27 @@
                [price]="item.price">
     </app-item>
   </div>
+=======
+<p>items shop</p>
+
+<div class="sorting-controls">
+  <button (click)="sortItems('name')">
+    Sort by Name {{ getSortIcon('name') }}
+  </button>
+  <button (click)="sortItems('description')">
+    Sort by Description {{ getSortIcon('description') }}
+  </button>
+  <button (click)="sortItems('price')">
+    Sort by Price {{ getSortIcon('price') }}
+  </button>
+</div>
+
+<div class="items-list">
+  <app-item 
+    *ngFor="let item of items"
+    [name]="item.name" 
+    [description]="item.description" 
+    [price]="item.price">
+  </app-item>
+>>>>>>> Stashed changes
 </div>
