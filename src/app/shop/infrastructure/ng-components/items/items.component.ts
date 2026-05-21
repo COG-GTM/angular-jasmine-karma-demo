@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< Updated upstream
 import { Item } from '../../domain/item.model';
+=======
+import { Item } from '../../../domain/item.model';
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-items',
@@ -18,12 +22,22 @@ export class ItemsComponent implements OnInit {
   sortBy: string = 'name';
   sortOrder: 'asc' | 'desc' = 'asc';
 
+  items: Item[] = [
+    { name: 'foo', description: 'bar', price: '123' },
+    { name: 'mario', description: 'bross', price: '456' },
+    { name: 'luigi', description: 'bross', price: '789' }
+  ];
+
+  sortField: string = 'name';
+  sortDirection: 'asc' | 'desc' = 'asc';
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   sortItems(field: string): void {
+<<<<<<< Updated upstream
     if (this.sortBy === field) {
       this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
     } else {
@@ -49,4 +63,30 @@ export class ItemsComponent implements OnInit {
     });
   }
 
+=======
+    if (this.sortField === field) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortField = field;
+      this.sortDirection = 'asc';
+    }
+
+    this.items.sort((a, b) => {
+      const aValue = a[field];
+      const bValue = b[field];
+
+      if (this.sortDirection === 'asc') {
+        return aValue > bValue ? 1 : -1;
+      } else {
+        return aValue < bValue ? 1 : -1;
+      }
+    });
+  }
+
+  getSortIcon(field: string): string {
+    if (this.sortField !== field) return '↕';
+    return this.sortDirection === 'asc' ? '↑' : '↓';
+  }
+
+>>>>>>> Stashed changes
 }
