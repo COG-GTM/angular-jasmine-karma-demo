@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "lib": ["es2018", "dom"]
+  },
+  "include": [
+    "src/**/*.tsx",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.component.ts",
+    "src/**/*.component.spec.ts",
+    "src/**/*.module.ts",
+    "src/**/*.service.spec.ts",
+    "src/main.ts",
+    "src/polyfills.ts"
+  ]
+}
