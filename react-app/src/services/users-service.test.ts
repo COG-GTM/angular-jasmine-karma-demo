@@ -10,6 +10,7 @@ describe('UsersService', () => {
 
   it('should make GET request to correct URL', async () => {
     const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
       json: () => Promise.resolve([]),
     });
     globalThis.fetch = mockFetch;
@@ -27,6 +28,7 @@ describe('UsersService', () => {
       { id: 2, name: 'Ervin Howell', email: 'ervin@example.com' },
     ];
     globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true,
       json: () => Promise.resolve(mockUsers),
     });
 
@@ -37,6 +39,7 @@ describe('UsersService', () => {
 
   it('should handle empty response array', async () => {
     globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true,
       json: () => Promise.resolve([]),
     });
 
@@ -47,6 +50,7 @@ describe('UsersService', () => {
 
   it('should pass AbortSignal when provided', async () => {
     const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
       json: () => Promise.resolve([]),
     });
     globalThis.fetch = mockFetch;
