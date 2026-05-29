@@ -1,0 +1,35 @@
+.users-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .get-users-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 24px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-family: inherit;
+    text-transform: uppercase;
+    font-weight: 500;
+
+    &:hover {
+      background-color: #d32f2f;
+    }
+  }
+
+  ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-top: 16px;
+
+    li {
+      padding: 4px 0;
+    }
+  }
+}
