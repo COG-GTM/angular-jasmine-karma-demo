@@ -1,0 +1,44 @@
+.card {
+  border: 0.1rem solid lightgrey;
+  box-shadow: 0.3rem 0.3rem lightgrey;
+  margin-top: 1rem;
+  width: 90%;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.card-header {
+  padding: 1rem;
+  border-bottom: 1px solid lightgrey;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.card-content p {
+  margin: 0.5rem 0;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #f44336;
+  font-size: 1.5rem;
+}
+
+.icon-button:hover {
+  opacity: 0.8;
+}
+
+.icon {
+  display: inline-block;
+}
