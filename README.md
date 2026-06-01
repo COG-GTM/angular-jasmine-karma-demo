@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
 
+**Demo Status**: This repository is being used for testing and demonstration purposes.
+
 <br />
 
 ## Development server
