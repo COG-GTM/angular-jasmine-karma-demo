@@ -1,138 +1,178 @@
-# AngularJasmineKarmaDemo
+# Angular Jasmine Karma Demo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
+An educational project demonstrating unit testing best practices in Angular applications using Jasmine and Karma.
 
-<br />
+## Table of Contents
 
-## Development server
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Quick Start](#quick-start)
+- [Project Structure](#project-structure)
+- [Testing Patterns](#testing-patterns)
+- [Running Tests](#running-tests)
+- [Further Documentation](#further-documentation)
+- [Contributing](#contributing)
+- [License](#license)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Overview
 
-<br />
+This project serves as a learning resource and reference implementation for developers who want to understand how to write effective unit tests for Angular components, services, and forms. It implements two simple business domains (shop and user management) purely to provide realistic testing scenarios.
 
-## Running unit tests
+The demo covers behavior-driven development (BDD) testing patterns with Jasmine, proper component testing with Angular's TestBed, form validation testing using reactive forms, service testing with HTTP mocking, and the AAA (Arrange-Act-Assert) testing pattern.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io). You can run the tests even without the server running 😲 
+## Requirements
 
-<br />
+This project requires Node.js version 12.14.1 or 14.x and npm version 6.x or 7.x. It was built with Angular CLI version 12.1.3 and uses Angular 12.1.x, Jasmine 3.8.x for the testing framework, and Karma 6.3.x as the test runner.
 
-## About this project
-It is intended to be an introduction to unit testing with jasmine, providing information on the most basic concepts and sample tests. This is a work in progress, so, content will be added whenever possible.
+## Quick Start
 
-<br />
+Clone the repository and install dependencies:
 
-## About Jasmine tests
-> Jasmine is a behavior-driven development framework for testing JavaScript code. It does not depend on any other JavaScript frameworks. It does not require a DOM. And it has a clean, obvious syntax so that you can easily write tests. It's developed by Pivotal Labs and is open-source.
+```bash
+git clone https://github.com/COG-GTM/angular-jasmine-karma-demo.git
+cd angular-jasmine-karma-demo
+npm install
+```
 
-> Karma: is a test runner, it allows us to run the test suite. It's developed by Google.
+Run the development server:
 
-> Both, Jasmine and Karma, come preinstalled and preconfigured in an Angular project created with Angular CLI.
+```bash
+npm start
+```
 
-> The Unit Tests must be coded in component-name.**spec.ts** files, so that Karma can find them.
+The application will be available at http://localhost:4200 and will automatically reload when source files change.
 
-> **There are a couple of example tests with comments on the _item_ and _add-item_ components.**
+Run the unit tests:
 
-<br />
+```bash
+npm test
+```
 
-### Test doubles
-Son un término genérico que hace referencia a cualquier caso en el que se reemplaza un objeto de producción con otro con el único objetivo de probar el código.
+This executes the unit tests via Karma. Tests can run independently of the development server.
 
-According with Gerard Meszaros there are at least 5 kinds of doubles
-https://en.wikipedia.org/wiki/Test_double
-- Test stub: used for providing the tested code with "indirect input".
-- Mock object: used for verifying "indirect output" of the tested code, by first defining the expectations before the tested code is executed.
-- Test spy: used for verifying "indirect output" of the tested code, by asserting the expectations afterwards, without having defined the expectations before the tested code is executed. It helps in recording information about the indirect object created.
-- Fake object: used as a simpler implementation, e.g. using an in-memory database in the tests instead of doing real database access.
-- Dummy object: used when a parameter is needed for the tested method but without actually needing to use the parameter.
+## Project Structure
 
-<br />
+The codebase follows a domain-driven architecture with clear separation of concerns:
 
-### AAA Pattern: sections of a Unit Test
-1. Arrange:  code required to setup a specific test. Here objects would be created, mocks setup, ...
-    ``` js
-    fixture = TestBed.createComponent(AddItemComponent);
-    component = fixture.componentInstance;
-    ```
-2. Act: which should be the invocation of the method being tested
-    ``` js
-    component.form.controls['name'].setValue('foo');
-    component.form.controls['description'].setValue('bar');
-    component.form.controls['price'].setValue('33');
-    ``` 
-3. Assert: check whether the expectations were met.
-    ``` js
-    expect(component.form.valid).toBeTruthy();
-    ``` 
-<br />
+```
+src/app/
+├── shop/                              # Shop domain module
+│   ├── domain/
+│   │   └── item.model.ts              # Item data model interface
+│   └── infrastructure/
+│       └── ng-components/
+│           ├── add-item/              # Form-based item creation with validation
+│           ├── item/                  # Individual item display component
+│           ├── item-detail/           # Detailed item view with @Input
+│           └── items/                 # Item list component
+├── user/                              # User domain module
+│   ├── application/
+│   │   ├── UsersServices.ts           # HTTP service for external API
+│   │   └── UsersServices.service.spec.ts
+│   └── infrastructure/
+│       └── ng-components/
+│           └── users/                 # User management component
+├── app.module.ts                      # Root module configuration
+├── app-routing.module.ts              # Application routing (/shop, /users)
+└── app.component.*                    # Root component
+```
 
-### Jasmine assertion functions
-- expect(array).toContain(member);
-- expect(fn).toThrow(string);
-- expect(fn).toThrowError(string);
-- expect(instance).toBe(instance);
-- expect(mixed).toBeDefined();
-- expect(mixed).toBeFalsy();
-- expect(mixed).toBeNull();
-- expect(mixed).toBeTruthy();
-- expect(mixed).toBeUndefined();
-- expect(mixed).toEqual(mixed);
-- expect(mixed).toMatch(pattern);
-- expect(number).toBeCloseTo(number, decimalPlaces);
-- expect(number).toBeGreaterThan(number);
-- expect(number).toBeLessThan(number);
-- expect(number).toBeNaN();
-- expect(spy).toHaveBeenCalled();
-- expect(spy).toHaveBeenCalledTimes(number);
-- expect(spy).toHaveBeenCalledWith(…arguments);
+Test files are co-located with their corresponding components using the `.spec.ts` naming convention, which allows Karma to discover them automatically.
 
-<br />
+## Testing Patterns
 
-### Jasmine functions that can be run before or after tests
-To help a test suite DRY up any duplicated setup and teardown code, Jasmine provides the global beforeEach, afterEach, beforeAll, and afterAll functions:
-- beforeAll:  is called only once before all the specs in describe are run
-  - e.g.: to createt the TestBed
-- afterAll:  is called only once after all the specs in describe are run
-  - e.g.: to run some shared teardown after each of the specs in the describe in which it is called.
-- beforeEach: is called once before each spec in the describe in which it is called
-  - This functionality is very useful for running the common code in the application, lie data initialization.
-- afterEach: is called once after each spec in the describe in which it is called
-  - Generally used to reset/clean up purposes at the end of specs
+### AAA Pattern (Arrange-Act-Assert)
 
-<br />
+All tests in this project follow the AAA pattern, which provides a clear structure for organizing test code:
 
-## Jasmine methods
-- TestBed: modulo de angular que nos permite manipular las pruebas y configurarlas.
-- SpyOn is a Jasmine feature that allows dynamically intercepting the calls to a function nd change its result.
+```typescript
+// Arrange: Set up the test environment and data
+fixture = TestBed.createComponent(AddItemComponent);
+component = fixture.componentInstance;
 
-<br />
+// Act: Execute the code being tested
+component.form.controls['name'].setValue('foo');
+component.form.controls['description'].setValue('bar');
+component.form.controls['price'].setValue('33');
 
-## Testing Cases / How to test...
+// Assert: Verify the expected outcome
+expect(component.form.valid).toBeTruthy();
+```
 
-### Testing component creation
-- You can see an example at **item.component.spec.ts**
-- this is a very basic test, but it's well documented.
+### Test Doubles
 
-### Testing form validation
-You can see an example at **add-item.component.spec.ts**
+The project demonstrates various test double patterns as defined by Gerard Meszaros:
 
-### Testing sharing data from parent to child (using @Input)
-You can see an example at **item-detail.component.spec.ts**
+**Test Stub** provides indirect input to the tested code. **Mock Object** verifies indirect output by defining expectations before execution. **Test Spy** verifies indirect output by asserting expectations after execution without pre-defined expectations. **Fake Object** provides a simpler implementation, such as an in-memory database. **Dummy Object** fills a required parameter without being used.
 
-### Testing calling a service from a component
-You can see an example at **users.component.spec.ts**
+### Component Testing Examples
 
-### RouterLink
-// TODO: pending to code
+**Basic Component Creation** is demonstrated in `item.component.spec.ts`, showing how to use TestBed to configure and create component instances.
 
-### Testing service against rest api
-// TODO: pending to code
-- no tengo claro si es un test muy util, porque se mockea la base de datos y da la impresión de que siempre funciona.
-- imports: [HttpClientModule]
+**Form Validation Testing** is shown in `add-item.component.spec.ts`, demonstrating reactive form testing with validation rules and button state verification.
 
-### Testing service against **real** rest api
-// TODO: pending to code
-- documentation: 
-  - https://stackoverflow.com/questions/59204306/trying-to-run-angular-httpclient-jasmine-test-against-live-rest-api-nothing-hap
+**Parent-Child Communication with @Input** is covered in `item-detail.component.spec.ts`, showing how to test components that receive data from parent components.
+
+**Service Integration Testing** is demonstrated in `users.component.spec.ts`, showing how to spy on service methods and mock HTTP responses using RxJS observables.
+
+### Jasmine Lifecycle Hooks
+
+The tests use Jasmine's lifecycle hooks for setup and teardown:
+
+`beforeAll` runs once before all specs in a describe block, typically used to create the TestBed configuration. `beforeEach` runs before each spec, commonly used for creating component instances and initializing data. `afterEach` runs after each spec for cleanup purposes. `afterAll` runs once after all specs for shared teardown.
+
+### Common Jasmine Assertions
+
+```typescript
+expect(value).toBeTruthy();
+expect(value).toBeFalsy();
+expect(value).toEqual(expected);
+expect(value).toBe(expected);
+expect(value).toContain(item);
+expect(value).toBeDefined();
+expect(value).toBeNull();
+expect(spy).toHaveBeenCalled();
+expect(spy).toHaveBeenCalledTimes(n);
+expect(spy).toHaveBeenCalledWith(args);
+```
+
+## Running Tests
+
+Run tests in watch mode (default):
+
+```bash
+npm test
+```
+
+Run tests once without watch mode:
+
+```bash
+npm test -- --watch=false
+```
+
+Run tests with code coverage:
+
+```bash
+npm test -- --code-coverage
+```
+
+Coverage reports are generated in the `coverage/angular-jasmine-karma-demo` directory.
+
+## Further Documentation
+
+For more information on Angular testing, refer to the official Angular Testing Guide at https://angular.io/guide/testing. The Jasmine documentation is available at https://jasmine.github.io/pages/docs_home.html. For Karma configuration options, see https://karma-runner.github.io/latest/config/configuration-file.html.
+
+## Contributing
+
+Contributions are welcome. Please feel free to submit issues and pull requests to help improve this educational resource.
+
+## License
+
+This project is open source and available for educational purposes.
+
+---
+
+_Originally written and maintained by contributors and [Devin](https://app.devin.ai), with updates from the core team._
 
 
 
