@@ -1,13 +1,14 @@
 {
   "name": "angular-jasmine-karma-demo",
   "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
+    "scripts": {
+      "ng": "ng",
+      "start": "ng serve",
+      "build": "ng build",
+      "watch": "ng build --watch --configuration development",
+      "test": "ng test",
+      "test:react": "jest"
+    },
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.1.0-",
@@ -20,6 +21,8 @@
     "@angular/platform-browser": "~12.1.0-",
     "@angular/platform-browser-dynamic": "~12.1.0-",
     "@angular/router": "~12.1.0-",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
@@ -28,14 +31,22 @@
     "@angular-devkit/build-angular": "~12.1.3",
     "@angular/cli": "~12.1.3",
     "@angular/compiler-cli": "~12.1.0-",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/jasmine": "~3.8.0",
+    "@types/jest": "^30.0.0",
     "@types/node": "^12.11.1",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
     "jasmine-core": "~3.8.0",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "ts-jest": "^29.4.6",
     "typescript": "~4.3.2"
   }
 }
