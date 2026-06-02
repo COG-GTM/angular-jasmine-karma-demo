@@ -132,9 +132,9 @@ describe('ItemsComponent: testing sorting functionality', () => {
       // Assert
       expect(component.sortBy).toBe('price');
       expect(component.sortOrder).toBe('asc');
-      expect(component.items[0].price).toBe('59');
-      expect(component.items[1].price).toBe('99');
-      expect(component.items[component.items.length - 1].price).toBe('789');
+      expect(component.items[0].price).toBe(59);
+      expect(component.items[1].price).toBe(99);
+      expect(component.items[component.items.length - 1].price).toBe(789);
     });
 
     it('should sort items by price in descending order when toggled', () => {
@@ -148,8 +148,8 @@ describe('ItemsComponent: testing sorting functionality', () => {
       // Assert
       expect(component.sortBy).toBe('price');
       expect(component.sortOrder).toBe('desc');
-      expect(component.items[0].price).toBe('789');
-      expect(component.items[component.items.length - 1].price).toBe('59');
+      expect(component.items[0].price).toBe(789);
+      expect(component.items[component.items.length - 1].price).toBe(59);
     });
   });
 
@@ -252,7 +252,7 @@ describe('ItemsComponent: testing sorting functionality', () => {
 
     it('should handle single item array', () => {
       // Arrange
-      component.items = [{ name: 'single', description: 'item', price: '100' }];
+      component.items = [{ name: 'single', description: 'item', price: 100 }];
 
       // Act
       component.sortItems('name');
@@ -265,8 +265,8 @@ describe('ItemsComponent: testing sorting functionality', () => {
     it('should handle items with same sort field values', () => {
       // Arrange
       component.items = [
-        { name: 'item1', description: 'same', price: '100' },
-        { name: 'item2', description: 'same', price: '200' }
+        { name: 'item1', description: 'same', price: 100 },
+        { name: 'item2', description: 'same', price: 200 }
       ];
 
       // Act
@@ -280,21 +280,21 @@ describe('ItemsComponent: testing sorting functionality', () => {
       expect(component.items[1].description).toBe('same');
     });
 
-    it('should handle price as string comparison correctly', () => {
+    it('should handle price as numeric comparison correctly', () => {
       // Arrange
       component.items = [
-        { name: 'a', description: 'desc', price: '9' },
-        { name: 'b', description: 'desc', price: '100' },
-        { name: 'c', description: 'desc', price: '50' }
+        { name: 'a', description: 'desc', price: 9 },
+        { name: 'b', description: 'desc', price: 100 },
+        { name: 'c', description: 'desc', price: 50 }
       ];
 
       // Act
       component.sortItems('price');
 
       // Assert
-      expect(component.items[0].price).toBe('100');
-      expect(component.items[1].price).toBe('50');
-      expect(component.items[2].price).toBe('9');
+      expect(component.items[0].price).toBe(9);
+      expect(component.items[1].price).toBe(50);
+      expect(component.items[2].price).toBe(100);
     });
   });
 

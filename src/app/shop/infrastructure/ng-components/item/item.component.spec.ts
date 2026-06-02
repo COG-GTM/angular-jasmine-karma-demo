@@ -69,9 +69,9 @@ describe('ItemComponent: testing basic component creation', () => {
 
    // Test for @Input properties - price
    it('should accept price input', () => {
-      component.price = '100';
+      component.price = 100;
       fixture.detectChanges();
-      expect(component.price).toEqual('100');
+      expect(component.price).toEqual(100);
    });
 
    // Test for the like() method
@@ -86,7 +86,7 @@ describe('ItemComponent: testing basic component creation', () => {
    it('should render name in the template', () => {
       component.name = 'Test Item';
       component.description = 'Test Description';
-      component.price = '100';
+      component.price = 100;
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
       expect(compiled.textContent).toContain('Test Item');
@@ -96,7 +96,7 @@ describe('ItemComponent: testing basic component creation', () => {
    it('should render price in the template', () => {
       component.name = 'Test Item';
       component.description = 'Test Description';
-      component.price = '100';
+      component.price = 100;
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
       expect(compiled.textContent).toContain('100 €');
@@ -106,7 +106,7 @@ describe('ItemComponent: testing basic component creation', () => {
    it('should render description in the template', () => {
       component.name = 'Test Item';
       component.description = 'Test Description';
-      component.price = '100';
+      component.price = 100;
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
       expect(compiled.textContent).toContain('Test Description');
@@ -117,7 +117,7 @@ describe('ItemComponent: testing basic component creation', () => {
       spyOn(component, 'like');
       component.name = 'Test Item';
       component.description = 'Test Description';
-      component.price = '100';
+      component.price = 100;
       fixture.detectChanges();
       
       const likeButton = fixture.debugElement.query(By.css('button')).nativeElement;
