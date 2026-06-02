@@ -9,7 +9,7 @@ export class ItemComponent implements OnInit {
 
    @Input() name: String;
    @Input() description: String;
-   @Input() price: String;
+   @Input() price: number;
 
    constructor() { }
 
