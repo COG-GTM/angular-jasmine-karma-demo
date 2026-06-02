@@ -19,7 +19,7 @@ describe('ItemDetailComponent: testing @Input from parent', () => {
       component = fixture.componentInstance;
 
       // pretend that it was wired to something that supplied an Item
-      itemInput = { 'name': 'foo', 'description': 'bar', 'price': '33' };
+      itemInput = { 'name': 'foo', 'description': 'bar', 'price': 33 };
       component.item = itemInput;
 
       // trigger initial data binding
@@ -39,7 +39,7 @@ describe('ItemDetailComponent: testing @Input from parent', () => {
    });
 
    it('should get the price param value from @Input', () => {
-      expect(component.item.price).toContain(itemInput.price);
+      expect(component.item.price).toEqual(itemInput.price);
    });
 
    it('should handle null item input', () => {
@@ -55,12 +55,12 @@ describe('ItemDetailComponent: testing @Input from parent', () => {
    });
 
    it('should accept item with different values', () => {
-      const newItem = { 'name': 'new item', 'description': 'new description', 'price': '99' };
+      const newItem = { 'name': 'new item', 'description': 'new description', 'price': 99 };
       component.item = newItem;
       fixture.detectChanges();
       expect(component.item.name).toEqual('new item');
       expect(component.item.description).toEqual('new description');
-      expect(component.item.price).toEqual('99');
+      expect(component.item.price).toEqual(99);
    });
 
    it('should render item-detail works text', () => {
