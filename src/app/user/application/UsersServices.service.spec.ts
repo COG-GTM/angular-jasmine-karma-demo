@@ -56,7 +56,7 @@ describe('UsersServices', () => {
       ];
 
       // Act
-      service.getUsers().subscribe((users) => {
+      service.getUsers().subscribe((users: any) => {
         // Assert
         expect(users).toEqual(mockUsers);
         expect(users.length).toBe(3);
@@ -72,7 +72,7 @@ describe('UsersServices', () => {
       const mockUsers: any[] = [];
 
       // Act
-      service.getUsers().subscribe((users) => {
+      service.getUsers().subscribe((users: any) => {
         // Assert
         expect(users).toEqual([]);
         expect(users.length).toBe(0);
@@ -101,12 +101,12 @@ describe('UsersServices', () => {
       ];
 
       // Act
-      service.getUsers().subscribe((users) => {
+      service.getUsers().subscribe((users: any) => {
         // Assert - verify the data structure
         expect(Array.isArray(users)).toBeTrue();
-        expect(users[0]).toHaveProperty('id');
-        expect(users[0]).toHaveProperty('name');
-        expect(users[0]).toHaveProperty('email');
+        expect(users[0].id).toBeDefined();
+        expect(users[0].name).toBeDefined();
+        expect(users[0].email).toBeDefined();
         expect(users[0].id).toBe(1);
         expect(users[0].name).toBe('Leanne Graham');
       });
@@ -182,7 +182,7 @@ describe('UsersServices', () => {
 
       // Mock the network error
       const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/users');
-      req.error(new ErrorEvent('Network Error'));
+      req.error(new ErrorEvent('Network Error'), { status: 0, statusText: 'Network Error' });
     });
 
     it('should handle 403 Forbidden error', () => {
