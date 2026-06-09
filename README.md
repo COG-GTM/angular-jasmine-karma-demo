@@ -1,143 +1,89 @@
-# AngularJasmineKarmaDemo
+# AngularJasmineKarmaDemo → React
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
+This project was originally an Angular 12 + Jasmine/Karma demo. It has been
+migrated to **React 18 + TypeScript + Vite**, with tests rewritten in
+**Vitest + React Testing Library**. The React application lives in the
+[`react-app/`](./react-app) directory.
 
-<br />
+All original functionality is preserved:
 
-## Development server
+- The same routes/URLs: `/shop` (item list with sorting) and `/users`, with `/`
+  redirecting to `/shop`.
+- The shop and user domains, the users API call to
+  `https://jsonplaceholder.typicode.com/users`, and the add-item reactive form.
+- The Angular Material look-and-feel, reproduced with plain CSS (no new UI
+  library was added).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Getting started
 
-<br />
+```bash
+cd react-app
+npm install
+```
 
-## Running unit tests
+### Development server
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io). You can run the tests even without the server running 😲 
+```bash
+npm run dev
+```
 
-<br />
+Vite serves the app at `http://localhost:5173/`. It reloads automatically when
+you change source files.
 
-## About this project
-It is intended to be an introduction to unit testing with jasmine, providing information on the most basic concepts and sample tests. This is a work in progress, so, content will be added whenever possible.
+### Build
 
-<br />
+```bash
+npm run build
+```
 
-## About Jasmine tests
-> Jasmine is a behavior-driven development framework for testing JavaScript code. It does not depend on any other JavaScript frameworks. It does not require a DOM. And it has a clean, obvious syntax so that you can easily write tests. It's developed by Pivotal Labs and is open-source.
+Type-checks with `tsc` and produces a production build in `react-app/dist/`.
 
-> Karma: is a test runner, it allows us to run the test suite. It's developed by Google.
+### Lint
 
-> Both, Jasmine and Karma, come preinstalled and preconfigured in an Angular project created with Angular CLI.
+```bash
+npm run lint
+```
 
-> The Unit Tests must be coded in component-name.**spec.ts** files, so that Karma can find them.
+### Running unit tests
 
-> **There are a couple of example tests with comments on the _item_ and _add-item_ components.**
+```bash
+npm test          # single run (CI)
+npm run test:watch
+```
 
-<br />
+Tests run with [Vitest](https://vitest.dev) and
+[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+in a jsdom environment. Test files live next to the code they cover as
+`*.test.ts` / `*.test.tsx`.
 
-### Test doubles
-Son un término genérico que hace referencia a cualquier caso en el que se reemplaza un objeto de producción con otro con el único objetivo de probar el código.
+## Project structure
 
-According with Gerard Meszaros there are at least 5 kinds of doubles
-https://en.wikipedia.org/wiki/Test_double
-- Test stub: used for providing the tested code with "indirect input".
-- Mock object: used for verifying "indirect output" of the tested code, by first defining the expectations before the tested code is executed.
-- Test spy: used for verifying "indirect output" of the tested code, by asserting the expectations afterwards, without having defined the expectations before the tested code is executed. It helps in recording information about the indirect object created.
-- Fake object: used as a simpler implementation, e.g. using an in-memory database in the tests instead of doing real database access.
-- Dummy object: used when a parameter is needed for the tested method but without actually needing to use the parameter.
+```
+react-app/src/
+├── types/        # TypeScript interfaces (Item, User)
+├── services/     # usersService (fetch + AbortController, ported from UsersServices)
+├── utils/        # sort helpers (ported from ItemsComponent sorting logic)
+├── components/   # Item, AddItem, ItemDetail, Layout (app shell)
+├── pages/        # ItemsPage (/shop), UsersPage (/users)
+├── styles/       # global + Material-like CSS
+├── App.tsx       # React Router routes
+└── main.tsx      # entry point
+```
 
-<br />
+## Angular → React mapping
 
-### AAA Pattern: sections of a Unit Test
-1. Arrange:  code required to setup a specific test. Here objects would be created, mocks setup, ...
-    ``` js
-    fixture = TestBed.createComponent(AddItemComponent);
-    component = fixture.componentInstance;
-    ```
-2. Act: which should be the invocation of the method being tested
-    ``` js
-    component.form.controls['name'].setValue('foo');
-    component.form.controls['description'].setValue('bar');
-    component.form.controls['price'].setValue('33');
-    ``` 
-3. Assert: check whether the expectations were met.
-    ``` js
-    expect(component.form.valid).toBeTruthy();
-    ``` 
-<br />
+| Angular | React |
+| --- | --- |
+| `@Component` + template | Function component returning JSX |
+| `@Input` | Props |
+| Services + RxJS `HttpClient` | `fetch` + `async/await` with `AbortController` |
+| `*ngFor` / `*ngIf` | `.map()` / conditional rendering |
+| Angular Router (`<router-outlet>`) | React Router (`<Outlet>`, `<Routes>`) |
+| Reactive forms | `useState` + derived validation |
+| Jasmine + Karma | Vitest + React Testing Library |
+| Angular Material components | Plain CSS replicas (`mat-*` class names) |
 
-### Jasmine assertion functions
-- expect(array).toContain(member);
-- expect(fn).toThrow(string);
-- expect(fn).toThrowError(string);
-- expect(instance).toBe(instance);
-- expect(mixed).toBeDefined();
-- expect(mixed).toBeFalsy();
-- expect(mixed).toBeNull();
-- expect(mixed).toBeTruthy();
-- expect(mixed).toBeUndefined();
-- expect(mixed).toEqual(mixed);
-- expect(mixed).toMatch(pattern);
-- expect(number).toBeCloseTo(number, decimalPlaces);
-- expect(number).toBeGreaterThan(number);
-- expect(number).toBeLessThan(number);
-- expect(number).toBeNaN();
-- expect(spy).toHaveBeenCalled();
-- expect(spy).toHaveBeenCalledTimes(number);
-- expect(spy).toHaveBeenCalledWith(…arguments);
+## Continuous Integration
 
-<br />
-
-### Jasmine functions that can be run before or after tests
-To help a test suite DRY up any duplicated setup and teardown code, Jasmine provides the global beforeEach, afterEach, beforeAll, and afterAll functions:
-- beforeAll:  is called only once before all the specs in describe are run
-  - e.g.: to createt the TestBed
-- afterAll:  is called only once after all the specs in describe are run
-  - e.g.: to run some shared teardown after each of the specs in the describe in which it is called.
-- beforeEach: is called once before each spec in the describe in which it is called
-  - This functionality is very useful for running the common code in the application, lie data initialization.
-- afterEach: is called once after each spec in the describe in which it is called
-  - Generally used to reset/clean up purposes at the end of specs
-
-<br />
-
-## Jasmine methods
-- TestBed: modulo de angular que nos permite manipular las pruebas y configurarlas.
-- SpyOn is a Jasmine feature that allows dynamically intercepting the calls to a function nd change its result.
-
-<br />
-
-## Testing Cases / How to test...
-
-### Testing component creation
-- You can see an example at **item.component.spec.ts**
-- this is a very basic test, but it's well documented.
-
-### Testing form validation
-You can see an example at **add-item.component.spec.ts**
-
-### Testing sharing data from parent to child (using @Input)
-You can see an example at **item-detail.component.spec.ts**
-
-### Testing calling a service from a component
-You can see an example at **users.component.spec.ts**
-
-### RouterLink
-// TODO: pending to code
-
-### Testing service against rest api
-// TODO: pending to code
-- no tengo claro si es un test muy util, porque se mockea la base de datos y da la impresión de que siempre funciona.
-- imports: [HttpClientModule]
-
-### Testing service against **real** rest api
-// TODO: pending to code
-- documentation: 
-  - https://stackoverflow.com/questions/59204306/trying-to-run-angular-httpclient-jasmine-test-against-live-rest-api-nothing-hap
-
-
-
-
-
-
-
-
+[`.github/workflows/ci.yml`](./.github/workflows/ci.yml) installs dependencies
+and runs lint, build, and tests for `react-app/` on every push and pull request.

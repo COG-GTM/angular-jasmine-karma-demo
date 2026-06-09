@@ -1,0 +1,28 @@
+/* Ported from item.component.scss plus a plain-CSS mat-card replacement. */
+.card {
+  border: 0.1rem solid lightgrey;
+  box-shadow: 0.3rem 0.3rem lightgrey;
+  margin-top: 1rem;
+  width: 90%;
+  border-radius: 4px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 16px 16px 0;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.card-content {
+  padding: 16px;
+
+  p {
+    margin: 0 0 8px;
+  }
+}
