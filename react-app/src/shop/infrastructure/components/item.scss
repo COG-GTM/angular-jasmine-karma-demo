@@ -1,0 +1,25 @@
+.card {
+  border: 0.1rem solid lightgrey;
+  box-shadow: 0.3rem 0.3rem lightgrey;
+  margin-top: 1rem;
+  width: 90%;
+
+  // Equivalent of Angular Material's mat-card padding / radius / typography.
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0 0 12px;
+}
+
+.card-content p {
+  margin: 0 0 12px;
+  font-size: 14px;
+}

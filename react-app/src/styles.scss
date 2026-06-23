@@ -1,0 +1,14 @@
+/* Global styles, mirroring the Angular app's styles.scss + Material typography. */
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+p {
+  margin: 0 0 12px;
+}
