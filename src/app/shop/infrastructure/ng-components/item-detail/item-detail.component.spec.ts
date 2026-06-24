@@ -43,13 +43,13 @@ describe('ItemDetailComponent: testing @Input from parent', () => {
    });
 
    it('should handle null item input', () => {
-      component.item = null;
+      component.item = null as any;
       fixture.detectChanges();
       expect(component.item).toBeNull();
    });
 
    it('should handle undefined item input', () => {
-      component.item = undefined;
+      component.item = undefined as any;
       fixture.detectChanges();
       expect(component.item).toBeUndefined();
    });

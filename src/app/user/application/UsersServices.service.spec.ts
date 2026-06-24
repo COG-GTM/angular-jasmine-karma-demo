@@ -104,9 +104,9 @@ describe('UsersServices', () => {
       service.getUsers().subscribe((users) => {
         // Assert - verify the data structure
         expect(Array.isArray(users)).toBeTrue();
-        expect(users[0]).toHaveProperty('id');
-        expect(users[0]).toHaveProperty('name');
-        expect(users[0]).toHaveProperty('email');
+        expect(users[0].id).toBeDefined();
+        expect(users[0].name).toBeDefined();
+        expect(users[0].email).toBeDefined();
         expect(users[0].id).toBe(1);
         expect(users[0].name).toBe('Leanne Graham');
       });

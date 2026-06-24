@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from '../../domain/item.model';
+import { Item } from '../../../domain/item.model';
 
 @Component({
   selector: 'app-items',
@@ -21,6 +21,7 @@ export class ItemsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.applySort();
   }
 
   sortItems(field: string): void {
