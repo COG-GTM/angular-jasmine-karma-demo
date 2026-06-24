@@ -47,7 +47,7 @@ describe('UsersComponent: testing calling a service from a component.', () => {
    });
 
    it('getUsers() should handle empty user list', () => {
-      const users = [];
+      const users: any[] = [];
       spyOn(component.usersServices, 'getUsers').and.returnValue(of({users: users}));
       
       component.getUsers();
