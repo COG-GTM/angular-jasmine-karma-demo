@@ -31,3 +31,5 @@ export const Item = ({ name, description, price }: ItemProps) => {
     </div>
   );
 };
+
+export default Item;
