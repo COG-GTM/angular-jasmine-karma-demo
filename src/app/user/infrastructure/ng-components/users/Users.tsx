@@ -15,5 +15,21 @@ export const Users = () => {
     setUsers([]);
   };
 
-  return null;
+  return (
+    <>
+      <p>users works!</p>
+      {/* TODO: Angular Material `mat-raised-button color="warn"` has no React
+          equivalent in this repo; rendered as a plain button. */}
+      <button type="button" onClick={getUsers}>
+        Get Users
+      </button>
+      <div>
+        <ul>
+          {users.map((user, index) => (
+            <li key={index}>{user.name}</li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
 };
