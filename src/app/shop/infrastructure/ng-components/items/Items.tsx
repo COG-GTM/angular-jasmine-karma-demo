@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Item as ItemModel } from '../../../domain/item.model';
 import { Item } from '../item/Item';
+import './Items.css';
 
 const INITIAL_ITEMS: ItemModel[] = [
   { name: 'foo', description: 'bar', price: '123' },
