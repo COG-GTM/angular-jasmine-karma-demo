@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Item as ItemModel } from '../../../domain/item.model';
+import { Item } from '../item/Item';
 
 const INITIAL_ITEMS: ItemModel[] = [
   { name: 'foo', description: 'bar', price: '123' },
@@ -44,5 +45,42 @@ export const Items = () => {
     }
   };
 
-  return null;
+  return (
+    <div className="items-container">
+      <h2>Shop Items</h2>
+
+      <div className="sort-controls">
+        <span>Sort by:</span>
+        <button
+          onClick={() => sortItems('name')}
+          className={`sort-btn${sortBy === 'name' ? ' active' : ''}`}
+        >
+          Name {sortBy === 'name' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+        </button>
+        <button
+          onClick={() => sortItems('description')}
+          className={`sort-btn${sortBy === 'description' ? ' active' : ''}`}
+        >
+          Description {sortBy === 'description' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+        </button>
+        <button
+          onClick={() => sortItems('price')}
+          className={`sort-btn${sortBy === 'price' ? ' active' : ''}`}
+        >
+          Price {sortBy === 'price' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+        </button>
+      </div>
+
+      <div className="items-grid">
+        {items.map((item, index) => (
+          <Item
+            key={index}
+            name={item.name}
+            description={item.description}
+            price={item.price}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
