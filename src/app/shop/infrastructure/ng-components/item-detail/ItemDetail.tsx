@@ -8,3 +8,5 @@ interface ItemDetailProps {
 export const ItemDetail = (props: ItemDetailProps) => {
   return <p>item-detail works!</p>;
 };
+
+export default ItemDetail;
