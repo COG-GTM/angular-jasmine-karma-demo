@@ -1,3 +1,4 @@
+import React from 'react';
 import { Item } from '../../../domain/item.model';
 
 interface ItemDetailProps {
@@ -5,5 +6,5 @@ interface ItemDetailProps {
 }
 
 export const ItemDetail = (props: ItemDetailProps) => {
-  return null;
+  return <p>item-detail works!</p>;
 };
