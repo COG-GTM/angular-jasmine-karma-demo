@@ -1,0 +1,16 @@
+/* Typecheck config for the migrated React components (kept separate from the
+   Angular build so it does not affect `ng build` / `ng test`). */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/react",
+    "jsx": "react-jsx",
+    "types": [],
+    "noEmit": true
+  },
+  "include": [
+    "src/app/user/domain/user.model.ts",
+    "src/app/user/application/useUsers.ts",
+    "src/app/user/infrastructure/ng-components/users/Users.tsx"
+  ]
+}
