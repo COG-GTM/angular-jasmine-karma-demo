@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { User } from '../../../domain/user.model';
+import { useUsers } from '../../../application/useUsers';
 
 // React port of the Angular `UsersComponent`.
 // - Angular `@Input()`/`@Output()`: none on this component.
@@ -7,12 +8,14 @@ import { User } from '../../../domain/user.model';
 // - Angular `ngOnInit()` was empty, so no `useEffect` on mount is required.
 export const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const usersService = useUsers();
 
+  // Mirrors `usersServices.getUsers().subscribe(users => this.users = users)`,
+  // with the RxJS Observable subscription converted to an async/Promise fetch.
   const getUsers = async () => {
     console.info('getUsers');
-    // TODO: wire up the users service (see step 6). Mirrors
-    // `usersServices.getUsers().subscribe(users => this.users = users)`.
-    setUsers([]);
+    const result = await usersService.getUsers();
+    setUsers(result);
   };
 
   return (
