@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ItemComponent } from './item.component';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 
 // Creamos la Suite de tests para este componente.
 // los tests se ejecutan con el comando $ ng test
@@ -23,7 +27,13 @@ describe('ItemComponent: testing basic component creation', () => {
       que desea probar. Separa el componente a testear de su propio módulo de aplicación 
       y lo conecta a un módulo de prueba Angular de construcción dinámica adaptado específicamente para estas pruebas. */
       await TestBed.configureTestingModule({
-         declarations: [ItemComponent]
+         declarations: [ItemComponent],
+         imports: [
+            NoopAnimationsModule,
+            MatCardModule,
+            MatIconModule,
+            MatButtonModule
+         ]
       })
          .compileComponents();
    });
