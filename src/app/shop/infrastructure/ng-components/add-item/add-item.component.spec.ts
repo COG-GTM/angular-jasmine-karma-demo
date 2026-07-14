@@ -3,6 +3,11 @@ import { AddItemComponent } from './add-item.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 describe('AddItemComponent: testing form validation', () => {
    let component: AddItemComponent;
@@ -11,7 +16,15 @@ describe('AddItemComponent: testing form validation', () => {
    beforeEach(async () => {
       await TestBed.configureTestingModule({
          declarations: [AddItemComponent],
-         imports: [FormsModule, ReactiveFormsModule]
+         imports: [
+            FormsModule,
+            ReactiveFormsModule,
+            NoopAnimationsModule,
+            MatFormFieldModule,
+            MatInputModule,
+            MatIconModule,
+            MatButtonModule
+         ]
       })
          .compileComponents();
    });
