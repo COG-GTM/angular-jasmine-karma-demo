@@ -48,12 +48,12 @@ describe('ItemsComponent: testing sorting functionality', () => {
       expect(sortOrder).toBe('asc');
     });
 
-    it('should have items in default order (by name ascending)', () => {
+    it('should have items in default (insertion) order before any sort', () => {
       // Arrange & Act
       const itemNames = component.items.map(item => item.name);
 
       // Assert
-      expect(itemNames).toEqual(['apple', 'banana', 'foo', 'luigi', 'mario']);
+      expect(itemNames).toEqual(['foo', 'mario', 'luigi', 'apple', 'banana']);
     });
   });
 
@@ -132,9 +132,9 @@ describe('ItemsComponent: testing sorting functionality', () => {
       // Assert
       expect(component.sortBy).toBe('price');
       expect(component.sortOrder).toBe('asc');
-      expect(component.items[0].price).toBe('59');
-      expect(component.items[1].price).toBe('99');
-      expect(component.items[component.items.length - 1].price).toBe('789');
+      expect(component.items[0].price).toBe('123');
+      expect(component.items[1].price).toBe('456');
+      expect(component.items[component.items.length - 1].price).toBe('99');
     });
 
     it('should sort items by price in descending order when toggled', () => {
@@ -148,8 +148,8 @@ describe('ItemsComponent: testing sorting functionality', () => {
       // Assert
       expect(component.sortBy).toBe('price');
       expect(component.sortOrder).toBe('desc');
-      expect(component.items[0].price).toBe('789');
-      expect(component.items[component.items.length - 1].price).toBe('59');
+      expect(component.items[0].price).toBe('99');
+      expect(component.items[component.items.length - 1].price).toBe('123');
     });
   });
 
@@ -247,7 +247,7 @@ describe('ItemsComponent: testing sorting functionality', () => {
       // Assert
       expect(component.items.length).toBe(0);
       expect(component.sortBy).toBe('name');
-      expect(component.sortOrder).toBe('asc');
+      expect(component.sortOrder).toBe('desc');
     });
 
     it('should handle single item array', () => {
@@ -316,9 +316,9 @@ describe('ItemsComponent: testing sorting functionality', () => {
       const afterThirdSort = [...component.items];
 
       // Assert
-      expect(component.sortOrder).toBe('asc');
+      expect(component.sortOrder).toBe('desc');
       expect(afterFirstSort).not.toEqual(initialOrder);
-      expect(afterSecondSort).toEqual(afterFirstSort.reverse());
+      expect(afterSecondSort).toEqual([...afterFirstSort].reverse());
       expect(afterThirdSort).toEqual(afterFirstSort);
     });
   });

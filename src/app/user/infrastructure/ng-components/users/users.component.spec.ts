@@ -87,7 +87,7 @@ describe('UsersComponent: testing calling a service from a component.', () => {
 
    it('should render user list when users are loaded', () => {
       const users = [{name: 'User1'}, {name: 'User2'}];
-      spyOn(component.usersServices, 'getUsers').and.returnValue(of({users: users}));
+      spyOn(component.usersServices, 'getUsers').and.returnValue(of(users));
       
       component.getUsers();
       fixture.detectChanges();

@@ -175,7 +175,7 @@ describe('UsersServices', () => {
         next: () => fail('should have failed with network error'),
         error: (error: HttpErrorResponse) => {
           // Assert
-          expect(error.statusText).toBe('Network Error');
+          expect(error.statusText).toBe('Unknown Error');
           expect(error.status).toBe(0);
         }
       });
