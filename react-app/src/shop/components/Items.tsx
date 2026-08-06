@@ -31,10 +31,8 @@ const applySort = (items: ItemModel[], sortBy: string, sortOrder: SortOrder): It
     return sortOrder === 'asc' ? comparison : -comparison;
   });
 
-const sortedInitialItems = applySort(initialItems, 'name', 'asc');
-
 const Items: FC<ItemsProps> = () => {
-  const [items, setItems] = useState<ItemModel[]>(sortedInitialItems);
+  const [items, setItems] = useState<ItemModel[]>(initialItems);
   const [sortBy, setSortBy] = useState<string>('name');
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
 

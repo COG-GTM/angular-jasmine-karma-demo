@@ -7,10 +7,10 @@ const itemNames = (): string[] =>
   screen.getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent ?? '');
 
 describe('Items', () => {
-  it('renders five items in name ascending order by default', () => {
+  it('renders five items in declaration order by default', () => {
     render(<Items />);
 
-    expect(itemNames()).toEqual(['apple', 'banana', 'foo', 'luigi', 'mario']);
+    expect(itemNames()).toEqual(['foo', 'mario', 'luigi', 'apple', 'banana']);
     expect(screen.getByRole('button', { name: /^Name ↑$/ })).toHaveClass(styles.active);
     expect(screen.getByRole('button', { name: /^Description$/ })).not.toHaveClass(styles.active);
     expect(screen.getByRole('button', { name: /^Price$/ })).not.toHaveClass(styles.active);
@@ -21,12 +21,12 @@ describe('Items', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /^Description$/ }));
 
-    expect(itemNames()).toEqual(['foo', 'luigi', 'mario', 'apple', 'banana']);
+    expect(itemNames()).toEqual(['foo', 'mario', 'luigi', 'apple', 'banana']);
     expect(screen.getByRole('button', { name: /^Description ↑$/ })).toHaveClass(styles.active);
     expect(screen.getByRole('button', { name: /^Name$/ })).not.toHaveClass(styles.active);
   });
 
-  it('toggles the selected field to descending on a second click', () => {
+  it('toggles the selected field to descending on the first Name click', () => {
     render(<Items />);
     const nameButton = screen.getByRole('button', { name: /^Name ↑$/ });
 
