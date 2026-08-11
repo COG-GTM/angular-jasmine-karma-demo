@@ -5,7 +5,7 @@ import Users from './Users';
 
 describe('Users page', () => {
   afterEach(() => {
-    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
   });
 
   it('loads users when the button is clicked', async () => {

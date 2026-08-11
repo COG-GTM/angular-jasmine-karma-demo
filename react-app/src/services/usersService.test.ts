@@ -3,7 +3,7 @@ import { getUsers } from './usersService';
 
 describe('usersService', () => {
   afterEach(() => {
-    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
   });
 
   it('returns the users returned by the API', async () => {
