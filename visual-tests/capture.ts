@@ -1,0 +1,77 @@
+import { mkdir } from 'node:fs/promises';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { chromium, type Browser, type Page } from 'playwright';
+import { USERS_FIXTURE, VIEWPORTS, VIEWS } from './matrix';
+
+const DISABLE_ANIMATIONS = `*, *::before, *::after {
+  transition: none !important;
+  animation: none !important;
+  caret-color: transparent !important;
+}`;
+
+export async function captureApp(baseUrl: string, outDir: string): Promise<string[]> {
+  await mkdir(outDir, { recursive: true });
+  const browser: Browser = await chromium.launch();
+  const written: string[] = [];
+  try {
+    for (const viewport of VIEWPORTS) {
+      const context = await browser.newContext({
+        viewport: { width: viewport.width, height: viewport.height },
+        deviceScaleFactor: 1,
+        reducedMotion: 'reduce',
+      });
+      // Serve identical mock API data to both apps so diffs only reflect rendering.
+      await context.route('**/jsonplaceholder.typicode.com/users*', (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(USERS_FIXTURE),
+        }),
+      );
+      try {
+        for (const view of VIEWS) {
+          // A fresh page per view so no in-page state can leak into the next baseline.
+          const page: Page = await context.newPage();
+          try {
+            await page.goto(baseUrl + view.path, { waitUntil: 'networkidle' });
+            await page.addStyleTag({ content: DISABLE_ANIMATIONS });
+            await page.evaluate(() => document.fonts.ready);
+            if (view.prepare) {
+              await view.prepare(page);
+              await page.waitForLoadState('networkidle');
+            }
+            await page.evaluate(() => document.fonts.ready);
+            await page.waitForTimeout(150);
+            const file = path.join(outDir, `${view.name}-${viewport.name}.png`);
+            await page.screenshot({ path: file, fullPage: true, animations: 'disabled' });
+            written.push(file);
+          } finally {
+            await page.close();
+          }
+        }
+      } finally {
+        await context.close();
+      }
+    }
+  } finally {
+    await browser.close();
+  }
+  return written;
+}
+
+async function main(): Promise<void> {
+  const [baseUrl, outDir] = process.argv.slice(2);
+  if (!baseUrl || !outDir) {
+    throw new Error('usage: tsx capture.ts <baseUrl> <outDir>');
+  }
+  // Relative paths resolve against this directory, matching capture-both.ts and
+  // compare.ts, so the scripts work from any cwd.
+  const files = await captureApp(baseUrl, path.resolve(import.meta.dirname, outDir));
+  console.log(`captured ${files.length} screenshots from ${baseUrl} into ${outDir}`);
+}
+
+const entry = process.argv[1];
+if (entry !== undefined && import.meta.url === pathToFileURL(entry).href) {
+  void main();
+}
