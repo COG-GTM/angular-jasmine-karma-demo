@@ -29,8 +29,9 @@ export async function captureApp(baseUrl: string, outDir: string): Promise<strin
           body: JSON.stringify(USERS_FIXTURE),
         }),
       );
-      const page: Page = await context.newPage();
       for (const view of VIEWS) {
+        // A fresh page per view so no in-page state can leak into the next baseline.
+        const page: Page = await context.newPage();
         await page.goto(baseUrl + view.path, { waitUntil: 'networkidle' });
         await page.addStyleTag({ content: DISABLE_ANIMATIONS });
         await page.evaluate(() => document.fonts.ready);
@@ -43,6 +44,7 @@ export async function captureApp(baseUrl: string, outDir: string): Promise<strin
         const file = path.join(outDir, `${view.name}-${viewport.name}.png`);
         await page.screenshot({ path: file, fullPage: true, animations: 'disabled' });
         written.push(file);
+        await page.close();
       }
       await context.close();
     }
