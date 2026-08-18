@@ -65,7 +65,9 @@ async function main(): Promise<void> {
   if (!baseUrl || !outDir) {
     throw new Error('usage: tsx capture.ts <baseUrl> <outDir>');
   }
-  const files = await captureApp(baseUrl, path.resolve(outDir));
+  // Relative paths resolve against this directory, matching capture-both.ts and
+  // compare.ts, so the scripts work from any cwd.
+  const files = await captureApp(baseUrl, path.resolve(import.meta.dirname, outDir));
   console.log(`captured ${files.length} screenshots from ${baseUrl} into ${outDir}`);
 }
 
