@@ -5,6 +5,9 @@ import { PNG } from 'pngjs';
 import { VIEWPORTS, VIEWS } from './matrix';
 
 const THRESHOLD_PCT = Number(process.env.THRESHOLD_PCT ?? '2');
+if (!Number.isFinite(THRESHOLD_PCT) || THRESHOLD_PCT <= 0) {
+  throw new Error(`THRESHOLD_PCT must be a positive number, got '${process.env.THRESHOLD_PCT ?? ''}'`);
+}
 const root = path.resolve(import.meta.dirname, 'screenshots');
 const diffDir = path.join(root, 'diff');
 

@@ -47,6 +47,24 @@ export const VIEWS: View[] = [
       await page.getByRole('button', { name: /^Price/ }).click();
     },
   },
+  {
+    name: 'shop-sort-description-desc',
+    path: '/shop',
+    prepare: async (page) => {
+      const button = page.getByRole('button', { name: /^Description/ });
+      await button.click();
+      await button.click();
+    },
+  },
+  {
+    name: 'shop-sort-price-desc',
+    path: '/shop',
+    prepare: async (page) => {
+      const button = page.getByRole('button', { name: /^Price/ });
+      await button.click();
+      await button.click();
+    },
+  },
   { name: 'users-initial', path: '/users' },
   {
     name: 'users-loaded',
