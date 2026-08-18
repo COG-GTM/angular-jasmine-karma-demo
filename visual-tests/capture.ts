@@ -1,5 +1,6 @@
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { chromium, type Browser, type Page } from 'playwright';
 import { USERS_FIXTURE, VIEWPORTS, VIEWS } from './matrix';
 
@@ -60,6 +61,7 @@ async function main(): Promise<void> {
   console.log(`captured ${files.length} screenshots from ${baseUrl} into ${outDir}`);
 }
 
-if (process.argv[1]?.endsWith('capture.ts')) {
+const entry = process.argv[1];
+if (entry !== undefined && import.meta.url === pathToFileURL(entry).href) {
   void main();
 }
