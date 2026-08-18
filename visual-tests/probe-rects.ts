@@ -36,7 +36,7 @@ async function main(): Promise<void> {
   const b = await rects(`${REACT_URL}/shop`, width);
   for (const sel of SELECTORS) {
     const flag = a[sel] === b[sel] ? '   ' : '>>>';
-    console.log(`${flag} ${sel.padEnd(26)} ng=${(a[sel] ?? '').padEnd(24)} react=${b[sel]}`);
+    console.log(`${flag} ${sel.padEnd(26)} ng=${(a[sel] ?? '').padEnd(24)} react=${b[sel] ?? ''}`);
   }
 }
 
