@@ -11,6 +11,7 @@ const diffDir = path.join(root, 'diff');
 interface Result {
   pair: string;
   mismatchPct: number;
+  sizeMismatch: boolean;
   passed: boolean;
 }
 
@@ -45,8 +46,14 @@ function main(): void {
         threshold: 0.1,
       });
       const mismatchPct = (mismatched / (width * height)) * 100;
+      const sizeMismatch = a.width !== b.width || a.height !== b.height;
       writeFileSync(path.join(diffDir, name), PNG.sync.write(diff));
-      results.push({ pair: name, mismatchPct, passed: mismatchPct < THRESHOLD_PCT });
+      results.push({
+        pair: name,
+        mismatchPct,
+        sizeMismatch,
+        passed: !sizeMismatch && mismatchPct < THRESHOLD_PCT,
+      });
     }
   }
 
@@ -55,7 +62,8 @@ function main(): void {
   console.log('| pair | mismatch % | result |');
   console.log('| --- | --- | --- |');
   for (const r of results) {
-    console.log(`| ${r.pair} | ${r.mismatchPct.toFixed(3)} | ${r.passed ? 'PASS' : 'FAIL'} |`);
+    const verdict = r.passed ? 'PASS' : r.sizeMismatch ? 'FAIL (size mismatch)' : 'FAIL';
+    console.log(`| ${r.pair} | ${r.mismatchPct.toFixed(3)} | ${verdict} |`);
   }
   const failed = results.filter((r) => !r.passed);
   console.log(`\n${results.length - failed.length}/${results.length} pairs passed`);

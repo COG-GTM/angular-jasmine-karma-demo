@@ -7,7 +7,10 @@ export function Users() {
 
   const getUsers = (): void => {
     console.info('getUsers');
-    void usersService.getUsers().then((loaded) => setUsers(loaded));
+    void usersService
+      .getUsers()
+      .then((loaded) => setUsers(loaded))
+      .catch((error: unknown) => console.error(error));
   };
 
   return (

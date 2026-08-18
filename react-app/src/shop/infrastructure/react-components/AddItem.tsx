@@ -16,7 +16,9 @@ export function AddItem() {
     price: false,
   });
 
-  const isFieldInvalid = (field: Field): boolean => values[field].trim().length === 0;
+  // Matches Angular's Validators.required: only an empty value is invalid, a
+  // whitespace-only value is not.
+  const isFieldInvalid = (field: Field): boolean => values[field].length === 0;
   const isFormInvalid = FIELDS.some(isFieldInvalid);
 
   const saveItem = (): void => {
