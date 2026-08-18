@@ -1,0 +1,28 @@
+{
+  "name": "visual-tests",
+  "version": "1.0.0",
+  "scripts": {
+    "capture": "tsx capture-both.ts",
+    "compare": "tsx compare.ts",
+    "capture:source": "tsx capture.ts http://localhost:4200 screenshots/source",
+    "capture:react": "tsx capture.ts http://localhost:5173 screenshots/react",
+    "probe": "tsx probe-rects.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0",
+    "@types/pixelmatch": "^5.2.6",
+    "@types/pngjs": "^6.0.5",
+    "pixelmatch": "^5.3.0",
+    "playwright": "^1.62.1",
+    "pngjs": "^7.0.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  },
+  "private": true,
+  "type": "module"
+}

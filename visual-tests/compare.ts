@@ -1,0 +1,67 @@
+import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import path from 'node:path';
+import pixelmatch from 'pixelmatch';
+import { PNG } from 'pngjs';
+import { VIEWPORTS, VIEWS } from './matrix';
+
+const THRESHOLD_PCT = Number(process.env.THRESHOLD_PCT ?? '2');
+const root = path.resolve(import.meta.dirname, 'screenshots');
+const diffDir = path.join(root, 'diff');
+
+interface Result {
+  pair: string;
+  mismatchPct: number;
+  passed: boolean;
+}
+
+function pad(png: PNG, width: number, height: number): PNG {
+  if (png.width === width && png.height === height) return png;
+  const out = new PNG({ width, height });
+  out.data.fill(255);
+  PNG.bitblt(png, out, 0, 0, Math.min(png.width, width), Math.min(png.height, height), 0, 0);
+  return out;
+}
+
+function main(): void {
+  mkdirSync(diffDir, { recursive: true });
+  const results: Result[] = [];
+
+  for (const view of VIEWS) {
+    for (const viewport of VIEWPORTS) {
+      const name = `${view.name}-${viewport.name}.png`;
+      const sourcePath = path.join(root, 'source', name);
+      const reactPath = path.join(root, 'react', name);
+      if (!existsSync(sourcePath) || !existsSync(reactPath)) {
+        throw new Error(`missing screenshot for ${name}`);
+      }
+      const a = PNG.sync.read(readFileSync(sourcePath));
+      const b = PNG.sync.read(readFileSync(reactPath));
+      const width = Math.max(a.width, b.width);
+      const height = Math.max(a.height, b.height);
+      const left = pad(a, width, height);
+      const right = pad(b, width, height);
+      const diff = new PNG({ width, height });
+      const mismatched = pixelmatch(left.data, right.data, diff.data, width, height, {
+        threshold: 0.1,
+      });
+      const mismatchPct = (mismatched / (width * height)) * 100;
+      writeFileSync(path.join(diffDir, name), PNG.sync.write(diff));
+      results.push({ pair: name, mismatchPct, passed: mismatchPct < THRESHOLD_PCT });
+    }
+  }
+
+  results.sort((x, y) => y.mismatchPct - x.mismatchPct);
+  console.log(`threshold: <${THRESHOLD_PCT}% mismatch\n`);
+  console.log('| pair | mismatch % | result |');
+  console.log('| --- | --- | --- |');
+  for (const r of results) {
+    console.log(`| ${r.pair} | ${r.mismatchPct.toFixed(3)} | ${r.passed ? 'PASS' : 'FAIL'} |`);
+  }
+  const failed = results.filter((r) => !r.passed);
+  console.log(`\n${results.length - failed.length}/${results.length} pairs passed`);
+  if (failed.length > 0) {
+    process.exitCode = 1;
+  }
+}
+
+main();
