@@ -19,7 +19,7 @@ export function Items() {
     const next = nextSortState({ sortBy, sortOrder }, field);
     setSortBy(next.sortBy);
     setSortOrder(next.sortOrder);
-    setItems(sortItems(items, next.sortBy, next.sortOrder));
+    setItems((current) => sortItems(current, next.sortBy, next.sortOrder));
   };
 
   const arrow = (field: SortField): string =>
