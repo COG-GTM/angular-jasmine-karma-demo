@@ -5,8 +5,10 @@ import { PNG } from 'pngjs';
 import { VIEWPORTS, VIEWS } from './matrix';
 
 const THRESHOLD_PCT = Number(process.env.THRESHOLD_PCT ?? '2');
-if (!Number.isFinite(THRESHOLD_PCT) || THRESHOLD_PCT <= 0) {
-  throw new Error(`THRESHOLD_PCT must be a positive number, got '${process.env.THRESHOLD_PCT ?? ''}'`);
+if (!Number.isFinite(THRESHOLD_PCT) || THRESHOLD_PCT < 0) {
+  throw new Error(
+    `THRESHOLD_PCT must be a non-negative number, got '${process.env.THRESHOLD_PCT ?? ''}'`,
+  );
 }
 const root = path.resolve(import.meta.dirname, 'screenshots');
 const diffDir = path.join(root, 'diff');
@@ -16,6 +18,12 @@ interface Result {
   mismatchPct: number;
   sizeMismatch: boolean;
   passed: boolean;
+}
+
+// THRESHOLD_PCT is an exclusive bound (the spec is "under 2%"), except 0, which
+// means "pixel-exact".
+function withinThreshold(mismatchPct: number): boolean {
+  return THRESHOLD_PCT === 0 ? mismatchPct === 0 : mismatchPct < THRESHOLD_PCT;
 }
 
 function pad(png: PNG, width: number, height: number): PNG {
@@ -55,13 +63,15 @@ function main(): void {
         pair: name,
         mismatchPct,
         sizeMismatch,
-        passed: !sizeMismatch && mismatchPct < THRESHOLD_PCT,
+        passed: !sizeMismatch && withinThreshold(mismatchPct),
       });
     }
   }
 
   results.sort((x, y) => y.mismatchPct - x.mismatchPct);
-  console.log(`threshold: <${THRESHOLD_PCT}% mismatch\n`);
+  console.log(
+    THRESHOLD_PCT === 0 ? 'threshold: pixel-exact\n' : `threshold: <${THRESHOLD_PCT}% mismatch\n`,
+  );
   console.log('| pair | mismatch % | result |');
   console.log('| --- | --- | --- |');
   for (const r of results) {

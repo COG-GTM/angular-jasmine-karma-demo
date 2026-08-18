@@ -28,7 +28,8 @@ export function AddItem() {
   return (
     <>
       <p>add-item works!</p>
-      <form className="add-item-form">
+      {/* Angular's FormGroupDirective swallows native submits; do the same here. */}
+      <form className="add-item-form" onSubmit={(event) => event.preventDefault()}>
         {FIELDS.map((field) => (
           <div
             key={field}
