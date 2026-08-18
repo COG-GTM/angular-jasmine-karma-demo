@@ -15,11 +15,20 @@ export function AddItem() {
     description: false,
     price: false,
   });
+  const [dirty, setDirty] = useState<Record<Field, boolean>>({
+    name: false,
+    description: false,
+    price: false,
+  });
 
   // Matches Angular's Validators.required: only an empty value is invalid, a
   // whitespace-only value is not.
   const isFieldInvalid = (field: Field): boolean => values[field].length === 0;
   const isFormInvalid = FIELDS.some(isFieldInvalid);
+  // Angular Material shows the error state once the control is invalid and has
+  // been touched or edited.
+  const showsError = (field: Field): boolean =>
+    isFieldInvalid(field) && (touched[field] || dirty[field]);
 
   const saveItem = (): void => {
     console.info('saveItem');
@@ -35,7 +44,7 @@ export function AddItem() {
             key={field}
             className={
               'mat-form-field mat-form-field-appearance-fill' +
-              (touched[field] && isFieldInvalid(field) ? ' mat-form-field-invalid' : '')
+              (showsError(field) ? ' mat-form-field-invalid' : '')
             }
           >
             <div className="mat-form-field-flex">
@@ -48,9 +57,10 @@ export function AddItem() {
                   name={field}
                   placeholder={field}
                   value={values[field]}
-                  onChange={(event) =>
-                    setValues((current) => ({ ...current, [field]: event.target.value }))
-                  }
+                  onChange={(event) => {
+                    setValues((current) => ({ ...current, [field]: event.target.value }));
+                    setDirty((current) => ({ ...current, [field]: true }));
+                  }}
                   onBlur={() => setTouched((current) => ({ ...current, [field]: true }))}
                 />
               </div>

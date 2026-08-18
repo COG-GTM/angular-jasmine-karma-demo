@@ -4,11 +4,11 @@ import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
 import { VIEWPORTS, VIEWS } from './matrix';
 
-const THRESHOLD_PCT = Number(process.env.THRESHOLD_PCT ?? '2');
+const thresholdEnv = process.env.THRESHOLD_PCT?.trim();
+// An unset or empty variable keeps the documented 2% default; 0 means pixel-exact.
+const THRESHOLD_PCT = Number(thresholdEnv === undefined || thresholdEnv === '' ? '2' : thresholdEnv);
 if (!Number.isFinite(THRESHOLD_PCT) || THRESHOLD_PCT < 0) {
-  throw new Error(
-    `THRESHOLD_PCT must be a non-negative number, got '${process.env.THRESHOLD_PCT ?? ''}'`,
-  );
+  throw new Error(`THRESHOLD_PCT must be a non-negative number, got '${thresholdEnv ?? ''}'`);
 }
 const root = path.resolve(import.meta.dirname, 'screenshots');
 const diffDir = path.join(root, 'diff');

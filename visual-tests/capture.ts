@@ -29,24 +29,30 @@ export async function captureApp(baseUrl: string, outDir: string): Promise<strin
           body: JSON.stringify(USERS_FIXTURE),
         }),
       );
-      for (const view of VIEWS) {
-        // A fresh page per view so no in-page state can leak into the next baseline.
-        const page: Page = await context.newPage();
-        await page.goto(baseUrl + view.path, { waitUntil: 'networkidle' });
-        await page.addStyleTag({ content: DISABLE_ANIMATIONS });
-        await page.evaluate(() => document.fonts.ready);
-        if (view.prepare) {
-          await view.prepare(page);
-          await page.waitForLoadState('networkidle');
+      try {
+        for (const view of VIEWS) {
+          // A fresh page per view so no in-page state can leak into the next baseline.
+          const page: Page = await context.newPage();
+          try {
+            await page.goto(baseUrl + view.path, { waitUntil: 'networkidle' });
+            await page.addStyleTag({ content: DISABLE_ANIMATIONS });
+            await page.evaluate(() => document.fonts.ready);
+            if (view.prepare) {
+              await view.prepare(page);
+              await page.waitForLoadState('networkidle');
+            }
+            await page.evaluate(() => document.fonts.ready);
+            await page.waitForTimeout(150);
+            const file = path.join(outDir, `${view.name}-${viewport.name}.png`);
+            await page.screenshot({ path: file, fullPage: true, animations: 'disabled' });
+            written.push(file);
+          } finally {
+            await page.close();
+          }
         }
-        await page.evaluate(() => document.fonts.ready);
-        await page.waitForTimeout(150);
-        const file = path.join(outDir, `${view.name}-${viewport.name}.png`);
-        await page.screenshot({ path: file, fullPage: true, animations: 'disabled' });
-        written.push(file);
-        await page.close();
+      } finally {
+        await context.close();
       }
-      await context.close();
     }
   } finally {
     await browser.close();
