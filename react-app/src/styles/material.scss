@@ -1,0 +1,107 @@
+/* Plain SCSS replacements for the Angular Material primitives used by the app */
+
+.mat-card {
+  display: block;
+  padding: 16px;
+  border-radius: 4px;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.mat-card-header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+}
+
+.mat-card-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.mat-card-content {
+  display: block;
+  font-size: 14px;
+
+  p {
+    margin: 0 0 12px;
+  }
+}
+
+.mat-raised-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 16px;
+  min-width: 64px;
+  height: 36px;
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: #f44336;
+  color: #fff;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+  &:disabled {
+    background-color: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.26);
+    box-shadow: none;
+    cursor: default;
+  }
+}
+
+.mat-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #f44336;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.mat-form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  max-width: 320px;
+
+  .mat-label {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 4px;
+  }
+
+  input {
+    padding: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+    border-radius: 4px 4px 0 0;
+    background-color: rgba(0, 0, 0, 0.04);
+
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid #3f51b5;
+    }
+  }
+}
