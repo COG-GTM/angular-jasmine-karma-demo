@@ -1,0 +1,59 @@
+/* add-item.component.scss was empty; .mat-* classes approximate Angular Material's fill form-field and raised button */
+.mat-form-field {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 0.25em 0.5em 1.34375em 0;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.mat-form-field-appearance-fill {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 4px 4px 0 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  padding: 0.75em 0.75em 0 0.75em;
+}
+
+.mat-form-field-label {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.75em;
+}
+
+.mat-input-element {
+  border: none;
+  background: transparent;
+  outline: none;
+  font: inherit;
+  padding: 0.5em 0 0.75em 0;
+}
+
+.mat-raised-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 64px;
+  padding: 0 16px;
+  line-height: 36px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.mat-raised-button.mat-warn {
+  background: #f44336;
+  color: white;
+}
+
+.mat-raised-button:disabled {
+  background: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.26);
+  box-shadow: none;
+  cursor: default;
+}
+
+.mat-raised-button .material-icons {
+  font-size: 24px;
+}
