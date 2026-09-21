@@ -5,5 +5,5 @@ export interface ItemDetailProps {
 }
 
 export const ItemDetail = (_props: ItemDetailProps) => {
-  return null;
+  return <p>item-detail works!</p>;
 };
