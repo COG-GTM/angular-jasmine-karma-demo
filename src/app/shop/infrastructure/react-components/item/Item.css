@@ -1,0 +1,43 @@
+/* Ported from item.component.scss; .mat-* classes approximate Angular Material's card styling */
+.card {
+  border: 0.1rem solid lightgrey;
+  box-shadow: 0.3rem 0.3rem lightgrey;
+  margin-top: 1rem;
+  width: 90%;
+}
+
+.mat-card {
+  display: block;
+  position: relative;
+  padding: 16px;
+  border-radius: 4px;
+  background: white;
+  color: rgba(0, 0, 0, 0.87);
+  box-sizing: border-box;
+}
+
+.mat-card-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.mat-card-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.mat-icon-button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  line-height: 40px;
+}
+
+.mat-icon-button.mat-warn {
+  color: #f44336;
+}
