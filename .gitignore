@@ -45,5 +45,5 @@ testem.log
 Thumbs.db
 
 # React app
-react-app/node_modules
-react-app/dist
+dist-ssr
+*.local
