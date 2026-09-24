@@ -12,20 +12,37 @@ function renderAt(route: string) {
 }
 
 describe('App', () => {
-  it('renders the running text', () => {
+  it('renders the running text and nav links', () => {
+    // Arrange / Act
     renderAt('/shop');
-    expect(
-      screen.getByText('angular-jasmine-karma-demo app is running!'),
-    ).toBeInTheDocument();
+
+    // Assert
+    expect(screen.getByText('angular-jasmine-karma-demo app is running!')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Shop' })).toHaveAttribute('href', '/shop');
+    expect(screen.getByRole('link', { name: 'Add Item' })).toHaveAttribute('href', '/shop/add');
+    expect(screen.getByRole('link', { name: 'Users' })).toHaveAttribute('href', '/users');
   });
 
-  it('redirects / to the shop page', () => {
+  it('renders Items at /shop', () => {
+    renderAt('/shop');
+    expect(screen.getByRole('heading', { name: 'Shop Items' })).toBeInTheDocument();
+  });
+
+  it('redirects unknown routes to /shop', () => {
     renderAt('/');
-    expect(screen.getByText('Items placeholder')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Shop Items' })).toBeInTheDocument();
+  });
+
+  it('renders AddItem at /shop/add', () => {
+    renderAt('/shop/add');
+    expect(screen.getByText('add-item works!')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('name')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /save/i })).toBeDisabled();
   });
 
   it('renders Users at /users', () => {
     renderAt('/users');
-    expect(screen.getByText('Users placeholder')).toBeInTheDocument();
+    expect(screen.getByText('users works!')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Get Users' })).toBeInTheDocument();
   });
 });
