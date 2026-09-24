@@ -1,6 +1,6 @@
 # angular-jasmine-karma-demo (React edition)
 
-An introduction to unit testing a React application with [Vitest](https://vitest.dev) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/), using the AAA (Arrange–Act–Assert) pattern. This repo was originally an Angular 12 + Jasmine/Karma testing demo; it has been migrated to React 18 + Vite + TypeScript + MUI (Material UI) + react-router-dom v6.
+An introduction to unit testing a React application with [Vitest](https://vitest.dev) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/), using the AAA (Arrange–Act–Assert) pattern. This repo was originally an Angular 12 + Jasmine/Karma testing demo; it has been migrated to React 18 + Vite + TypeScript + MUI (Material UI) + react-router-dom v7.
 
 ## Commands
 
