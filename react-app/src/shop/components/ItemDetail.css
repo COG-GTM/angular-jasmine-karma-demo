@@ -1,0 +1,18 @@
+.item-detail {
+  padding: 0.5rem 0;
+}
+
+.item-detail__fields {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.25rem 1rem;
+  margin: 0;
+}
+
+.item-detail__fields dt {
+  font-weight: 600;
+}
+
+.item-detail__fields dd {
+  margin: 0;
+}
