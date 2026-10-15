@@ -6,6 +6,15 @@ export interface User {
   [key: string]: unknown;
 }
 
+export class UsersRequestError extends Error {
+  constructor(public readonly status: number, public readonly statusText: string) {
+    super(`GET ${USERS_URL} failed: ${status} ${statusText}`);
+    this.name = 'UsersRequestError';
+  }
+}
+
 export async function getUsers(): Promise<User[]> {
-  throw new Error('not implemented');
+  const response = await fetch(USERS_URL, { method: 'GET' });
+  if (!response.ok) throw new UsersRequestError(response.status, response.statusText);
+  return (await response.json()) as User[];
 }

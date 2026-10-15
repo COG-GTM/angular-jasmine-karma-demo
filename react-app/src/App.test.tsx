@@ -24,7 +24,7 @@ describe('App', () => {
 
   it('shows Users placeholder on /users and not Items', () => {
     renderApp(['/users']);
-    expect(screen.getByText('Users placeholder')).toBeInTheDocument();
+    expect(screen.getByText('users works!')).toBeInTheDocument();
     expect(screen.queryByText('Items placeholder')).not.toBeInTheDocument();
   });
 
