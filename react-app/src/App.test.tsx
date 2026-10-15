@@ -17,19 +17,19 @@ describe('App', () => {
     expect(title.tagName).toBe('SPAN');
   });
 
-  it('shows Items placeholder on /shop', () => {
+  it('shows Items on /shop', () => {
     renderApp(['/shop']);
-    expect(screen.getByText('Items placeholder')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Shop Items' })).toBeInTheDocument();
   });
 
-  it('shows Users placeholder on /users and not Items', () => {
+  it('shows Users on /users and not Items', () => {
     renderApp(['/users']);
     expect(screen.getByText('users works!')).toBeInTheDocument();
-    expect(screen.queryByText('Items placeholder')).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Shop Items' })).not.toBeInTheDocument();
   });
 
-  it('redirects / to /shop showing Items placeholder', () => {
+  it('redirects / to /shop showing Items', () => {
     renderApp(['/']);
-    expect(screen.getByText('Items placeholder')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Shop Items' })).toBeInTheDocument();
   });
 });
