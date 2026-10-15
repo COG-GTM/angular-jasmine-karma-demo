@@ -5,5 +5,5 @@ export interface ItemDetailProps {
 }
 
 export default function ItemDetail(_props: ItemDetailProps) {
-  return <p>ItemDetail placeholder</p>;
+  return <p>item-detail works!</p>;
 }
