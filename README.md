@@ -1,143 +1,271 @@
-# AngularJasmineKarmaDemo
+# Angular Jasmine Karma Demo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
-
-<br />
+This repository is a React 18 + TypeScript application built with Vite, MUI, and React Router v7, tested with Vitest and React Testing Library. It was originally an Angular 12/Jasmine/Karma testing demo and keeps the same teaching purpose while showing the equivalent React testing patterns.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run the Vite development server:
 
-<br />
+```bash
+npm run dev
+```
+
+By default, the app is available at `http://localhost:5173/`.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io). You can run the tests even without the server running 😲 
+Run the unit tests once with:
 
-<br />
+```bash
+npm test
+```
+
+Run Vitest in watch mode with:
+
+```bash
+npm run test:watch
+```
+
+## Commands
+
+```bash
+npm ci            # install dependencies from the lockfile
+npm run dev       # start the Vite development server
+npm test          # run tests once
+npm run test:watch
+npm run typecheck # typecheck the app and tests
+npm run build     # typecheck and create a production build
+npm run preview   # preview the production build
+```
+
+## Folder layout
+
+```text
+.
+├── .editorconfig
+├── .gitignore
+├── index.html
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+├── vite.config.ts
+└── src/
+    ├── App.tsx
+    ├── App.test.tsx
+    ├── index.css
+    ├── main.tsx
+    ├── setupTests.ts
+    ├── vite-env.d.ts
+    ├── shop/
+    │   ├── domain/
+    │   │   └── item.model.ts
+    │   └── components/
+    │       ├── AddItem/
+    │       │   ├── AddItem.tsx
+    │       │   ├── AddItem.test.tsx
+    │       │   └── index.ts
+    │       ├── Item/
+    │       │   ├── Item.tsx
+    │       │   ├── Item.test.tsx
+    │       │   ├── Item.css
+    │       │   └── index.ts
+    │       ├── ItemDetail/
+    │       │   ├── ItemDetail.tsx
+    │       │   ├── ItemDetail.test.tsx
+    │       │   └── index.ts
+    │       └── Items/
+    │           ├── Items.tsx
+    │           ├── Items.test.tsx
+    │           ├── Items.css
+    │           ├── useItemsSort.ts
+    │           └── index.ts
+    └── user/
+        ├── application/
+        │   ├── usersService.ts
+        │   └── usersService.test.ts
+        └── components/
+            └── Users/
+                ├── Users.tsx
+                ├── Users.test.tsx
+                └── index.ts
+```
 
 ## About this project
-It is intended to be an introduction to unit testing with jasmine, providing information on the most basic concepts and sample tests. This is a work in progress, so, content will be added whenever possible.
 
-<br />
+This project introduces unit testing through small, runnable examples in the shop and user features. Tests render real React components in a simulated DOM, interact with them as a user would, and isolate calls to external services. The examples also demonstrate component props, routing, validation, and sorting.
 
-## About Jasmine tests
-> Jasmine is a behavior-driven development framework for testing JavaScript code. It does not depend on any other JavaScript frameworks. It does not require a DOM. And it has a clean, obvious syntax so that you can easily write tests. It's developed by Pivotal Labs and is open-source.
+## About Vitest tests
 
-> Karma: is a test runner, it allows us to run the test suite. It's developed by Google.
+Vitest is the test runner and assertion framework. Tests use `describe`, `it`, and `expect`; these names are available globally because `vite.config.ts` sets `test.globals` to `true`. The configured `jsdom` environment provides browser-like DOM APIs for component tests.
 
-> Both, Jasmine and Karma, come preinstalled and preconfigured in an Angular project created with Angular CLI.
-
-> The Unit Tests must be coded in component-name.**spec.ts** files, so that Karma can find them.
-
-> **There are a couple of example tests with comments on the _item_ and _add-item_ components.**
-
-<br />
+The test setup in `src/setupTests.ts` imports `@testing-library/jest-dom/vitest`. This adds DOM assertions such as `toBeInTheDocument()` and `toBeDisabled()` to Vitest's `expect`. React Testing Library's `render` mounts a component into the test DOM, and `screen` queries it by accessible role, label, or text.
 
 ### Test doubles
-Son un término genérico que hace referencia a cualquier caso en el que se reemplaza un objeto de producción con otro con el único objetivo de probar el código.
 
-According with Gerard Meszaros there are at least 5 kinds of doubles
-https://en.wikipedia.org/wiki/Test_double
-- Test stub: used for providing the tested code with "indirect input".
-- Mock object: used for verifying "indirect output" of the tested code, by first defining the expectations before the tested code is executed.
-- Test spy: used for verifying "indirect output" of the tested code, by asserting the expectations afterwards, without having defined the expectations before the tested code is executed. It helps in recording information about the indirect object created.
-- Fake object: used as a simpler implementation, e.g. using an in-memory database in the tests instead of doing real database access.
-- Dummy object: used when a parameter is needed for the tested method but without actually needing to use the parameter.
+A test double replaces or observes a production dependency to keep a test focused and predictable. The common kinds are:
 
-<br />
+- **Dummy**: a value passed only because a parameter is required.
+- **Stub**: a dependency configured to return controlled data.
+- **Spy**: a function wrapper used to inspect calls while retaining or replacing its implementation.
+- **Mock**: a programmable function or module used to control behavior and verify interactions.
+- **Fake**: a simpler working implementation used instead of a real dependency.
 
-### AAA Pattern: sections of a Unit Test
-1. Arrange:  code required to setup a specific test. Here objects would be created, mocks setup, ...
-    ``` js
-    fixture = TestBed.createComponent(AddItemComponent);
-    component = fixture.componentInstance;
-    ```
-2. Act: which should be the invocation of the method being tested
-    ``` js
-    component.form.controls['name'].setValue('foo');
-    component.form.controls['description'].setValue('bar');
-    component.form.controls['price'].setValue('33');
-    ``` 
-3. Assert: check whether the expectations were met.
-    ``` js
-    expect(component.form.valid).toBeTruthy();
-    ``` 
-<br />
+Vitest provides `vi.fn()` for mock functions, `vi.spyOn()` for spies, and `vi.mock()` for module mocks. For example, `Users.test.tsx` mocks `getUsers` and resolves it with sample users, while `usersService.test.ts` stubs global `fetch` and supplies a `Response` with `mockResolvedValue`:
 
-### Jasmine assertion functions
-- expect(array).toContain(member);
-- expect(fn).toThrow(string);
-- expect(fn).toThrowError(string);
-- expect(instance).toBe(instance);
-- expect(mixed).toBeDefined();
-- expect(mixed).toBeFalsy();
-- expect(mixed).toBeNull();
-- expect(mixed).toBeTruthy();
-- expect(mixed).toBeUndefined();
-- expect(mixed).toEqual(mixed);
-- expect(mixed).toMatch(pattern);
-- expect(number).toBeCloseTo(number, decimalPlaces);
-- expect(number).toBeGreaterThan(number);
-- expect(number).toBeLessThan(number);
-- expect(number).toBeNaN();
-- expect(spy).toHaveBeenCalled();
-- expect(spy).toHaveBeenCalledTimes(number);
-- expect(spy).toHaveBeenCalledWith(…arguments);
+```ts
+vi.stubGlobal('fetch', vi.fn());
+vi.mocked(fetch).mockResolvedValue(createResponse([{ id: 1, name: 'foo' }]));
+```
 
-<br />
+Here, `createResponse` is the helper in `src/user/application/usersService.test.ts`. The service test restores the global and mock state after each test with `vi.unstubAllGlobals()` and `vi.restoreAllMocks()`.
 
-### Jasmine functions that can be run before or after tests
-To help a test suite DRY up any duplicated setup and teardown code, Jasmine provides the global beforeEach, afterEach, beforeAll, and afterAll functions:
-- beforeAll:  is called only once before all the specs in describe are run
-  - e.g.: to createt the TestBed
-- afterAll:  is called only once after all the specs in describe are run
-  - e.g.: to run some shared teardown after each of the specs in the describe in which it is called.
-- beforeEach: is called once before each spec in the describe in which it is called
-  - This functionality is very useful for running the common code in the application, lie data initialization.
-- afterEach: is called once after each spec in the describe in which it is called
-  - Generally used to reset/clean up purposes at the end of specs
+### AAA Pattern: sections of a unit test
 
-<br />
+The Arrange-Act-Assert pattern separates setup, the behavior being exercised, and the expected result. This example follows `AddItem.test.tsx`:
 
-## Jasmine methods
-- TestBed: modulo de angular que nos permite manipular las pruebas y configurarlas.
-- SpyOn is a Jasmine feature that allows dynamically intercepting the calls to a function nd change its result.
+```tsx
+const user = userEvent.setup();
+const onSave = vi.fn();
+render(<AddItem onSave={onSave} />);
 
-<br />
+// Arrange: enter valid form values.
+await user.type(screen.getByPlaceholderText('name'), 'foo');
+await user.type(screen.getByPlaceholderText('description'), 'bar');
+await user.type(screen.getByPlaceholderText('price'), '33');
+
+// Act: save the item.
+await user.click(screen.getByRole('button', { name: /save/i }));
+
+// Assert: the callback received the entered values.
+expect(onSave).toHaveBeenCalledWith({ name: 'foo', description: 'bar', price: '33' });
+```
+
+### Vitest/jest-dom assertion functions
+
+Examples used by Vitest and the installed jest-dom matchers include:
+
+- `expect(value).toBe(value)` for identity or primitive equality.
+- `expect(value).toEqual(value)` for deep equality.
+- `expect(mock).toHaveBeenCalledWith(...args)` and `toHaveBeenCalledTimes(number)` for interactions.
+- `expect(element).toBeInTheDocument()` and `toHaveTextContent(text)` for rendered content.
+- `expect(element).toBeDisabled()` and `toBeEnabled()` for controls.
+- `expect(element).toBeRequired()`, `toBeInvalid()`, and `toHaveValue(value)` for form fields.
+- `expect(value).toContain(member)`, `toMatch(pattern)`, and `toThrow(message)` for values and errors.
+
+### Setup/teardown
+
+Vitest provides global `beforeEach`, `afterEach`, `beforeAll`, and `afterAll` hooks:
+
+- `beforeAll` and `afterAll` run once before or after a suite.
+- `beforeEach` and `afterEach` run around each test and are useful for shared setup and cleanup.
+
+React Testing Library automatically calls `cleanup` after each test when the test runner exposes `afterEach`. Use `vi.restoreAllMocks()` to restore spies, and `vi.unstubAllGlobals()` to remove globals installed by `vi.stubGlobal()`. The `Users` and service tests demonstrate these hooks.
+
+## Vitest methods
+
+- `describe` groups related tests; `it` (or `test`) defines an individual test.
+- `expect` checks values and DOM state.
+- `vi.fn()` creates a mock function.
+- `vi.spyOn(object, method)` observes or replaces a method.
+- `vi.mock(path, factory)` replaces a module for a test.
+- `vi.mocked(value).mockResolvedValue(data)` configures a mock to resolve a promise.
+- `vi.stubGlobal(name, value)` and `vi.unstubAllGlobals()` set and remove globals for tests.
+- `vi.restoreAllMocks()` restores spies and mock implementations.
+- `render`, `screen`, and `userEvent` come from React Testing Library and its user-event package.
 
 ## Testing Cases / How to test...
 
 ### Testing component creation
-- You can see an example at **item.component.spec.ts**
-- this is a very basic test, but it's well documented.
+
+`src/shop/components/Item/Item.test.tsx` renders `Item` and queries its content with `screen`:
+
+```tsx
+render(<Item name="Test Item" description="Test Description" price="100" />);
+expect(screen.getByText('Test Item')).toBeInTheDocument();
+```
 
 ### Testing form validation
-You can see an example at **add-item.component.spec.ts**
 
-### Testing sharing data from parent to child (using @Input)
-You can see an example at **item-detail.component.spec.ts**
+`src/shop/components/AddItem/AddItem.test.tsx` uses `userEvent` to fill the fields and checks the Save button state:
+
+```tsx
+const user = userEvent.setup();
+render(<AddItem />);
+await user.type(screen.getByPlaceholderText('name'), 'foo');
+await user.type(screen.getByPlaceholderText('description'), 'bar');
+await user.type(screen.getByPlaceholderText('price'), '33');
+expect(screen.getByRole('button', { name: /save/i })).toBeEnabled();
+```
+
+### Testing sharing data from parent to child (using props instead of `@Input`)
+
+React passes data through props. `Items` maps its records to `Item` components using the `name`, `description`, and `price` props; `Item.test.tsx` verifies those values render. `ItemDetail` accepts an optional `item` prop typed as `Item`, and `ItemDetail.test.tsx` checks the values passed through that prop.
+
+```tsx
+<Item name="Test Item" description="Test Description" price="100" />
+```
 
 ### Testing calling a service from a component
-You can see an example at **users.component.spec.ts**
+
+`src/user/components/Users/Users.test.tsx` mocks the `getUsers` service export, clicks the button, and checks the asynchronously rendered user:
+
+```tsx
+getUsersMock.mockResolvedValue([{ id: 1, name: 'foo' }]);
+await user.click(screen.getByRole('button', { name: 'Get Users' }));
+expect(await screen.findByText('foo')).toBeInTheDocument();
+expect(getUsersMock).toHaveBeenCalledTimes(1);
+```
 
 ### RouterLink
-// TODO: pending to code
 
-### Testing service against rest api
-// TODO: pending to code
-- no tengo claro si es un test muy util, porque se mockea la base de datos y da la impresión de que siempre funciona.
-- imports: [HttpClientModule]
+The React equivalent in this app is route rendering with React Router. `src/App.test.tsx` uses `MemoryRouter` with `initialEntries` to test routes without a browser:
 
-### Testing service against **real** rest api
-// TODO: pending to code
-- documentation: 
-  - https://stackoverflow.com/questions/59204306/trying-to-run-angular-httpclient-jasmine-test-against-live-rest-api-nothing-hap
+```tsx
+render(
+  <MemoryRouter initialEntries={['/shop']}>
+    <App />
+  </MemoryRouter>,
+);
+expect(screen.getByRole('heading', { name: 'Shop Items' })).toBeInTheDocument();
+```
 
+The same test file checks `/users` and that `/` redirects to `/shop`.
 
+### Testing service against REST API
 
+`src/user/application/usersService.test.ts` tests `getUsers()` without making a network request by stubbing `fetch`. Its `createResponse` helper returns a `Response` with controlled JSON:
 
+```ts
+vi.stubGlobal('fetch', vi.fn());
+vi.mocked(fetch).mockResolvedValue(createResponse([]));
+await expect(getUsers()).resolves.toEqual([]);
+expect(fetch).toHaveBeenCalledWith(
+  USERS_URL,
+  expect.objectContaining({ method: 'GET' }),
+);
+```
 
+These tests exercise the service's request and response handling while remaining deterministic.
 
+### Testing service against **real** REST API
 
+The default test suite stubs `fetch`; it does not call the live API at `https://jsonplaceholder.typicode.com/users`. Live API tests are not part of the default suite, which keeps tests independent of network availability and external data.
 
+## Migration from Angular
+
+| Angular file | React target | Status |
+| --- | --- | --- |
+| `src/app/app.component.{ts,html,scss}` | `src/App.tsx` | Ported |
+| `src/app/app-routing.module.ts` | `src/App.tsx` routes | Ported |
+| `src/app/app.module.ts` | `src/main.tsx` | Ported |
+| `src/app/app.component.spec.ts` | `src/App.test.tsx` | Ported |
+| `src/styles.scss` | `src/index.css` | Ported |
+| `src/app/shop/domain/item.model.ts` | `src/shop/domain/item.model.ts` | Ported |
+| `src/app/user/application/UsersServices.ts` (+ `.service.spec.ts`) | `src/user/application/usersService.ts` and `src/user/application/usersService.test.ts` | Ported |
+| `shop/infrastructure/ng-components/item/*` | `src/shop/components/Item/` | Ported |
+| `shop/infrastructure/ng-components/items/*` | `src/shop/components/Items/` | Ported |
+| `shop/infrastructure/ng-components/add-item/*` | `src/shop/components/AddItem/` | Ported |
+| `shop/infrastructure/ng-components/item-detail/*` | `src/shop/components/ItemDetail/` | Ported |
+| `user/infrastructure/ng-components/users/*` | `src/user/components/Users/` | Ported |
