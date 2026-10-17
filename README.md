@@ -1,6 +1,6 @@
 # Angular Jasmine Karma Demo
 
-This repository is a React 18 + TypeScript application built with Vite, MUI, and React Router v6, tested with Vitest and React Testing Library. It was originally an Angular 12/Jasmine/Karma testing demo and keeps the same teaching purpose while showing the equivalent React testing patterns.
+This repository is a React 18 + TypeScript application built with Vite, MUI, and React Router v7, tested with Vitest and React Testing Library. It was originally an Angular 12/Jasmine/Karma testing demo and keeps the same teaching purpose while showing the equivalent React testing patterns.
 
 ## Development server
 
