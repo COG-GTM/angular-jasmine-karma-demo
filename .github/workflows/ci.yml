@@ -1,4 +1,4 @@
-name: react-app
+name: ci
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: react-app-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -20,9 +20,6 @@ jobs:
       fail-fast: false
       matrix:
         node: [20, 22]
-    defaults:
-      run:
-        working-directory: react-app
     steps:
       - uses: actions/checkout@v4
 
@@ -30,7 +27,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: npm
-          cache-dependency-path: react-app/package-lock.json
 
       - run: npm ci
       - run: npm run lint
@@ -48,5 +44,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report-node-${{ matrix.node }}
-          path: react-app/playwright-report
+          path: playwright-report
           retention-days: 7
