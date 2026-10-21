@@ -19,7 +19,9 @@ integration child. If something here conflicts with a child prompt, ask the pare
 | Lint | `eslint` 10 flat config, `@eslint/js`, `typescript-eslint`, `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`, `globals` | 10.13.0 / 10.0.0 / 8.72.0 / 7.1.1 / 0.5.7 / 17.13.0 |
 
 Node: `"engines": { "node": ">=20" }`; CI runs Node 20 and 22. Versions were chosen so the whole
-toolchain still runs on Node 20.19+ (react-router 8, vitest 5, jsdom 30 and jest-dom 7 need Node 22).
+toolchain still runs on Node 20 (react-router 8, vitest 5, jsdom 30 and jest-dom 7 need Node 22). Effective
+minimum from transitive engines (ESLint 10, jsdom 29): Node `^20.19 || ^22.13 || >=24`; on 22.12 `npm ci`
+only prints EBADENGINE warnings and everything still runs.
 
 **Every dependency the migration needs is already installed. Wave-2 children must not edit
 `package.json` or `package-lock.json`.** If you think you need a new package, report it as a
