@@ -40,7 +40,7 @@ shared change instead.
 | `npm test` | `vitest run` (all `src/**/*.test.{ts,tsx}`) |
 | `npm run test:watch` | `vitest` in watch mode |
 | `npm run test:coverage` | `vitest run --coverage` (v8, text + html in `coverage/`) |
-| `npm run e2e` | Playwright: builds, serves with `vite preview` on :4173, runs `e2e/*.spec.ts` in Chromium (first time: `npx playwright install chromium`) |
+| `npm run e2e` | Playwright: always rebuilds, serves with `vite preview` on :4173 (port must be free; no server reuse, so it never tests a stale build), runs `e2e/*.spec.ts` in Chromium (first time: `npx playwright install chromium`) |
 
 Checks every PR must pass: `npm ci && npm run lint && npm run typecheck && npm test && npm run build`
 (CI also runs `npm run e2e`). CI workflow: `.github/workflows/react-app.yml`.
