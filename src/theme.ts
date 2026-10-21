@@ -15,6 +15,12 @@ export const theme = createTheme({
     fontSize: 14,
   },
   components: {
+    // CssBaseline colours body text with text.primary (87% black); the legacy page leaves it black.
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: { color: '#000' },
+      },
+    },
     // mat-raised-button keeps the label's case and has no extra letter spacing (MUI uppercases).
     MuiButton: {
       styleOverrides: {
