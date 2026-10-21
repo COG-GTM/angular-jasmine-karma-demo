@@ -193,4 +193,21 @@ describe('AddItem: testing form validation', () => {
     expect(price).toHaveAttribute('aria-invalid', 'true');
     expect(screen.getByLabelText('name')).toHaveAttribute('aria-invalid', 'false');
   });
+
+  it('a submit event is cancelled and does not save, like FormGroupDirective', async () => {
+    // Arrange: a valid form, so a save would be allowed if submit triggered it
+    const { user, onSave } = setup();
+    const info = vi.spyOn(console, 'info').mockImplementation(() => {});
+    await fillForm(user, filled);
+    const form = screen.getByLabelText('name').closest('form')!;
+
+    // Act: fireEvent-style dispatch; requestSubmit() would also reach the same handler
+    const event = new Event('submit', { bubbles: true, cancelable: true });
+    form.dispatchEvent(event);
+
+    // Assert: default (navigation) prevented, and saveItem was not called
+    expect(event.defaultPrevented).toBe(true);
+    expect(onSave).not.toHaveBeenCalled();
+    expect(info).not.toHaveBeenCalledWith('saveItem');
+  });
 });

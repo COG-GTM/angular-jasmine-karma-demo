@@ -7,11 +7,19 @@ export const theme = createTheme({
     primary: { main: '#3f51b5' },
     secondary: { main: '#ff4081' },
     error: { main: '#f44336' },
-    background: { default: '#fafafa' },
+    background: { default: '#fff' },
     text: { primary: 'rgba(0, 0, 0, 0.87)' },
   },
   typography: {
     fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
     fontSize: 14,
+  },
+  components: {
+    // mat-raised-button keeps the label's case and has no extra letter spacing (MUI uppercases).
+    MuiButton: {
+      styleOverrides: {
+        root: { textTransform: 'none', letterSpacing: 'normal' },
+      },
+    },
   },
 });

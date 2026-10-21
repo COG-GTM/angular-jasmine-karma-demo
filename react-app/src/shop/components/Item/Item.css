@@ -1,7 +1,31 @@
-/* Port of item.component.scss. Two classes so it beats MUI Card's own (single-class) border/shadow styles. */
+/* Port of item.component.scss plus the mat-card metrics MUI doesn't share.
+   Two classes so it beats MUI Card's own (single-class) border/shadow styles. */
 .item-card.card {
+  box-sizing: content-box;
+  padding: 16px;
   border: 0.1rem solid lightgrey;
   box-shadow: 0.3rem 0.3rem lightgrey;
   margin-top: 1rem;
   width: 90%;
+}
+
+/* mat-card-header: no padding of its own, the title text is indented 16px. */
+.item-card .MuiCardHeader-root {
+  padding: 0;
+}
+
+.item-card .MuiCardHeader-content {
+  margin: 0 16px;
+}
+
+/* mat-card-title: 20px/500 (h6 variant), 20px line height, 12px gap before the content. */
+.item-card .MuiCardHeader-title {
+  line-height: 20px;
+  margin-bottom: 12px;
+}
+
+/* mat-card-content has no padding; the card's own 16px padding frames it. */
+.item-card .MuiCardContent-root,
+.item-card .MuiCardContent-root:last-child {
+  padding: 0;
 }

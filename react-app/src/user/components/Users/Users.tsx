@@ -20,13 +20,13 @@ export function Users() {
   return (
     <>
       <p>users works!</p>
-      {/* Match mat-raised-button: label keeps its case (MUI uppercases) and the height is 36px. */}
+      {/* Match mat-raised-button height (36px); case and letter spacing come from the theme. */}
       <Button
         type="button"
         variant="contained"
         color="error"
         onClick={handleGetUsers}
-        sx={{ textTransform: 'none', letterSpacing: 'normal', lineHeight: '36px', py: 0 }}
+        sx={{ lineHeight: '36px', py: 0 }}
       >
         Get Users
       </Button>

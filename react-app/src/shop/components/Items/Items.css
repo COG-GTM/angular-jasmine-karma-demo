@@ -1,14 +1,14 @@
 /* Port of items.component.scss; every selector is scoped under .items-container
    to mimic Angular view encapsulation. */
+/* content-box like the legacy page (MUI CssBaseline makes everything border-box). */
 .items-container {
+  box-sizing: content-box;
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* div. raises specificity above the global .mat-typography h2 (margin 16px),
-   which index.css declares later; Angular's encapsulated h2 rule wins there too. */
-div.items-container h2 {
+.items-container h2 {
   margin-bottom: 20px;
   color: #333;
 }

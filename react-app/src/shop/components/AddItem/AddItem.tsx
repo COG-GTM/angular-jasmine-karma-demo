@@ -20,7 +20,8 @@ export interface AddItemProps {
 }
 
 // Port of add-item.component: a controlled form with three required fields.
-// Parity: the Save button is type="button" and the <form> has no onSubmit, like the Angular template.
+// Parity: the Save button is type="button", like the Angular template. Angular's FormGroupDirective
+// calls preventDefault() on every submit event, so a submit never navigates and never saves.
 export function AddItem({ onSave }: AddItemProps) {
   const [values, setValues] = useState<AddItemFormValues>(EMPTY_ADD_ITEM_FORM);
   const [touched, setTouched] = useState<AddItemTouched>(UNTOUCHED_ADD_ITEM_FORM);
@@ -43,7 +44,7 @@ export function AddItem({ onSave }: AddItemProps) {
   return (
     <>
       <p>add-item works!</p>
-      <form className="add-item">
+      <form className="add-item" onSubmit={(event) => event.preventDefault()}>
         {ADD_ITEM_FIELDS.map((field) => (
           <TextField
             key={field}
