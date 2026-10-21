@@ -20,13 +20,13 @@ export function Users() {
   return (
     <>
       <p>users works!</p>
-      {/* Angular Material buttons keep the label's case; MUI uppercases it by default. */}
+      {/* Match mat-raised-button: label keeps its case (MUI uppercases) and the height is 36px. */}
       <Button
         type="button"
         variant="contained"
         color="error"
         onClick={handleGetUsers}
-        sx={{ textTransform: 'none', letterSpacing: 'normal' }}
+        sx={{ textTransform: 'none', letterSpacing: 'normal', lineHeight: '36px', py: 0 }}
       >
         Get Users
       </Button>
