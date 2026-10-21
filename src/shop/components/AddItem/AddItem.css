@@ -1,0 +1,24 @@
+/* Angular Material 12 legacy mat-form-field (appearance fill) / mat-raised-button metrics.
+   Scoped under .add-item so nothing leaks (the Angular SCSS was view-encapsulated). */
+.add-item .MuiTextField-root {
+  vertical-align: baseline;
+  width: calc(180px + 1.5em);
+  margin-bottom: 1.34375em;
+  font-size: 14px;
+}
+
+.add-item .MuiInputBase-root,
+.add-item .MuiInputLabel-root {
+  font-size: inherit;
+}
+
+.add-item .MuiButton-root {
+  vertical-align: baseline;
+}
+
+/* mat-form-field-appearance-fill keeps rgba(0,0,0,.04) on hover and focus (MUI darkens it). */
+.add-item .MuiFilledInput-root,
+.add-item .MuiFilledInput-root:hover,
+.add-item .MuiFilledInput-root.Mui-focused {
+  background-color: rgba(0, 0, 0, 0.04);
+}

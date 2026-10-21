@@ -1,0 +1,47 @@
+/* Port of src/styles.scss (global styles). */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/* Subset of Angular Material's .mat-typography rules (indigo-pink prebuilt theme),
+   applied because index.html keeps <body class="mat-typography"> like the legacy app.
+   Element rules use :where() so they have element-only specificity: component CSS (loaded
+   earlier) still wins, like Angular's encapsulated component styles beat the global theme. */
+.mat-typography {
+  font: 400 14px/20px Roboto, 'Helvetica Neue', sans-serif;
+  letter-spacing: normal;
+}
+
+:where(.mat-typography) h1 {
+  font: 400 24px/32px Roboto, 'Helvetica Neue', sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+
+:where(.mat-typography) h2 {
+  font: 500 20px/32px Roboto, 'Helvetica Neue', sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+
+:where(.mat-typography) h3 {
+  font: 400 16px/28px Roboto, 'Helvetica Neue', sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+
+:where(.mat-typography) h4 {
+  font: 400 15px/24px Roboto, 'Helvetica Neue', sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+
+:where(.mat-typography) p {
+  margin: 0 0 12px;
+}

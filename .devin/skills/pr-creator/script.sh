@@ -27,8 +27,8 @@ SCOPE=""
 DESCRIPTION=""
 
 # Check for test files
-if echo "$CHANGED_FILES" | grep -q "\.spec\."; then
-  if [ $(echo "$CHANGED_FILES" | grep -c "\.spec\.") -eq $(echo "$CHANGED_FILES" | wc -l) ]; then
+if echo "$CHANGED_FILES" | grep -qE "\.(spec|test)\."; then
+  if [ $(echo "$CHANGED_FILES" | grep -cE "\.(spec|test)\.") -eq $(echo "$CHANGED_FILES" | wc -l) ]; then
     CHANGE_TYPE="test"
     DESCRIPTION="update tests"
   fi
@@ -244,7 +244,7 @@ PR_DESCRIPTION="${PR_DESCRIPTION}
 "
 
 # Check if test files were modified
-if echo "$CHANGED_FILES" | grep -q "\.spec\."; then
+if echo "$CHANGED_FILES" | grep -qE "\.(spec|test)\."; then
   PR_DESCRIPTION="${PR_DESCRIPTION}Tests have been updated/added to cover the changes. Run \`npm test\` to verify.
 "
 else
