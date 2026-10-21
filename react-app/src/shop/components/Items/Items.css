@@ -6,7 +6,9 @@
   margin: 0 auto;
 }
 
-.items-container h2 {
+/* div. raises specificity above the global .mat-typography h2 (margin 16px),
+   which index.css declares later; Angular's encapsulated h2 rule wins there too. */
+div.items-container h2 {
   margin-bottom: 20px;
   color: #333;
 }
