@@ -18,7 +18,8 @@ export function Item({ name, description, price }: ItemProps) {
 
   return (
     <Card className="item-card card">
-      <CardHeader title={name} />
+      {/* h6 = 20px/500, like mat-card-title inside mat-card-header */}
+      <CardHeader title={name} slotProps={{ title: { variant: 'h6' } }} />
       <CardContent>
         <p>{price} €</p>
         <p>{description}</p>
