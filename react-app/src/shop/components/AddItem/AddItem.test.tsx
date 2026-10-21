@@ -6,6 +6,8 @@ import {
   hasFieldError,
   isAddItemFormValid,
   isFieldValid,
+  shouldShowFieldError,
+  UNTOUCHED_ADD_ITEM_FORM,
   type AddItemFormValues,
 } from './addItemForm';
 
@@ -164,5 +166,31 @@ describe('AddItem: testing form validation', () => {
 
   it('whitespace-only values count as filled, like Validators.required', () => {
     expect(isAddItemFormValid({ name: ' ', description: ' ', price: ' ' })).toBe(true);
+  });
+
+  it('shows the error state only once an invalid field has been touched', () => {
+    // Arrange
+    const touchedName = { ...UNTOUCHED_ADD_ITEM_FORM, name: true };
+
+    // Act / Assert: mirrors Angular's ErrorStateMatcher (invalid && touched)
+    expect(shouldShowFieldError(EMPTY_ADD_ITEM_FORM, UNTOUCHED_ADD_ITEM_FORM, 'name')).toBe(false);
+    expect(shouldShowFieldError(EMPTY_ADD_ITEM_FORM, touchedName, 'name')).toBe(true);
+    expect(shouldShowFieldError(filled, touchedName, 'name')).toBe(false);
+  });
+
+  it('marks a cleared field as invalid after blur, like mat-form-field', async () => {
+    // Arrange
+    const { user } = setup();
+    const price = screen.getByLabelText('price');
+    expect(price).toHaveAttribute('aria-invalid', 'false');
+
+    // Act: type, clear, then move focus away (blur marks the control as touched)
+    await user.type(price, '33');
+    await user.clear(price);
+    await user.tab();
+
+    // Assert
+    expect(price).toHaveAttribute('aria-invalid', 'true');
+    expect(screen.getByLabelText('name')).toHaveAttribute('aria-invalid', 'false');
   });
 });

@@ -6,10 +6,14 @@ import type { Item } from '../../domain/item.model';
 import {
   ADD_ITEM_FIELDS,
   EMPTY_ADD_ITEM_FORM,
+  UNTOUCHED_ADD_ITEM_FORM,
   isAddItemFormValid,
+  shouldShowFieldError,
   type AddItemField,
   type AddItemFormValues,
+  type AddItemTouched,
 } from './addItemForm';
+import './AddItem.css';
 
 export interface AddItemProps {
   onSave?: (item: Item) => void;
@@ -19,11 +23,16 @@ export interface AddItemProps {
 // Parity: the Save button is type="button" and the <form> has no onSubmit, like the Angular template.
 export function AddItem({ onSave }: AddItemProps) {
   const [values, setValues] = useState<AddItemFormValues>(EMPTY_ADD_ITEM_FORM);
+  const [touched, setTouched] = useState<AddItemTouched>(UNTOUCHED_ADD_ITEM_FORM);
   const valid = isAddItemFormValid(values);
 
   const handleChange = (field: AddItemField) => (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setValues((current) => ({ ...current, [field]: value }));
+  };
+
+  const handleBlur = (field: AddItemField) => () => {
+    setTouched((current) => (current[field] ? current : { ...current, [field]: true }));
   };
 
   const saveItem = () => {
@@ -34,7 +43,7 @@ export function AddItem({ onSave }: AddItemProps) {
   return (
     <>
       <p>add-item works!</p>
-      <form>
+      <form className="add-item">
         {ADD_ITEM_FIELDS.map((field) => (
           <TextField
             key={field}
@@ -44,6 +53,8 @@ export function AddItem({ onSave }: AddItemProps) {
             name={field}
             value={values[field]}
             onChange={handleChange(field)}
+            onBlur={handleBlur(field)}
+            error={shouldShowFieldError(values, touched, field)}
           />
         ))}
         <Button

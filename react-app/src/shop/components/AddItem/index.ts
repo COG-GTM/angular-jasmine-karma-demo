@@ -6,6 +6,8 @@ export {
   hasFieldError,
   isAddItemFormValid,
   isFieldValid,
+  shouldShowFieldError,
+  UNTOUCHED_ADD_ITEM_FORM,
   validateAddItemForm,
   validateRequired,
 } from './addItemForm';
@@ -14,4 +16,5 @@ export type {
   AddItemFieldErrors,
   AddItemFormErrors,
   AddItemFormValues,
+  AddItemTouched,
 } from './addItemForm';

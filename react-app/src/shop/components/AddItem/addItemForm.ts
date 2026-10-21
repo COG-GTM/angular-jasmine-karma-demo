@@ -14,9 +14,17 @@ export interface AddItemFieldErrors {
 
 export type AddItemFormErrors = Record<AddItemField, AddItemFieldErrors | null>;
 
+export type AddItemTouched = Record<AddItemField, boolean>;
+
 export const ADD_ITEM_FIELDS: readonly AddItemField[] = ['name', 'description', 'price'];
 
 export const EMPTY_ADD_ITEM_FORM: AddItemFormValues = { name: '', description: '', price: '' };
+
+export const UNTOUCHED_ADD_ITEM_FORM: AddItemTouched = {
+  name: false,
+  description: false,
+  price: false,
+};
 
 // Same rule as Angular's Validators.required: only null/undefined/empty string fail
 // (whitespace-only values are valid, exactly like the legacy form).
@@ -46,4 +54,14 @@ export function isFieldValid(values: AddItemFormValues, field: AddItemField): bo
 
 export function isAddItemFormValid(values: AddItemFormValues): boolean {
   return ADD_ITEM_FIELDS.every((field) => isFieldValid(values, field));
+}
+
+// Angular Material's default ErrorStateMatcher: a field shows its error state (red label and
+// underline) when it is invalid and touched (blurred). The legacy form is never submitted.
+export function shouldShowFieldError(
+  values: AddItemFormValues,
+  touched: AddItemTouched,
+  field: AddItemField,
+): boolean {
+  return touched[field] && !isFieldValid(values, field);
 }
