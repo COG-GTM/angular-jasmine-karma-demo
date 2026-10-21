@@ -1,0 +1,7 @@
+/* Port of item.component.scss. Two classes so it beats MUI Card's own (single-class) border/shadow styles. */
+.item-card.card {
+  border: 0.1rem solid lightgrey;
+  box-shadow: 0.3rem 0.3rem lightgrey;
+  margin-top: 1rem;
+  width: 90%;
+}
