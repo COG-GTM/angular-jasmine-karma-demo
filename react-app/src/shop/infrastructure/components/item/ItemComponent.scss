@@ -1,0 +1,36 @@
+/* item.component.scss */
+.card {
+  border: 0.1rem solid lightgrey;
+  box-shadow: 0.3rem 0.3rem lightgrey;
+  margin-top: 1rem;
+  width: 90%;
+}
+
+/* Angular Material 12 mat-card layout defaults */
+.card {
+  padding: 16px;
+  border-radius: 4px;
+
+  .card-header {
+    padding: 0;
+
+    .MuiCardHeader-content {
+      margin: 0 16px;
+    }
+    .MuiCardHeader-title {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 32px;
+      margin-bottom: 12px;
+    }
+  }
+
+  .card-content {
+    padding: 0;
+    font-size: 14px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}
