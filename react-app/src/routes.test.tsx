@@ -31,9 +31,10 @@ describe('routes', () => {
     expect(screen.getByText('users works!')).toBeInTheDocument();
   });
 
-  it('renders only the banner for unknown paths (no wildcard route, like Angular)', () => {
-    vi.spyOn(console, 'warn').mockImplementation(() => {});
+  it('renders only the banner for unknown paths, like Angular', () => {
     const { container } = renderAt('/nope');
+    expect(screen.getByText('angular-jasmine-karma-demo app is running!')).toBeInTheDocument();
+    expect(screen.queryByText(/404/)).not.toBeInTheDocument();
     expect(container.querySelector('.items-container')).not.toBeInTheDocument();
     expect(screen.queryByText('users works!')).not.toBeInTheDocument();
   });
