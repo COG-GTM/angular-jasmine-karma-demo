@@ -4,5 +4,5 @@ package-lock.json
 # Not part of the app
 .devin
 .windsurf
-# Rewritten for the React toolchain in the docs PR
-README.md
+test-results
+playwright-report
