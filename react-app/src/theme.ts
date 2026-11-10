@@ -11,4 +11,20 @@ export const theme = createTheme({
     fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
     fontSize: 14,
   },
+  components: {
+    // Angular Material 12 mat-raised-button metrics (no uppercase, 36px line height).
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          fontSize: 14,
+          fontWeight: 500,
+          lineHeight: '36px',
+          letterSpacing: 'normal',
+          padding: '0 16px',
+          borderRadius: 4,
+        },
+      },
+    },
+  },
 });
