@@ -1,0 +1,56 @@
+// Architecture of angular-jasmine-karma-demo as it is on master.
+// Edit this file, then run ./render.sh to regenerate architecture.png and architecture.svg.
+digraph architecture {
+  graph [rankdir=TB, fontname="DejaVu Sans", fontsize=18, pad=0.4, nodesep=0.45, ranksep=0.8,
+         label="angular-jasmine-karma-demo (Angular 12) - runtime and test wiring on master", labelloc=t];
+  node  [shape=box, style="rounded,filled", fillcolor=white, fontname="DejaVu Sans", fontsize=16, margin="0.2,0.1"];
+  edge  [fontname="DejaVu Sans", fontsize=13, color="#555555"];
+
+  browser [label="Browser\nlocalhost:4200", shape=oval, fillcolor="#eeeeee"];
+
+  subgraph cluster_root {
+    label="Root (src/app)"; style="rounded,dashed"; color="#888888"; fontsize=16;
+    main   [label="main.ts\nbootstrapModule(AppModule)"];
+    module [label="AppModule\nBrowserAnimations, Forms, ReactiveForms,\nHttpClient, MatCard/Icon/Button/FormField"];
+    router [label="AppRoutingModule\n'' -> /shop\n/shop  /users"];
+    app    [label="AppComponent <app-root>\ntitle + <router-outlet>"];
+  }
+
+  subgraph cluster_shop {
+    label="shop feature"; style="rounded,filled"; fillcolor="#e8f1fb"; color="#4a7bb7"; fontsize=16;
+    items   [label="ItemsComponent  /shop\n5 hard-coded items\nsortItems(name|description|price)"];
+    item    [label="ItemComponent <app-item>\n@Input name, description, price\nlike() -> console.info"];
+    model   [label="Item (domain/item.model.ts)\n{ name, description, price: string }", shape=note, fillcolor="#fff7d6"];
+    additem [label="AddItemComponent\nreactive form, 3 required fields\nsaveItem() -> console.info", fillcolor="#f3f3f3"];
+    detail  [label="ItemDetailComponent\n@Input item: Item\n(template is a stub)", fillcolor="#f3f3f3"];
+  }
+
+  subgraph cluster_user {
+    label="user feature"; style="rounded,filled"; fillcolor="#eaf6ea"; color="#4f9a4f"; fontsize=16;
+    users   [label="UsersComponent  /users\n'Get Users' button -> list of names"];
+    service [label="UsersServices (application)\nprovidedIn: root\ngetUsers(): HttpClient.get"];
+  }
+
+  api [label="jsonplaceholder.typicode.com\n/users (public REST API)", shape=cylinder, fillcolor="#fde7e7"];
+
+  subgraph cluster_test {
+    label="Unit tests (ng test)"; style="rounded,filled"; fillcolor="#f4eefa"; color="#8a63b5"; fontsize=16;
+    karma [label="Karma + karma-chrome-launcher\nsrc/test.ts loads every *.spec.ts"];
+    specs [label="Jasmine specs beside each class\nTestBed, fixtures, spyOn,\nHttpTestingController"];
+  }
+
+  browser -> main [label="index.html"];
+  main -> module -> app;
+  module -> router [style=dashed, label="imports"];
+  app -> router [label="router-outlet"];
+  router -> items [label="/shop"];
+  router -> users [label="/users"];
+  items -> item [label="*ngFor, @Input"];
+  items -> model [style=dotted];
+  detail -> model [style=dotted];
+  users -> service [label="subscribe()"];
+  service -> api [label="GET /users"];
+  karma -> specs;
+  specs -> additem [style=dashed, color="#8a63b5", label="only reached\nfrom specs"];
+  specs -> detail [style=dashed, color="#8a63b5"];
+}

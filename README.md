@@ -4,15 +4,50 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 <br />
 
+## Setup
+
+Requires Node.js and npm. The project pins Angular CLI 12, so on Node 17 or newer every `ng` command needs `NODE_OPTIONS=--openssl-legacy-provider`.
+
+```bash
+npm install
+```
+
+<br />
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` (or `npx ng serve`) for a dev server. Navigate to `http://localhost:4200/`; it redirects to `/shop`, and `/users` is the second screen. The app will automatically reload if you change any of the source files.
 
 <br />
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io). You can run the tests even without the server running 😲 
+Run `npm test` (or `npx ng test`) to execute the unit tests via [Karma](https://karma-runner.github.io) in Chrome. You can run the tests even without the server running 😲
+
+For a single headless run (CI, containers), set `CHROME_BIN` to a Chrome binary and run `npx ng test --no-watch --browsers=ChromeHeadless`; inside a container Chrome also needs `--no-sandbox`, which takes a `ChromeHeadless`-based custom launcher (`karma.conf.js` does not define one).
+
+> **Known issue:** on `master`, `ng build` and `ng test` currently fail to compile because two relative imports point one directory too high. See [Known state of master](docs/architecture.md#known-state-of-master).
+
+<br />
+
+## Project layout
+
+```
+src/app/
+├── app.module.ts, app-routing.module.ts, app.component.*   root module, routes (/shop, /users), shell
+├── shop/
+│   ├── domain/item.model.ts                                 Item interface
+│   └── infrastructure/ng-components/
+│       ├── items/        /shop page: hard-coded list with sorting
+│       ├── item/         one item card (@Input)
+│       ├── add-item/     reactive form (spec example only)
+│       └── item-detail/  @Input example (spec example only)
+└── user/
+    ├── application/UsersServices.ts                         HttpClient call to jsonplaceholder /users
+    └── infrastructure/ng-components/users/                  /users page
+```
+
+Every class has its `*.spec.ts` beside it. The [architecture doc](docs/architecture.md) describes the app, its data flow and the tests, with a [diagram](docs/diagrams/architecture.png).
 
 <br />
 
@@ -121,23 +156,16 @@ You can see an example at **item-detail.component.spec.ts**
 ### Testing calling a service from a component
 You can see an example at **users.component.spec.ts**
 
+### Testing a list component (sorting)
+You can see an example at **items.component.spec.ts**
+
 ### RouterLink
 // TODO: pending to code
 
 ### Testing service against rest api
-// TODO: pending to code
-- no tengo claro si es un test muy util, porque se mockea la base de datos y da la impresión de que siempre funciona.
-- imports: [HttpClientModule]
+You can see an example at **UsersServices.service.spec.ts**, which uses `HttpClientTestingModule` and `HttpTestingController` so no real request is sent.
 
 ### Testing service against **real** rest api
 // TODO: pending to code
 - documentation: 
   - https://stackoverflow.com/questions/59204306/trying-to-run-angular-httpclient-jasmine-test-against-live-rest-api-nothing-hap
-
-
-
-
-
-
-
-
