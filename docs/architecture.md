@@ -60,8 +60,8 @@ Every class has a `*.spec.ts` beside it, and the specs are the main content of t
 | `users.component.spec.ts` | Stubbing a service call from a component with `spyOn(...).and.returnValue(of(...))` |
 | `UsersServices.service.spec.ts` | HTTP service tests with `HttpClientTestingModule` and `HttpTestingController` |
 
-`ng test` runs them in Chrome through Karma, with coverage via `karma-coverage`
-(output in `coverage/angular-jasmine-karma-demo`).
+`ng test` runs them in Chrome through Karma. Coverage is off by default (`karma.conf.js` reporters are
+`progress` and `kjhtml`); `ng test --code-coverage` writes it to `coverage/angular-jasmine-karma-demo`.
 
 ## Known state of `master`
 
