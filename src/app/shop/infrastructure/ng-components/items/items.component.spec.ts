@@ -8,8 +8,8 @@ describe('ItemsComponent: testing sorting functionality', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ItemsComponent ]
-    })
+    imports: [ItemsComponent]
+})
     .compileComponents();
   });
 

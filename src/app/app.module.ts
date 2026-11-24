@@ -17,15 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { UsersComponent } from './user/infrastructure/ng-components/users/users.component';
 import { ItemDetailComponent } from './shop/infrastructure/ng-components/item-detail/item-detail.component';
 
-@NgModule({ declarations: [
-        AppComponent,
-        ItemsComponent,
-        ItemComponent,
-        AddItemComponent,
-        UsersComponent,
-        ItemDetailComponent
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+@NgModule({ declarations: [AppComponent], bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         MatCardModule,
@@ -33,5 +25,9 @@ import { ItemDetailComponent } from './shop/infrastructure/ng-components/item-de
         MatButtonModule,
         FormsModule,
         ReactiveFormsModule,
-        MatFormFieldModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        MatFormFieldModule, ItemsComponent,
+        ItemComponent,
+        AddItemComponent,
+        UsersComponent,
+        ItemDetailComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

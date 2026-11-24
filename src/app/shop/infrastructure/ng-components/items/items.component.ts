@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../../domain/item.model';
+import { ItemComponent } from '../item/item.component';
 
 @Component({
     selector: 'app-items',
     templateUrl: './items.component.html',
     styleUrls: ['./items.component.scss'],
-    standalone: false
+    imports: [ItemComponent]
 })
 export class ItemsComponent implements OnInit {
   items: Item[] = [

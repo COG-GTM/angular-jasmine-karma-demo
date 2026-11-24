@@ -9,8 +9,8 @@ describe('ItemDetailComponent: testing @Input from parent', () => {
 
    beforeEach(async () => {
       await TestBed.configureTestingModule({
-         declarations: [ItemDetailComponent]
-      })
+    imports: [ItemDetailComponent]
+})
          .compileComponents();
    });
 

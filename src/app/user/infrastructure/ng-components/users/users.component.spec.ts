@@ -11,8 +11,7 @@ describe('UsersComponent: testing calling a service from a component.', () => {
 
    beforeEach(async () => {
       await TestBed.configureTestingModule({
-    declarations: [UsersComponent],
-    imports: [],
+    imports: [UsersComponent],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
          .compileComponents();
