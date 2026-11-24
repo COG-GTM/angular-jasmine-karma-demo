@@ -31,7 +31,9 @@ test.describe('users', () => {
   test('API failure leaves the list empty and the page usable', async ({ page }) => {
     await page.route('https://jsonplaceholder.typicode.com/users', (r) => r.fulfill({ status: 500, body: 'boom' }));
     await open(page, '/users');
+    const failed = page.waitForResponse((r) => r.url() === 'https://jsonplaceholder.typicode.com/users' && r.status() === 500);
     await page.getByRole('button', { name: 'Get Users' }).click();
+    await failed;
     await expect(page.locator('li')).toHaveCount(0);
     await expect(page.getByRole('button', { name: 'Get Users' })).toBeEnabled();
   });
