@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,28 +17,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { UsersComponent } from './user/infrastructure/ng-components/users/users.component';
 import { ItemDetailComponent } from './shop/infrastructure/ng-components/item-detail/item-detail.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    ItemsComponent,
-    ItemComponent,
-    AddItemComponent,
-    UsersComponent,
-    ItemDetailComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    HttpClientModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        ItemsComponent,
+        ItemComponent,
+        AddItemComponent,
+        UsersComponent,
+        ItemDetailComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatIconModule,
+        MatButtonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
