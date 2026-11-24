@@ -1,7 +1,6 @@
 import { enableProdMode, provideZoneChangeDetection } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 
 import { environment } from './environments/environment';
@@ -16,7 +15,6 @@ bootstrapApplication(AppComponent, {
     providers: [
         provideZoneChangeDetection(),
         provideRouter(routes),
-        provideAnimationsAsync(),
         provideHttpClient()
     ]
 })
