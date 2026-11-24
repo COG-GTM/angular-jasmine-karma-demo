@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UsersServices } from '../../../application/UsersServices';
 import { MatButton } from '@angular/material/button';
 
@@ -9,10 +9,10 @@ import { MatButton } from '@angular/material/button';
     imports: [MatButton]
 })
 export class UsersComponent implements OnInit {
+   usersServices = inject(UsersServices);
+
 
    users:any = [];
-
-   constructor(public usersServices: UsersServices) { }
 
    ngOnInit(): void {
    }

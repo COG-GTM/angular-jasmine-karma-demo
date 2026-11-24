@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -6,9 +6,9 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class UsersServices {
-   private url = "https://jsonplaceholder.typicode.com/users";
+   private httpClient = inject(HttpClient);
 
-   constructor(private httpClient: HttpClient) {}
+   private url = "https://jsonplaceholder.typicode.com/users";
 
    getUsers() {
       return this.httpClient.get(this.url);

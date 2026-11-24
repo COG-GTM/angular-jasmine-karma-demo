@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
@@ -12,10 +12,10 @@ import { MatInput } from '@angular/material/input';
     imports: [FormsModule, ReactiveFormsModule, MatFormField, MatLabel, MatButton, MatIcon, MatInput]
 })
 export class AddItemComponent implements OnInit {
+   private fb = inject(UntypedFormBuilder);
+
 
    form: UntypedFormGroup;
-
-   constructor(private fb: UntypedFormBuilder,) { }
 
    ngOnInit(): void {
       this.formInit();
