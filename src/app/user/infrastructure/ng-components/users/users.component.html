@@ -2,7 +2,7 @@
 <button type="button" mat-raised-button color="warn" (click)="getUsers()">Get Users</button>
 <div>
   <ul>
-    @for (user of users; track user) {
+    @for (user of users(); track user) {
       <li>{{ user.name }}</li>
     }
   </ul>

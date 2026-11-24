@@ -43,7 +43,7 @@ describe('UsersComponent: testing calling a service from a component.', () => {
       component.getUsers();
 
        //3º assert: we expect to receibe an object with an array of users
-      expect(component.users).toEqual({users});
+      expect(component.users()).toEqual({users});
    });
 
    it('getUsers() should handle empty user list', () => {
@@ -51,7 +51,7 @@ describe('UsersComponent: testing calling a service from a component.', () => {
       spyOn(component.usersServices, 'getUsers').and.returnValue(of({users: users}));
       
       component.getUsers();
-      expect(component.users).toEqual({users});
+      expect(component.users()).toEqual({users});
    });
 
    it('getUsers() should log to console when called', () => {
@@ -82,7 +82,7 @@ describe('UsersComponent: testing calling a service from a component.', () => {
    });
 
    it('should initialize with empty users array', () => {
-      expect(component.users).toEqual([]);
+      expect(component.users()).toEqual([]);
    });
 
    it('should render user list when users are loaded', () => {

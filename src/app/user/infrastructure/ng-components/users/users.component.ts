@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { UsersServices } from '../../../application/UsersServices';
 import { MatButton } from '@angular/material/button';
 
@@ -12,13 +12,13 @@ export class UsersComponent implements OnInit {
    usersServices = inject(UsersServices);
 
 
-   users:any = [];
+   readonly users = signal<any>([]);
 
    ngOnInit(): void {
    }
 
    getUsers() {
       console.info('getUsers');
-      this.usersServices.getUsers().subscribe(users => {this.users = users});
+      this.usersServices.getUsers().subscribe(users => this.users.set(users));
    }
 }
