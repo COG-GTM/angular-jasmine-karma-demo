@@ -2,10 +2,11 @@
 // computes a pixel-diff % per page and writes report/README.md with the results tables.
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 
-const root = path.dirname(new URL(import.meta.url).pathname);
+const root = path.dirname(fileURLToPath(import.meta.url));
 const screens = path.join(root, 'report', 'screens');
 const outDir = path.join(root, 'report', 'side-by-side');
 fs.mkdirSync(outDir, { recursive: true });
