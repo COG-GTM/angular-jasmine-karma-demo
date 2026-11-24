@@ -69,6 +69,6 @@ md += `\n## Screenshots (baseline left, upgraded right)\n\n| Page | Pixel diff |
 for (const r of rows) md += `| [${r.name}](side-by-side/${r.name}) | ${r.diff} | ${r.size ?? '-'} |\n`;
 md += `\n`;
 for (const r of rows) if (r.size) md += `### ${r.name}\n\n![${r.name}](side-by-side/${r.name})\n\n`;
-md += `## Run it\n\n\`\`\`bash\n# baseline (Angular 12) on :4000 from a checkout of master\ngit worktree add ../baseline origin/master && cd ../baseline\nnvm use 20 && npm ci && NODE_OPTIONS=--openssl-legacy-provider npx ng serve --port 4000\n\n# upgraded (Angular 21) on :4200 from this branch\nnvm use 22 && npm ci && npx ng serve --port 4200\n\n# parity suite\ncd parity && npm ci && npx playwright install chromium\nnpx playwright test && node compose.mjs\n\`\`\`\n`;
+md += `## Run it\n\n\`\`\`bash\n# baseline (Angular 12, master + baseline build fixes) on :4000\ngit worktree add ../baseline 21b78bc && cd ../baseline\nnvm use 20 && npm ci && NODE_OPTIONS=--openssl-legacy-provider npx ng serve --port 4000\n\n# upgraded (Angular 21) on :4200 from this branch\nnvm use 22 && npm ci && npx ng serve --port 4200\n\n# parity suite\ncd parity && npm ci && npx playwright install chromium\nnpx playwright test; node compose.mjs\n\`\`\`\n`;
 fs.writeFileSync(path.join(root, 'report', 'README.md'), md);
 console.log(rows, `baseline ${count('baseline')}/${tests.size}, upgraded ${count('upgraded')}/${tests.size}`);

@@ -55,8 +55,8 @@ Result: baseline 12/12 pass, upgraded 12/12 pass.
 ## Run it
 
 ```bash
-# baseline (Angular 12) on :4000 from a checkout of master
-git worktree add ../baseline origin/master && cd ../baseline
+# baseline (Angular 12, master + baseline build fixes) on :4000
+git worktree add ../baseline 21b78bc && cd ../baseline
 nvm use 20 && npm ci && NODE_OPTIONS=--openssl-legacy-provider npx ng serve --port 4000
 
 # upgraded (Angular 21) on :4200 from this branch
@@ -64,5 +64,5 @@ nvm use 22 && npm ci && npx ng serve --port 4200
 
 # parity suite
 cd parity && npm ci && npx playwright install chromium
-npx playwright test && node compose.mjs
+npx playwright test; node compose.mjs
 ```
