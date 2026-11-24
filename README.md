@@ -133,7 +133,7 @@ You can see an example at **users.component.spec.ts**
 ### Testing service against rest api
 // TODO: pending to code
 - no tengo claro si es un test muy util, porque se mockea la base de datos y da la impresión de que siempre funciona.
-- imports: [HttpClientModule]
+- providers: [provideHttpClient(), provideHttpClientTesting()] (see **UsersServices.service.spec.ts**)
 
 ### Testing service against **real** rest api
 // TODO: pending to code
