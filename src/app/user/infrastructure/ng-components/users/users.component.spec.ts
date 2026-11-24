@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
@@ -11,9 +11,9 @@ describe('UsersComponent: testing calling a service from a component.', () => {
 
    beforeEach(async () => {
       await TestBed.configureTestingModule({
-         declarations: [UsersComponent],
-         imports: [HttpClientModule]
-      })
+    imports: [UsersComponent],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
          .compileComponents();
    });
 
@@ -43,15 +43,15 @@ describe('UsersComponent: testing calling a service from a component.', () => {
       component.getUsers();
 
        //3º assert: we expect to receibe an object with an array of users
-      expect(component.users).toEqual({users});
+      expect(component.users()).toEqual({users});
    });
 
    it('getUsers() should handle empty user list', () => {
-      const users = [];
+      const users: any[] = [];
       spyOn(component.usersServices, 'getUsers').and.returnValue(of({users: users}));
       
       component.getUsers();
-      expect(component.users).toEqual({users});
+      expect(component.users()).toEqual({users});
    });
 
    it('getUsers() should log to console when called', () => {
@@ -82,7 +82,7 @@ describe('UsersComponent: testing calling a service from a component.', () => {
    });
 
    it('should initialize with empty users array', () => {
-      expect(component.users).toEqual([]);
+      expect(component.users()).toEqual([]);
    });
 
    it('should render user list when users are loaded', () => {

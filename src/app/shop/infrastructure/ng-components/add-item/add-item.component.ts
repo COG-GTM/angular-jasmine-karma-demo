@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
 
 @Component({
-   selector: 'app-add-item',
-   templateUrl: './add-item.component.html',
-   styleUrls: ['./add-item.component.scss']
+    selector: 'app-add-item',
+    templateUrl: './add-item.component.html',
+    styleUrls: ['./add-item.component.scss'],
+    imports: [FormsModule, ReactiveFormsModule, MatFormField, MatLabel, MatButton, MatIcon, MatInput]
 })
 export class AddItemComponent implements OnInit {
+   private fb = inject(UntypedFormBuilder);
 
-   form: FormGroup;
 
-   constructor(private fb: FormBuilder,) { }
+   form: UntypedFormGroup;
 
    ngOnInit(): void {
       this.formInit();

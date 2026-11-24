@@ -4,3 +4,27 @@
     margin-top: 1rem;
     width: 90%;
 }
+// Keep the pre-MDC (Material <= 14) card box model and spacing.
+.card {
+    box-sizing: content-box;
+    padding: 16px;
+}
+
+.card .mat-mdc-card-header,
+.card .mat-mdc-card-content {
+    padding: 0;
+}
+
+:host ::ng-deep .card .mat-mdc-card-header-text {
+    margin: 0 16px;
+}
+
+.card .mat-mdc-card-title {
+    margin-bottom: 12px;
+    line-height: 20px;
+}
+
+.card button[mat-icon-button] {
+    --mat-icon-button-state-layer-size: 40px;
+    padding: 8px;
+}

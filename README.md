@@ -1,6 +1,12 @@
 # AngularJasmineKarmaDemo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3 and is now on Angular 21.
+
+<br />
+
+## Requirements
+
+Node.js ^20.19, ^22.12 or >=24 (required by Angular 21).
 
 <br />
 
@@ -115,8 +121,8 @@ To help a test suite DRY up any duplicated setup and teardown code, Jasmine prov
 ### Testing form validation
 You can see an example at **add-item.component.spec.ts**
 
-### Testing sharing data from parent to child (using @Input)
-You can see an example at **item-detail.component.spec.ts**
+### Testing sharing data from parent to child (using signal `input()`)
+You can see an example at **item-detail.component.spec.ts** (inputs are set with `fixture.componentRef.setInput`)
 
 ### Testing calling a service from a component
 You can see an example at **users.component.spec.ts**
@@ -127,7 +133,7 @@ You can see an example at **users.component.spec.ts**
 ### Testing service against rest api
 // TODO: pending to code
 - no tengo claro si es un test muy util, porque se mockea la base de datos y da la impresión de que siempre funciona.
-- imports: [HttpClientModule]
+- providers: [provideHttpClient(), provideHttpClientTesting()] (see **UsersServices.service.spec.ts**)
 
 ### Testing service against **real** rest api
 // TODO: pending to code

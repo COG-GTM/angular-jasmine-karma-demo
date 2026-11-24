@@ -1,0 +1,5 @@
+
+// Keep the pre-MDC (Material <= 14) button label spacing.
+button[mat-raised-button] {
+    letter-spacing: normal;
+}
