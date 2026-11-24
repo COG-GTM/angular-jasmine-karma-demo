@@ -55,38 +55,38 @@ describe('ItemComponent: testing basic component creation', () => {
 
    // Test for @Input properties - name
    it('should accept name input', () => {
-      component.name = 'Test Item';
+      fixture.componentRef.setInput('name', 'Test Item');
       fixture.detectChanges();
-      expect(component.name).toEqual('Test Item');
+      expect(component.name()).toEqual('Test Item');
    });
 
    // Test for @Input properties - description
    it('should accept description input', () => {
-      component.description = 'Test Description';
+      fixture.componentRef.setInput('description', 'Test Description');
       fixture.detectChanges();
-      expect(component.description).toEqual('Test Description');
+      expect(component.description()).toEqual('Test Description');
    });
 
    // Test for @Input properties - price
    it('should accept price input', () => {
-      component.price = '100';
+      fixture.componentRef.setInput('price', '100');
       fixture.detectChanges();
-      expect(component.price).toEqual('100');
+      expect(component.price()).toEqual('100');
    });
 
    // Test for the like() method
    it('should call like() method', () => {
       spyOn(console, 'info');
-      component.name = 'Test Item';
+      fixture.componentRef.setInput('name', 'Test Item');
       component.like();
       expect(console.info).toHaveBeenCalledWith('like Test Item');
    });
 
    // Test for rendering name in the template
    it('should render name in the template', () => {
-      component.name = 'Test Item';
-      component.description = 'Test Description';
-      component.price = '100';
+      fixture.componentRef.setInput('name', 'Test Item');
+      fixture.componentRef.setInput('description', 'Test Description');
+      fixture.componentRef.setInput('price', '100');
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
       expect(compiled.textContent).toContain('Test Item');
@@ -94,9 +94,9 @@ describe('ItemComponent: testing basic component creation', () => {
 
    // Test for rendering price in the template
    it('should render price in the template', () => {
-      component.name = 'Test Item';
-      component.description = 'Test Description';
-      component.price = '100';
+      fixture.componentRef.setInput('name', 'Test Item');
+      fixture.componentRef.setInput('description', 'Test Description');
+      fixture.componentRef.setInput('price', '100');
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
       expect(compiled.textContent).toContain('100 €');
@@ -104,9 +104,9 @@ describe('ItemComponent: testing basic component creation', () => {
 
    // Test for rendering description in the template
    it('should render description in the template', () => {
-      component.name = 'Test Item';
-      component.description = 'Test Description';
-      component.price = '100';
+      fixture.componentRef.setInput('name', 'Test Item');
+      fixture.componentRef.setInput('description', 'Test Description');
+      fixture.componentRef.setInput('price', '100');
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
       expect(compiled.textContent).toContain('Test Description');
@@ -115,9 +115,9 @@ describe('ItemComponent: testing basic component creation', () => {
    // Test for like button click
    it('should call like() when like button is clicked', () => {
       spyOn(component, 'like');
-      component.name = 'Test Item';
-      component.description = 'Test Description';
-      component.price = '100';
+      fixture.componentRef.setInput('name', 'Test Item');
+      fixture.componentRef.setInput('description', 'Test Description');
+      fixture.componentRef.setInput('price', '100');
       fixture.detectChanges();
       
       const likeButton = fixture.debugElement.query(By.css('button')).nativeElement;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { Item } from '../../../domain/item.model';
 
 @Component({
@@ -8,7 +8,7 @@ import { Item } from '../../../domain/item.model';
 })
 export class ItemDetailComponent implements OnInit {
 
-   @Input() item: Item;
+   readonly item = input<Item>();
 
    constructor() { }
 
