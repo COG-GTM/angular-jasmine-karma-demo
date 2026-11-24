@@ -56,7 +56,7 @@ describe('UsersServices', () => {
       ];
 
       // Act
-      service.getUsers().subscribe((users) => {
+      service.getUsers().subscribe((users: any) => {
         // Assert
         expect(users).toEqual(mockUsers);
         expect(users.length).toBe(3);
@@ -72,7 +72,7 @@ describe('UsersServices', () => {
       const mockUsers: any[] = [];
 
       // Act
-      service.getUsers().subscribe((users) => {
+      service.getUsers().subscribe((users: any) => {
         // Assert
         expect(users).toEqual([]);
         expect(users.length).toBe(0);
@@ -101,12 +101,12 @@ describe('UsersServices', () => {
       ];
 
       // Act
-      service.getUsers().subscribe((users) => {
+      service.getUsers().subscribe((users: any) => {
         // Assert - verify the data structure
         expect(Array.isArray(users)).toBeTrue();
-        expect(users[0]).toHaveProperty('id');
-        expect(users[0]).toHaveProperty('name');
-        expect(users[0]).toHaveProperty('email');
+        expect('id' in users[0]).toBeTrue();
+        expect('name' in users[0]).toBeTrue();
+        expect('email' in users[0]).toBeTrue();
         expect(users[0].id).toBe(1);
         expect(users[0].name).toBe('Leanne Graham');
       });
@@ -211,12 +211,12 @@ describe('UsersServices', () => {
       let responseCount = 0;
 
       // Act
-      service.getUsers().subscribe((users) => {
+      service.getUsers().subscribe((users: any) => {
         responseCount++;
         expect(users).toEqual(mockUsers1);
       });
 
-      service.getUsers().subscribe((users) => {
+      service.getUsers().subscribe((users: any) => {
         responseCount++;
         expect(users).toEqual(mockUsers2);
       });
