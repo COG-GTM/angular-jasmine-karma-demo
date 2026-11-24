@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
-   selector: 'app-add-item',
-   templateUrl: './add-item.component.html',
-   styleUrls: ['./add-item.component.scss']
+    selector: 'app-add-item',
+    templateUrl: './add-item.component.html',
+    styleUrls: ['./add-item.component.scss'],
+    standalone: false
 })
 export class AddItemComponent implements OnInit {
 
