@@ -36,5 +36,11 @@ test.describe('users', () => {
     await failed;
     await expect(page.locator('li')).toHaveCount(0);
     await expect(page.getByRole('button', { name: 'Get Users' })).toBeEnabled();
+
+    const recovered = [{ id: 1, name: `Recovered User ${Date.now()}` }];
+    await page.unroute('https://jsonplaceholder.typicode.com/users');
+    await page.route('https://jsonplaceholder.typicode.com/users', (r) => r.fulfill({ json: recovered }));
+    await page.getByRole('button', { name: 'Get Users' }).click();
+    await expect(page.locator('li')).toHaveText(recovered.map((u) => u.name));
   });
 });
