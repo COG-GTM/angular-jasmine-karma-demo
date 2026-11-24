@@ -96,12 +96,12 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 572,
+                      "duration": 500,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:48.195Z",
+                      "startTime": "2026-11-24T03:16:33.740Z",
                       "attachments": []
                     }
                   ],
@@ -128,12 +128,12 @@
                     {
                       "workerIndex": 1,
                       "status": "passed",
-                      "duration": 473,
+                      "duration": 639,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:48.248Z",
+                      "startTime": "2026-11-24T03:16:33.731Z",
                       "attachments": []
                     }
                   ],
@@ -160,12 +160,12 @@
                     {
                       "workerIndex": 2,
                       "status": "passed",
-                      "duration": 676,
+                      "duration": 604,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:48.258Z",
+                      "startTime": "2026-11-24T03:16:33.709Z",
                       "attachments": []
                     }
                   ],
@@ -192,12 +192,12 @@
                     {
                       "workerIndex": 3,
                       "status": "passed",
-                      "duration": 895,
+                      "duration": 907,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:48.334Z",
+                      "startTime": "2026-11-24T03:16:33.956Z",
                       "attachments": []
                     }
                   ],
@@ -205,6 +205,134 @@
                 }
               ],
               "id": "3420664513cb0bae123e-0bec9ccb0c2bd59d0028",
+              "file": "shell.spec.ts",
+              "line": 31,
+              "column": 7
+            },
+            {
+              "title": "root redirects to /shop",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "status": "passed",
+                      "duration": 432,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:36.166Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3420664513cb0bae123e-0f8217a80b4e60276078",
+              "file": "shell.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "document title and fonts are the same",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "status": "passed",
+                      "duration": 517,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:36.313Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3420664513cb0bae123e-29b0f3c857e96c510aa1",
+              "file": "shell.spec.ts",
+              "line": 12,
+              "column": 7
+            },
+            {
+              "title": "unknown route keeps the shell and renders no page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "status": "passed",
+                      "duration": 572,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:36.279Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3420664513cb0bae123e-260ad406a9886ee13bc5",
+              "file": "shell.spec.ts",
+              "line": 19,
+              "column": 7
+            },
+            {
+              "title": "navigating between /shop and /users with history",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "status": "passed",
+                      "duration": 839,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:36.612Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3420664513cb0bae123e-5552c4724ba63d0a7ec9",
               "file": "shell.spec.ts",
               "line": 31,
               "column": 7
@@ -239,14 +367,14 @@
                   "projectName": "baseline",
                   "results": [
                     {
-                      "workerIndex": 1,
+                      "workerIndex": 0,
                       "status": "passed",
-                      "duration": 593,
+                      "duration": 630,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:48.819Z",
+                      "startTime": "2026-11-24T03:16:34.325Z",
                       "attachments": []
                     }
                   ],
@@ -271,14 +399,14 @@
                   "projectName": "baseline",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 2,
                       "status": "passed",
-                      "duration": 586,
+                      "duration": 696,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:48.863Z",
+                      "startTime": "2026-11-24T03:16:34.384Z",
                       "attachments": []
                     }
                   ],
@@ -303,14 +431,14 @@
                   "projectName": "baseline",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 1,
                       "status": "passed",
-                      "duration": 749,
+                      "duration": 762,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:49.022Z",
+                      "startTime": "2026-11-24T03:16:34.472Z",
                       "attachments": []
                     }
                   ],
@@ -337,12 +465,12 @@
                     {
                       "workerIndex": 3,
                       "status": "passed",
-                      "duration": 622,
+                      "duration": 653,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:49.315Z",
+                      "startTime": "2026-11-24T03:16:34.957Z",
                       "attachments": []
                     }
                   ],
@@ -367,14 +495,14 @@
                   "projectName": "baseline",
                   "results": [
                     {
-                      "workerIndex": 1,
+                      "workerIndex": 0,
                       "status": "passed",
-                      "duration": 491,
+                      "duration": 509,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:49.416Z",
+                      "startTime": "2026-11-24T03:16:34.960Z",
                       "attachments": []
                     }
                   ],
@@ -382,6 +510,166 @@
                 }
               ],
               "id": "f3cfbb30272ae2b01352-4398eb7a72dd6386b63c",
+              "file": "shop.spec.ts",
+              "line": 55,
+              "column": 7
+            },
+            {
+              "title": "lists the five items in their initial order",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "status": "passed",
+                      "duration": 601,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:36.668Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f3cfbb30272ae2b01352-f5c03c0c57c57d5613a2",
+              "file": "shop.spec.ts",
+              "line": 7,
+              "column": 7
+            },
+            {
+              "title": "sort by name toggles to descending, then ascending",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "status": "passed",
+                      "duration": 613,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:36.938Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f3cfbb30272ae2b01352-c4df3a550c723238d330",
+              "file": "shop.spec.ts",
+              "line": 22,
+              "column": 7
+            },
+            {
+              "title": "sort by price compares prices as text",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "status": "passed",
+                      "duration": 730,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:36.969Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f3cfbb30272ae2b01352-c61f1b2b57f6c911e9ef",
+              "file": "shop.spec.ts",
+              "line": 32,
+              "column": 7
+            },
+            {
+              "title": "sort by description",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "status": "passed",
+                      "duration": 652,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:37.274Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f3cfbb30272ae2b01352-bc9c388117bcc2741960",
+              "file": "shop.spec.ts",
+              "line": 46,
+              "column": 7
+            },
+            {
+              "title": "like button logs the item name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "status": "passed",
+                      "duration": 506,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:37.558Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f3cfbb30272ae2b01352-5693f09ec991af385808",
               "file": "shop.spec.ts",
               "line": 55,
               "column": 7
@@ -416,14 +704,14 @@
                   "projectName": "baseline",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 2,
                       "status": "passed",
-                      "duration": 735,
+                      "duration": 690,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:49.457Z",
+                      "startTime": "2026-11-24T03:16:35.087Z",
                       "attachments": []
                     }
                   ],
@@ -448,14 +736,14 @@
                   "projectName": "baseline",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 1,
                       "status": "passed",
-                      "duration": 449,
+                      "duration": 491,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:49.784Z",
+                      "startTime": "2026-11-24T03:16:35.242Z",
                       "attachments": []
                     }
                   ],
@@ -480,14 +768,14 @@
                   "projectName": "baseline",
                   "results": [
                     {
-                      "workerIndex": 1,
+                      "workerIndex": 0,
                       "status": "passed",
-                      "duration": 399,
+                      "duration": 482,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-24T02:44:49.917Z",
+                      "startTime": "2026-11-24T03:16:35.475Z",
                       "attachments": []
                     }
                   ],
@@ -495,6 +783,102 @@
                 }
               ],
               "id": "7d08affc2ce055c80dfd-e330fbf700b76832713d",
+              "file": "users.spec.ts",
+              "line": 31,
+              "column": 7
+            },
+            {
+              "title": "starts empty, then loads users from the API",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "status": "passed",
+                      "duration": 724,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:37.571Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d08affc2ce055c80dfd-73ff5c1aa2dce4342fa6",
+              "file": "users.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "renders whatever the API returns (stubbed, run-unique data)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "status": "passed",
+                      "duration": 444,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:37.713Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d08affc2ce055c80dfd-79bad8dbfee78a75ad1c",
+              "file": "users.spec.ts",
+              "line": 22,
+              "column": 7
+            },
+            {
+              "title": "API failure leaves the list empty and the page usable",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "upgraded",
+                  "projectName": "upgraded",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "status": "passed",
+                      "duration": 425,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-24T03:16:37.935Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d08affc2ce055c80dfd-e248317498b89bcc49e4",
               "file": "users.spec.ts",
               "line": 31,
               "column": 7
@@ -506,9 +890,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-24T02:44:47.631Z",
-    "duration": 2721.602,
-    "expected": 12,
+    "startTime": "2026-11-24T03:16:33.204Z",
+    "duration": 5197.225,
+    "expected": 24,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
