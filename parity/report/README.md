@@ -29,8 +29,8 @@ Result: baseline 12/12 pass, upgraded 12/12 pass.
 | [01-shop.png](side-by-side/01-shop.png) | 0.32% | 1280x900 / 1280x900 |
 | [02-shop-sorted-by-price.png](side-by-side/02-shop-sorted-by-price.png) | 0.33% | 1280x900 / 1280x900 |
 | [03-unknown-route.png](side-by-side/03-unknown-route.png) | 0.09% | 1280x900 / 1280x900 |
-| [04-users-empty.png](side-by-side/04-users-empty.png) | 0.16% | 1280x900 / 1280x900 |
-| [05-users-loaded.png](side-by-side/05-users-loaded.png) | 0.52% | 1280x900 / 1280x900 |
+| [04-users-empty.png](side-by-side/04-users-empty.png) | 0.11% | 1280x900 / 1280x900 |
+| [05-users-loaded.png](side-by-side/05-users-loaded.png) | 0.47% | 1280x900 / 1280x900 |
 
 ### 01-shop.png
 
